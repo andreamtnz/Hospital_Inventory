@@ -1,11 +1,12 @@
 package Hospital_InventoryPOJO;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Treatment {
+public class Treatment implements Serializable{
 
 	private Integer id;
 	private String name;

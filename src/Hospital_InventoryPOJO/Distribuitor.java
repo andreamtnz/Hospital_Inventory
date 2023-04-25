@@ -1,8 +1,9 @@
 package Hospital_InventoryPOJO;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Distribuitor {
+public class Distribuitor implements Serializable{
 
 	private Integer id;
 	private String name;

@@ -1,8 +1,9 @@
 package Hospital_InventoryPOJO;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Materials {
+public class Materials implements Serializable{
 
 	private Integer id;
 	private String name;
