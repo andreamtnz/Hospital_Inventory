@@ -1,6 +1,5 @@
 package Hospital_InventoryPOJO;
 
-import ;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,8 +16,13 @@ import javax.persistence.TableGenerator;
 @Entity
 @Table(name = "roles")
 
-public class Role {
+public class Role implements Serializable{
 	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1271225604608186097L;
 	//serialVersionUID
 	
 	@Id
