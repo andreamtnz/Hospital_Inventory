@@ -6,6 +6,12 @@ import java.util.Objects;
 
 public class Order implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2139695442355747482L;
+	
+	
 	private Integer id;
 	private String state;
 	private Date date;

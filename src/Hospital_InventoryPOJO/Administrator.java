@@ -5,6 +5,10 @@ import java.util.Objects;
 
 public class Administrator implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3811233637153096668L;
 	
 	private Integer id;
 	private String name;

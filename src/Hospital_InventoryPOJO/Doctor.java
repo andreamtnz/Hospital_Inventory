@@ -5,6 +5,12 @@ import java.util.Objects;
 
 public class Doctor implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6814603893152445627L;
+	
+	
 	private Integer id;
 	private String name;
 	private String department;

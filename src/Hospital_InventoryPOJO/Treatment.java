@@ -8,6 +8,11 @@ import java.util.Objects;
 
 public class Treatment implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7444340460612287385L;
+	
 	private Integer id;
 	private String name;
 	private Date date;

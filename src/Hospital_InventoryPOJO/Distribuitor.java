@@ -5,6 +5,12 @@ import java.util.Objects;
 
 public class Distribuitor implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2751233094345411814L;
+	
+	
 	private Integer id;
 	private String name;
 	private String type;

@@ -10,7 +10,7 @@ public interface DoctorManager {
 	//get a list of all the doctors
 	public List<Doctor> getListDoctor();
 	//remove a doctor by it´s id
-	public void removeDoctor(int id);
+	public void removeDoctor(int id); //creo que sería mejor poner (Doctor d)
 	//change department
-	public void updateDepartment(int id, String dep);
+	public void updateDepartment(int id, String dep); // aquí lo mismo, creo que mejor (Doctor d), y ya dentro del método se pide el departamento nuevo
 }

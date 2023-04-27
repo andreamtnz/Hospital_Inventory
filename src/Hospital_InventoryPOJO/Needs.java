@@ -5,6 +5,12 @@ import java.util.Objects;
 
 public class Needs implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4210357670002315192L;
+	
+	
 	private Integer quantity;
 	private Integer treatment;
 	private Integer material;

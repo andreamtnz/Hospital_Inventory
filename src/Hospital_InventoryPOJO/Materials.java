@@ -5,6 +5,12 @@ import java.util.Objects;
 
 public class Materials implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 359775902753496801L;
+	
+	
 	private Integer id;
 	private String name;
 	private String type;
