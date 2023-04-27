@@ -61,6 +61,12 @@ public class JDBCManager {
 		+ "	department	TEXT NOT NULL"
 		+ ");";
 		stmt.executeUpdate(sql);
+		sql = "CREATE TABLE nurse ("
+		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
+		+ "	name	TEXT NOT NULL,"
+		+ "	department	TEXT NOT NULL"
+		+ ");";
+		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE treatment ("
 		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	name	TEXT NOT NULL,"
@@ -93,6 +99,14 @@ public class JDBCManager {
 		+ "	FOREIGN KEY(treatmentID) REFERENCES treatment(id) ON DELETE CASCADE,"
 		+ "	FOREIGN KEY(materialID) REFERENCES materials(id) ON DELETE CASCADE,"
 		+ "	PRIMARY KEY(treatmentID,materialID)\r\n"
+		+ ");";
+		stmt.executeUpdate(sql);
+		sql = "CREATE TABLE perform ("
+		+ "	nurseID	INTEGER,"
+		+ "	treatmentID	INTEGER,"
+		+ "	FOREIGN KEY(nurseID) REFERENCES nurse(id) ON DELETE CASCADE,"
+		+ "	FOREIGN KEY(treatmentID) REFERENCES treatment(id) ON DELETE CASCADE,"
+		+ "	PRIMARY KEY(nurseID,treatmentID)\r\n"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE request ("
