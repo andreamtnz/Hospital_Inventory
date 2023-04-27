@@ -10,7 +10,8 @@ public class Treatment implements Serializable{
 
 	private Integer id;
 	private String name;
-	private Timestamp date;
+	private Date date;
+	private String time;
 	private String patient;
 	private List<Doctor> doctores;
 	
@@ -32,7 +33,7 @@ public class Treatment implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Timestamp getDate() {
+	public Date getDate() {
 		return date;
 	}
 	public void setDate(Timestamp date) {
@@ -61,9 +62,11 @@ public class Treatment implements Serializable{
 	}
 
 
+	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(date, doctores, id, name, patient);
+		return Objects.hash(date, doctores, id, name, patient, time);
 	}
 
 
@@ -78,7 +81,7 @@ public class Treatment implements Serializable{
 		Treatment other = (Treatment) obj;
 		return Objects.equals(date, other.date) && Objects.equals(doctores, other.doctores)
 				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(patient, other.patient);
+				&& Objects.equals(patient, other.patient) && Objects.equals(time, other.time);
 	}
 
 
@@ -86,6 +89,16 @@ public class Treatment implements Serializable{
 	public String toString() {
 		return "Treatment [id=" + id + ", name=" + name + ", date=" + date + ", patient=" + patient + ", doctores="
 				+ doctores + "]";
+	}
+
+
+	public String getTime() {
+		return time;
+	}
+
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 
