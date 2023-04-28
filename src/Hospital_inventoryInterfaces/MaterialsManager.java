@@ -15,4 +15,6 @@ public interface MaterialsManager {
 	//get a list of materials
 	public List<Materials> getListMaterials();
 	
+	public Materials getMaterialBYID(int id);
+	
 }
