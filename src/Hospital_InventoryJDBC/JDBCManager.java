@@ -40,6 +40,7 @@ public class JDBCManager {
 		String sql = "CREATE TABLE administrator ("
 		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	name	TEXT NOT NULL,"
+		+ " email   TEXT NOT NULL"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE material ("
@@ -60,13 +61,15 @@ public class JDBCManager {
 		sql = "CREATE TABLE doctor ("
 		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	name	TEXT NOT NULL,"
-		+ "	department	TEXT NOT NULL"
+		+ "	department	TEXT NOT NULL,"
+		+ " email   TEXT NOT NULL"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE nurse ("
 		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	name	TEXT NOT NULL,"
-		+ "	department	TEXT NOT NULL"
+		+ "	department	TEXT NOT NULL,"
+		+ " email   TEXT NOT NULL"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE treatment ("

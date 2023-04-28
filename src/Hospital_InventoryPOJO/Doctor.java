@@ -20,9 +20,17 @@ public class Doctor implements Serializable {
 		super();
 	}
 	
-	public Doctor ( String name, String department) {
+	public Doctor ( String name, String department, String email) {
 		this.name = name;
 		this.department = department;
+		this.email = email;
+	}
+	
+	public Doctor (Integer id, String name, String department, String email) {
+		this.id = id;
+		this.name = name;
+		this.department = department;
+		this.email = email;
 	}
 	
 	

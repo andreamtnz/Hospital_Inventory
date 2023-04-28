@@ -12,4 +12,6 @@ public interface AdministratorManager {
 	public List<Administrator> getListAdministrator();
 	//remove an administrator by it´s id
 	public void removeAdministrator(int id);
+	//get an administrator by it´s id
+	public Administrator getAdministratorByID(int id);
 }

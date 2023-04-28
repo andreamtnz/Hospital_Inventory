@@ -12,14 +12,20 @@ public class Administrator implements Serializable {
 	
 	private Integer id;
 	private String name;
+	private String email;
 	
 	public Administrator() {
 		super();
 	}
 	
-	public Administrator (String nameAd) {
-		super();
+	public Administrator (String nameAd, String email) {
 		this.name = nameAd;
+		this.email = email;
+	}
+	public Administrator(Integer id, String name, String email) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
 	}
 
 	@Override
@@ -39,13 +45,13 @@ public class Administrator implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-	@Override
-	public String toString() {
-		return "Administrator [id=" + id + ", name=" + name + "]";
-	}
-
 	public Integer getId() {
 		return id;
+	}
+
+	@Override
+	public String toString() {
+		return "Administrator [id=" + id + ", name=" + name + ", email=" + email + "]";
 	}
 
 	public void setId(Integer id) {
@@ -58,6 +64,14 @@ public class Administrator implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

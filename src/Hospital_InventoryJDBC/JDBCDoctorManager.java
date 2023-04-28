@@ -1,7 +1,9 @@
 package Hospital_InventoryJDBC;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
+import java.sql.Statement;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -74,5 +76,30 @@ public class JDBCDoctorManager implements DoctorManager{
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public Doctor getDoctorByID(int id) {
+		// TODO Auto-generated method stub
+		Doctor d = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM doctor WHERE id=" + id;
+			ResultSet rs = stmt.executeQuery(sql);
+			
+				String name = rs.getString("name");
+				String department = rs.getString("department");
+				String email = rs.getString("email");
+				d = new Doctor(id, name, department, email);				
+			
+			rs.close();
+			stmt.close();
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return d;
+	}
+	
 
 }
