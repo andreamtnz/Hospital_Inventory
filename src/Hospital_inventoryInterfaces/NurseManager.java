@@ -12,6 +12,6 @@ public interface NurseManager {
 		public List<Nurse> getListNurse();
 		//remove an administrator by it´s id
 		public void removeNurse(int id);
-		
+		public void updateDepartment(int id);
 		public Nurse getNurseByID(int id);
 }
