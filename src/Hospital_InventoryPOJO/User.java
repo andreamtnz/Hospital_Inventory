@@ -25,11 +25,14 @@ public class User implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 6744651775162375568L;
+	
 	@Id
 	@GeneratedValue( generator = "users")
 	@TableGenerator (name = "users" , table = "sqlite_sequence", pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "users" )
+	
 	private Integer id;
 	private String email;
+	
 	@Lob
 	private byte[] password;
 	@ManyToOne
@@ -47,30 +50,38 @@ public class User implements Serializable {
 		this.password = password;
 		this.role = role;
 	}
+	
 	public Integer getId() {
 		return id;
 	}
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 	public byte[] getPassword() {
 		return password;
 	}
+	
 	public void setPassword(byte[] password) {
 		this.password = password;
 	}
+	
 	public Role getRole() {
 		return role;
 	}
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -79,6 +90,8 @@ public class User implements Serializable {
 		result = prime * result + Objects.hash(email, id, role);
 		return result;
 	}
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

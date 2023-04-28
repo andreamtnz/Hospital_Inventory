@@ -24,17 +24,15 @@ public class Role implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1271225604608186097L;
-
-	
-	
 	@Id
 	@GeneratedValue(generator = "roles")
 	@TableGenerator(name = "roles", table = "sqlite_sequence", pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "roles")
+	
 	private Integer id;
 	private String name;
+	
 	@OneToMany (fetch = FetchType.LAZY, mappedBy = "role")
 	private List<User> users;
-	
 	
 	
 	
@@ -44,12 +42,11 @@ public class Role implements Serializable{
 	}
 	
 	
-	
 	public Role( String name) {
 		super();
 		this.name = name;
 	}
-
+	
 
 	public void addUSer(User u) {
 		if(!users.contains(u)) {
@@ -98,7 +95,7 @@ public class Role implements Serializable{
 
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) { //only for the name and the id
 		if (this == obj)
 			return true;
 		if (obj == null)
