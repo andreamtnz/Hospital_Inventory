@@ -11,6 +11,8 @@ public interface TreatmentManager {
 	//get a list of treatments
 	public List<Treatment> getListTreatments();
 	//assign a doctor
-	public void assignDoctor(int doctor_id, int treatment_id);	
-	
+	public void assignDoctor(int doctor_id, int treatment_id);
+	public void assignNurse(int nurse_id, int treatment_id);
+	public Treatment getTreatmentById(int treatment_id); 
 }
+ 
