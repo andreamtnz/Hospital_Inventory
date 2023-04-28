@@ -1,11 +1,11 @@
 package Hospital_InventoryJDBC;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import Hospital_InventoryPOJO.Doctor;
 
 public class JDBCManager {
 
@@ -33,7 +33,6 @@ public class JDBCManager {
 		}
 	}
 	
-	
 	private void createTables() {
 		// Create Tables
 		try {
@@ -43,16 +42,16 @@ public class JDBCManager {
 		+ "	name	TEXT NOT NULL,"
 		+ ");";
 		stmt.executeUpdate(sql);
-		sql = "CREATE TABLE materials ("
+		sql = "CREATE TABLE material ("
 		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	name	TEXT NOT NULL,"
 		+ "	type	TEXT NOT NULL,"
 		+ "	stock	INTEGER,"
 		+ "	price	FLOAT,"
-		+ "	distribuitorID	INTEGER NOT NULL REFERENCES distribuitor(id) ON DELETE RESTRICT"
+		+ "	distributorID	INTEGER NOT NULL REFERENCES distributor(id) ON DELETE RESTRICT"
 		+ ");";
 		stmt.executeUpdate(sql);
-		sql = "CREATE TABLE distribuitor ("
+		sql = "CREATE TABLE distributor ("
 		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	name	TEXT NOT NULL,"
 		+ "	type	TEXT NOT NULL"
@@ -90,7 +89,7 @@ public class JDBCManager {
 		+ "	materialID	INTEGER,"
 		+ "	orderID	INTEGER,"
 		+ " quantity INTEGER,"
-		+ "	FOREIGN KEY(materialID) REFERENCES materials(id) ON DELETE CASCADE,"
+		+ "	FOREIGN KEY(materialID) REFERENCES material(id) ON DELETE CASCADE,"
 		+ "	FOREIGN KEY(orderID) REFERENCES order(id) ON DELETE CASCADE,"
 		+ "	PRIMARY KEY(materialID,orderID)\r\n"
 		+ ");";
@@ -100,7 +99,7 @@ public class JDBCManager {
 		+ "	materialID	INTEGER,"
 		+ " quantity    INTEGER,"
 		+ "	FOREIGN KEY(treatmentID) REFERENCES treatment(id) ON DELETE CASCADE,"
-		+ "	FOREIGN KEY(materialID) REFERENCES materials(id) ON DELETE CASCADE,"
+		+ "	FOREIGN KEY(materialID) REFERENCES material(id) ON DELETE CASCADE,"
 		+ "	PRIMARY KEY(treatmentID,materialID)\r\n"
 		+ ");";
 		stmt.executeUpdate(sql);
