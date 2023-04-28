@@ -24,6 +24,13 @@ public class Nurse implements Serializable{
 		this.department= deparment;
 		this.email= email;
 	}
+	
+	public Nurse(int id, String name, String deparment, String email) {
+		this.id= id;
+		this.name= name;
+		this.department= deparment;
+		this.email= email;
+	}
 
 	public Integer getId() {
 		return id;
