@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import Hospital_InventoryPOJO.Doctor;
+
 public class JDBCManager {
 
 	private Connection c = null;
@@ -15,7 +17,7 @@ public class JDBCManager {
 		{			
 			// Open the DB connection
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:./db/hospital.db");
+			c = DriverManager.getConnection("jdbc:sqlite:./db/proyecto.db");
 			System.out.println("Database connection opened.");
 			
 			//create tables
@@ -30,6 +32,7 @@ public class JDBCManager {
 			System.out.print("Libraries not loaded");
 		}
 	}
+	
 	
 	private void createTables() {
 		// Create Tables

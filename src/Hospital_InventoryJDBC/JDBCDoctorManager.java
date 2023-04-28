@@ -20,11 +20,12 @@ public class JDBCDoctorManager implements DoctorManager{
 	public void addDoctor(Doctor d) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "INSERT INTO dogs (name, department) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO doctor (name, department) VALUES (?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, d.getName());
 			prep.setString(2, d.getDepartment());
-			prep.executeUpdate();			
+			prep.executeUpdate();
+			System.out.println("Doctor added");
 					
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -46,8 +47,8 @@ public class JDBCDoctorManager implements DoctorManager{
 			String sql = "DELETE FROM doctor WHERE id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1,id);
-			
 			prep.executeUpdate();
+			System.out.println("Doctor removed");
 			
 		}catch(Exception e) {
 			e.printStackTrace();
