@@ -18,6 +18,12 @@ public class Nurse implements Serializable{
 	public Nurse() {
 		super();
 	}
+	
+	public Nurse(String name, String deparment, String email) {
+		this.name= name;
+		this.department= deparment;
+		this.email= email;
+	}
 
 	public Integer getId() {
 		return id;
