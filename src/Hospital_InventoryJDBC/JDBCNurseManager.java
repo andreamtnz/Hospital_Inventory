@@ -6,7 +6,6 @@ import java.util.List;
 import java.sql.Statement;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import Hospital_InventoryPOJO.Doctor;
 import Hospital_InventoryPOJO.Nurse;
 import Hospital_inventoryInterfaces.NurseManager;
 
