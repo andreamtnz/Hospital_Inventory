@@ -19,6 +19,7 @@ public class Treatment implements Serializable{
 	private String time;
 	private String patient;
 	private List<Doctor> doctores;
+	private List<Nurse> nurses;
 	
 	
 	public Treatment() {
@@ -69,9 +70,34 @@ public class Treatment implements Serializable{
 
 	
 
+	public List<Nurse> getNurses() {
+		return nurses;
+	}
+
+
+	public void setNurses(List<Nurse> nurses) {
+		this.nurses = nurses;
+	}
+
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+
+	public String getTime() {
+		return time;
+	}
+
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(date, doctores, id, name, patient, time);
+		return Objects.hash(date, doctores, id, name, nurses, patient, time);
 	}
 
 
@@ -86,33 +112,14 @@ public class Treatment implements Serializable{
 		Treatment other = (Treatment) obj;
 		return Objects.equals(date, other.date) && Objects.equals(doctores, other.doctores)
 				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(patient, other.patient) && Objects.equals(time, other.time);
+				&& Objects.equals(nurses, other.nurses) && Objects.equals(patient, other.patient)
+				&& Objects.equals(time, other.time);
 	}
 
 
 	@Override
 	public String toString() {
-		return "Treatment [id=" + id + ", name=" + name + ", date=" + date + ", patient=" + patient + ", doctores="
-				+ doctores + "]";
+		return "Treatment [id=" + id + ", name=" + name + ", date=" + date + ", time=" + time + ", patient=" + patient
+				+ ", doctores=" + doctores + ", nurses=" + nurses + "]";
 	}
-
-
-	public String getTime() {
-		return time;
-	}
-
-
-	public void setTime(String time) {
-		this.time = time;
-	}
-
-
-	
-
-
-	
-
-
-	
-	
 }
