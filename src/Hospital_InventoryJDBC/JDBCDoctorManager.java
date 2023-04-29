@@ -63,7 +63,7 @@ public class JDBCDoctorManager implements DoctorManager{
 		
 		try {
 			
-			String sql = "UPDATE vets SET speciality=? WHERE id=?;";
+			String sql = "UPDATE Doctor SET department=? WHERE id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, department);
 			prep.setInt(2, doctor_id);

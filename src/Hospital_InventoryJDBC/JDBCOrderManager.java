@@ -87,5 +87,23 @@ public class JDBCOrderManager implements OrderManager{
 		
 		return o;
 	}
+	
+	@Override
+	public void updateStatus(int order_id, String state) {
+		// TODO Auto-generated method stub
+		
+			try {
+					
+				String sql = "UPDATE Order SET state=? WHERE id=?;";
+				PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+				prep.setString(1, state);
+				prep.setInt(2, order_id);
+		
+				prep.executeUpdate();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+				}
+	}
 
 }

@@ -645,9 +645,8 @@ private static void loginNurse() throws Exception{
 		nurseManager.addNurse(n);
 	}
 	
-
 		
-	/*public static void updateDoctor() throws Exception
+	public static void updateDoctor() throws Exception
 	{
 		System.out.println("Please enter the id of the doctor to update:");
 		int doctor_id =  Integer.parseInt(reader.readLine());
@@ -655,9 +654,9 @@ private static void loginNurse() throws Exception{
 		String department = reader.readLine();
 		
 		doctorManager.updateDepartment(doctor_id, department);
-	}*/
+	}
 	
-	/*public static void updateNurse() throws Exception
+	public static void updateNurse() throws Exception
 	{
 		System.out.println("Please enter the id of the nurse to update:");
 		int nurse_id =  Integer.parseInt(reader.readLine());
@@ -665,7 +664,7 @@ private static void loginNurse() throws Exception{
 		String department = reader.readLine();
 		
 		nurseManager.updateDepartment(nurse_id, department);
-	}*/
+	}
 	
 	/*public static void modifyStock() throws Exception
 	{
@@ -677,15 +676,15 @@ private static void loginNurse() throws Exception{
 		materialsManager.updateStock(material_id, stock);
 	}*/
 	
-	/*public static void updateStatus() throws Exception
+	public static void updateStatus() throws Exception
 	{
 		System.out.println("Please enter the id of the order:");
 		int order_id =  Integer.parseInt(reader.readLine());
 		System.out.println("Please enter the new stock:");
 		String status = reader.readLine();
 		
-		ordersManager.updateStatus(order_id, status);
-	}*/
+		orderManager.updateStatus(order_id, status);
+	}
 
 	/*
 	public static void deleteVet() throws Exception
