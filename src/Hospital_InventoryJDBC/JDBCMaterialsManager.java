@@ -90,5 +90,24 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		return m;
 	}
 	
+	@Override
+	public void updateStock(int material_id, int stock) {
+		// TODO Auto-generated method stub
+		
+		try {
+			
+			String sql = "UPDATE Materials SET stock=? WHERE id=?;";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, stock);
+			prep.setInt(2, material_id);
+			
+			prep.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 }

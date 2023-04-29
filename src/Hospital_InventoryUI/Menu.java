@@ -666,7 +666,7 @@ private static void loginNurse() throws Exception{
 		nurseManager.updateDepartment(nurse_id, department);
 	}
 	
-	/*public static void modifyStock() throws Exception
+	public static void modifyStock() throws Exception
 	{
 		System.out.println("Please enter the id of the material:");
 		int material_id =  Integer.parseInt(reader.readLine());
@@ -674,7 +674,7 @@ private static void loginNurse() throws Exception{
 		int stock = Integer.parseInt(reader.readLine());
 		
 		materialsManager.updateStock(material_id, stock);
-	}*/
+	}
 	
 	public static void updateStatus() throws Exception
 	{

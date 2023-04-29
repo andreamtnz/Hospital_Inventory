@@ -16,5 +16,6 @@ public interface MaterialsManager {
 	public List<Materials> getListMaterials();
 	
 	public Materials getMaterialBYID(int id);
+	public void updateStock(int id, int stock);
 	
 }
