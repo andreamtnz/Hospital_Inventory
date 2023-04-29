@@ -26,7 +26,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 			prep.setString(2, m.getType());
 			prep.setInt(3, m.getStock());
 			prep.setFloat(4, m.getPrice());
-			prep.setInt(5, m.getDistribuidor());
+			prep.setInt(5, m.getDistributor());
 
 			prep.executeUpdate();
 			System.out.println("Material added");
