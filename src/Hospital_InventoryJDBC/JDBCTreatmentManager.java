@@ -1,9 +1,13 @@
 package Hospital_InventoryJDBC;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
 
 import Hospital_InventoryPOJO.Materials;
+import Hospital_InventoryPOJO.Order;
 import Hospital_InventoryPOJO.Treatment;
 import Hospital_inventoryInterfaces.TreatmentManager;
 
@@ -43,13 +47,33 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	@Override
 	public void assignDoctor(int doctor_id, int treatment_id) {
 		// TODO Auto-generated method stub
-		
+		try{
+			String sql = "INSERT INTO examines (doctor_id,treatment_id) VALUES (?,?)";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, doctor_id);
+			prep.setInt(2, treatment_id);		
+			
+			prep.executeUpdate();			
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void assignNurse(int nurse_id, int treatment_id) {
 		// TODO Auto-generated method stub
-		
+		try{
+			String sql = "INSERT INTO examines (nurse_id,treatment_id) VALUES (?,?)";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, nurse_id);
+			prep.setInt(2, treatment_id);		
+			
+			prep.executeUpdate();			
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -61,7 +85,8 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	@Override
 	public Treatment getTreatmentById(int treatment_id) {
 		// TODO Auto-generated method stub
-		return null;
+		Treatment t= null;
+		return t;
 	}
 
 }
