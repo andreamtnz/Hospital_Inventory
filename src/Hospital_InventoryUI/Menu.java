@@ -529,20 +529,31 @@ private static void loginNurse() throws Exception{
 		//show vet data
 		v = vetManager.getVetbyId(vetID);
 		System.out.println(v.toString());
-	}
+	}  */
 
-	private static void assignDog() throws Exception{
+	private static void assignDoctor() throws Exception{
 		// TODO Auto-generated method stub
-		System.out.println("Please enter the dog ID to assign:");
-		Integer dogid = Integer.parseInt(reader.readLine());
-		System.out.println("Please enter the vet ID to assign:");
-		Integer vetid = Integer.parseInt(reader.readLine());
+		System.out.println("Please enter the doctor ID to assign:");
+		Integer doctor_id = Integer.parseInt(reader.readLine());
+		System.out.println("Please enter the treatment ID to assign:");
+		Integer treatment_id = Integer.parseInt(reader.readLine());
 		
-		dogManager.assign(vetid, dogid);
+		treatmentManager.assignDoctor(doctor_id, treatment_id);
+		
+	}
+	
+	private static void assignNoctor() throws Exception{
+		// TODO Auto-generated method stub
+		System.out.println("Please enter the nurse ID to assign:");
+		Integer nurse_id = Integer.parseInt(reader.readLine());
+		System.out.println("Please enter the treatment ID to assign:");
+		Integer treatment_id = Integer.parseInt(reader.readLine());
+		
+		treatmentManager.assignDoctor(nurse_id, treatment_id);
 		
 	}
 
-*/	
+
 
 /*private static Materials selectMaterial() throws Exception{
 	// TODO Auto-generated method stub
