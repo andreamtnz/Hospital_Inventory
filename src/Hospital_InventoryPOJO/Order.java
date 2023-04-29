@@ -34,7 +34,7 @@ public class Order implements Serializable{
 		this.state = state;
 		this.date = date;
 		this.cost = price * q ;
-		this.administrador = administrador;
+		this.administrador = administrador_id;
 	}
 	
 
