@@ -16,7 +16,7 @@ public class Materials implements Serializable{
 	private String type;
 	private Integer stock;
 	private Float price;
-	private Integer distribuidor;
+	private Integer distributor;
 	
 	
 	public Materials() {
@@ -29,7 +29,7 @@ public class Materials implements Serializable{
 		this.type = type;
 		this.stock = stock;
 		this.price = price;
-		this.distribuidor = distributorId;
+		this.distributor = distributorId;
 	}
 
 	public Integer getId() {
@@ -72,17 +72,17 @@ public class Materials implements Serializable{
 		this.price = price;
 	}
 
-	public Integer getDistribuidor() {
-		return distribuidor;
+	public Integer getDistributor() {
+		return distributor;
 	}
 
-	public void setDistribuidor(Integer distribuidor) {
-		this.distribuidor = distribuidor;
+	public void setDistribuidor(Integer distributor) {
+		this.distributor = distributor;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(distribuidor, id, name, price, stock, type);
+		return Objects.hash(distributor, id, name, price, stock, type);
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class Materials implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Materials other = (Materials) obj;
-		return Objects.equals(distribuidor, other.distribuidor) && Objects.equals(id, other.id)
+		return Objects.equals(distributor, other.distributor) && Objects.equals(id, other.id)
 				&& Objects.equals(name, other.name) && Objects.equals(price, other.price)
 				&& Objects.equals(stock, other.stock) && Objects.equals(type, other.type);
 	}
@@ -102,7 +102,7 @@ public class Materials implements Serializable{
 	@Override
 	public String toString() {
 		return "Materials [id=" + id + ", name=" + name + ", type=" + type + ", stock=" + stock + ", price=" + price
-				+ ", distribuidor=" + distribuidor + "]";
+				+ ", distributor=" + distributor + "]";
 	}
 
 	
