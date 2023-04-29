@@ -31,6 +31,14 @@ public class Materials implements Serializable{
 		this.price = price;
 		this.distributor = distributorId;
 	}
+	
+	public Materials(String name, String type, Integer stock, Float price, Integer distributorId) {
+		this.name = name;
+		this.type = type;
+		this.stock = stock;
+		this.price = price;
+		this.distributor = distributorId;
+	}
 
 	public Integer getId() {
 		return id;

@@ -18,6 +18,12 @@ public class Distribuitor implements Serializable{
 	public Distribuitor() {
 		super();
 	}
+	
+	public Distribuitor (String name, String type) {
+		this.name = name;
+		this.type = type;
+
+	}
 
 	public Integer getId() {
 		return id;
