@@ -170,19 +170,19 @@ private static void materialsSubMenu () throws Exception{
 					break;
 		/*		case 4:  			CASES COMENTADOS PORQUE HAY QUE HACER LOS MÉTODOS
 					modifyMaterial();
-					break;
+					break;		*/
 				case 5:
 					deleteMaterial();
 					break;
-				case 6:
+		/*		case 6:
 					viewStocks(); //shows id, name and stock of all materials
 					break;
 				case 7:
 					searchStock();
-					break;
+					break;*/
 				case 8:
 					modifyStock();
-					break;		*/
+					break;		
 				case 0: 
 					jdbcManager.disconnect();
 					userManager.disconnect();
@@ -590,6 +590,8 @@ private static void loginNurse() throws Exception{
 	}
 
 */
+	
+	
 	public static void addMaterial() throws Exception
 	{
 		
@@ -743,6 +745,15 @@ private static void loginNurse() throws Exception{
 		treatmentManager.removeTreatment(treatment_id);
 		
 		System.out.println("Treatment deleted");
+	}
+	
+	public static void deleteMaterial() throws Exception
+	{
+		System.out.println("Please enter the id of the material to delete:");
+		int material_id =  Integer.parseInt(reader.readLine());
+		materialsManager.removeMaterial(material_id);
+		
+		System.out.println("Material deleted");
 
 	}
 	

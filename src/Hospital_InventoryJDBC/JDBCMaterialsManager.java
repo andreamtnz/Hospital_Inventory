@@ -40,11 +40,10 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		// TODO Auto-generated method stub
 		try {
 			
-			String sql = "DELETE FROM material WHERE id=?;";
+			String sql = "DELETE FROM materials WHERE id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1,id);
 			prep.executeUpdate();
-			System.out.println("Material removed");
 			
 		}catch(Exception e) {
 			e.printStackTrace();
