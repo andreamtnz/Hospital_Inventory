@@ -309,10 +309,10 @@ private static void doctorsSubMenu() throws Exception{
 				addDoctor();
 				break;
 			case 4:
-//				updateDoctor();
+				updateDoctor();
 				break;
 			case 5:
-//				deleteDoctor();
+				deleteDoctor();
 				break;
 			case 0: 
 				jdbcManager.disconnect();
@@ -355,10 +355,10 @@ private static void nursesSubMenu() throws Exception{
 				addNurse();
 				break;
 			case 4:
-//				updateNurse();
+				updateNurse();
 				break;
 			case 5:
-//				deleteNurse();
+				deleteNurse();
 				break;
 			case 0: 
 				jdbcManager.disconnect();
@@ -697,13 +697,20 @@ private static void loginNurse() throws Exception{
 		orderManager.updateStatus(order_id, status);
 	}
 
-	/*
-	public static void deleteVet() throws Exception
+	
+	public static void deleteDoctor() throws Exception
 	{
-		System.out.println("Please ente the id of the vet to delete:");
-		int vet_id =  Integer.parseInt(reader.readLine());
-		vetManager.deleteVetbyID(vet_id);
+		System.out.println("Please enter the id of the doctor to delete:");
+		int doctor_id =  Integer.parseInt(reader.readLine());
+		doctorManager.removeDoctor(doctor_id);
 	}
-	*/
+	
+	public static void deleteNurse() throws Exception
+	{
+		System.out.println("Please enter the id of the doctor to delete:");
+		int nurse_id =  Integer.parseInt(reader.readLine());
+		nurseManager.removeNurse(nurse_id);
+	}
+	
 
 }
