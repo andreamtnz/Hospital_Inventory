@@ -2,7 +2,7 @@ package Hospital_InventoryPOJO;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,12 +38,6 @@ public class Treatment implements Serializable{
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Timestamp date) {
-		this.date = date;
 	}
 	
 	
@@ -82,6 +76,10 @@ public class Treatment implements Serializable{
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public Date getDate() {
+		return date;
 	}
 
 

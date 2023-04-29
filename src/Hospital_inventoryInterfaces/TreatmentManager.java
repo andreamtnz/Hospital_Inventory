@@ -1,6 +1,8 @@
 package Hospital_inventoryInterfaces;
 
 import java.util.List;
+
+import Hospital_InventoryPOJO.Materials;
 import Hospital_InventoryPOJO.Treatment;
 
 
@@ -13,6 +15,7 @@ public interface TreatmentManager {
 	//assign a doctor
 	public void assignDoctor(int doctor_id, int treatment_id);
 	public void assignNurse(int nurse_id, int treatment_id);
+	public void assignToTreatment(Materials m, Treatment t, Integer q);
 	public Treatment getTreatmentById(int treatment_id); 
 }
  
