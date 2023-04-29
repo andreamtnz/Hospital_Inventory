@@ -40,9 +40,6 @@ public class Menu {
 	treatmentManager = new JDBCTreatmentManager(jdbcManager);
 	userManager = new JPAUserManager();
 
-
-	
-	userManager = new JPAUserManager();
 	
 	try {
 		do {
@@ -79,7 +76,7 @@ public class Menu {
 	
 	}
 	
-	
+//ADMINISTRADOR
 	private static void administratorMenu (Integer id) throws Exception{
 		
 		try {
@@ -141,144 +138,6 @@ public class Menu {
 		}
 		
 	}
-	
-private static void doctorMenu (Integer id) throws Exception{
-		
-		try {
-			do {
-				System.out.println("Choose an option");
-				System.out.println("1. View all treatments");
-				System.out.println("2. Search treatment");
-				System.out.println("3. Add a treatment");
-				System.out.println("4. Delete an existing treatment");
-				System.out.println("5. Assign doctor to a treatment");
-				System.out.println("6. Assign nurse to a treatment");
-				System.out.println("7. View stock of all materials");
-				System.out.println("8. Search stock of a material");
-				System.out.println("9. Modify stock of a material");
-				System.out.println("0. exit");
-
-				int choice = Integer.parseInt(reader.readLine());
-				switch(choice)
-				{
-				case 1:
-//					viewTreatments();
-					break;
-				case 2:
-//					searchTreatment();
-					break;
-				case 3:
-//					addTreatment(); 
-					break;
-				case 4:
-//					deleteTreatment(); 
-					break;
-				case 5:
-//					assignDoctorToTreatment(); 
-					break;
-				case 6:
-//					assignNurseTotreatment();
-					break;
-				case 7:
-//					viewStocks();
-					break;
-				case 8:
-//					searchStock();
-					break;
-				case 9:
-//					modifyStock();
-				case 0: 
-					jdbcManager.disconnect();
-					userManager.disconnect();
-					System.exit(0);
-				default:
-					break;
-				}
-			}while(true);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-private static void loginDoctor() throws Exception{
-		
-		System.out.println("Email:");
-		String email = reader.readLine();
-		
-		System.out.println("Password: ");
-		String passwd = reader.readLine();
-		User u = userManager.checkPassword(email, passwd);
-		
-		if(u!=null & u.getRole().getName().equals("owner"))
-		{	
-			System.out.println("Login Successful!");
-			doctorMenu(u.getId());
-		}
-		
-	}
-
-private static void loginNurse() throws Exception{
-	
-	System.out.println("Email:");
-	String email = reader.readLine();
-	
-	System.out.println("Password: ");
-	String passwd = reader.readLine();
-	User u = userManager.checkPassword(email, passwd);
-	
-	if(u!=null & u.getRole().getName().equals("owner"))
-	{	
-		System.out.println("Login Successful!");
-		nurseMenu(u.getId());
-	}
-	
-}		
-
-private static void nurseMenu (Integer id) throws Exception{
-	
-	try {
-		do {
-			System.out.println("Choose an option");
-			System.out.println("1. View all treatments");
-			System.out.println("2. Search treatment");
-			System.out.println("3. View stock of all materials");
-			System.out.println("4. Search stock of a material");
-			System.out.println("5. Modify stock of a material");
-			System.out.println("0. exit");
-
-			int choice = Integer.parseInt(reader.readLine());
-			switch(choice)
-			{
-			case 1:
-//				viewTreatments();
-				break;
-			case 2:
-//				searchTreatment();
-				break;
-			case 3:
-//				viewStocks();
-				break;
-			case 4:
-//				searchStock();
-				break;
-			case 5:
-//				modifyStock();
-				break;
-				
-			case 0: 
-				jdbcManager.disconnect();
-				userManager.disconnect();
-				System.exit(0);
-			default:
-				break;
-			}
-		}while(true);
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-}
 	
 	
 	//submenu materiales Administrador
@@ -407,7 +266,7 @@ private static void ordersSubMenu() throws Exception{
 //				placeOrder();
 				break;
 			case 4:
-//				modifyOrderStatus();
+//				upsateStatus();
 				break;
 			case 0: 
 				jdbcManager.disconnect();
@@ -433,7 +292,7 @@ private static void doctorsSubMenu() throws Exception{
 			System.out.println("1. View all doctors");
 			System.out.println("2. Search a doctor");
 			System.out.println("3. Add a new doctor");
-			System.out.println("4. Update doctor");
+			System.out.println("4. Update a doctor's department");
 			System.out.println("5. Delete a doctor");
 			System.out.println("0. exit");
 
@@ -479,7 +338,7 @@ private static void nursesSubMenu() throws Exception{
 			System.out.println("1. View all nurses");
 			System.out.println("2. Search a nurse");
 			System.out.println("3. Add a new nurse");
-			System.out.println("4. Update nurse");
+			System.out.println("4. Update a nurse's department");
 			System.out.println("5. Delete a nurse");
 			System.out.println("0. exit");
 
@@ -515,6 +374,151 @@ private static void nursesSubMenu() throws Exception{
 	}
 }
 
+
+//DOCTOR
+	
+private static void doctorMenu (Integer id) throws Exception{
+		
+		try {
+			do {
+				System.out.println("Choose an option");
+				System.out.println("1. View all treatments");
+				System.out.println("2. Search treatment");
+				System.out.println("3. Add a treatment");
+				System.out.println("4. Delete an existing treatment");
+				System.out.println("5. Assign doctor to a treatment");
+				System.out.println("6. Assign nurse to a treatment");
+				System.out.println("7. View stock of all materials");
+				System.out.println("8. Search stock of a material");
+				System.out.println("9. Modify stock of a material");
+				System.out.println("0. exit");
+
+				int choice = Integer.parseInt(reader.readLine());
+				switch(choice)
+				{
+				case 1:
+//					viewTreatments();
+					break;
+				case 2:
+//					searchTreatment();
+					break;
+				case 3:
+//					addTreatment(); 
+					break;
+				case 4:
+//					deleteTreatment(); 
+					break;
+				case 5:
+//					assignDoctorToTreatment(); 
+					break;
+				case 6:
+//					assignNurseTotreatment();
+					break;
+				case 7:
+//					viewStocks();
+					break;
+				case 8:
+//					searchStock();
+					break;
+				case 9:
+//					modifyStock();
+				case 0: 
+					jdbcManager.disconnect();
+					userManager.disconnect();
+					System.exit(0);
+				default:
+					break;
+				}
+			}while(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+private static void loginDoctor() throws Exception{
+		
+		System.out.println("Email:");
+		String email = reader.readLine();
+		
+		System.out.println("Password: ");
+		String passwd = reader.readLine();
+		User u = userManager.checkPassword(email, passwd);
+		
+		if(u!=null & u.getRole().getName().equals("owner"))
+		{	
+			System.out.println("Login Successful!");
+			doctorMenu(u.getId());
+		}
+		
+	}
+
+
+//NURSE
+
+private static void nurseMenu (Integer id) throws Exception{
+	
+	try {
+		do {
+			System.out.println("Choose an option");
+			System.out.println("1. View all treatments");
+			System.out.println("2. Search treatment");
+			System.out.println("3. View stock of all materials");
+			System.out.println("4. Search stock of a material");
+			System.out.println("5. Modify stock of a material");
+			System.out.println("0. exit");
+
+			int choice = Integer.parseInt(reader.readLine());
+			switch(choice)
+			{
+			case 1:
+//				viewTreatments();
+				break;
+			case 2:
+//				searchTreatment();
+				break;
+			case 3:
+//				viewStocks();
+				break;
+			case 4:
+//				searchStock();
+				break;
+			case 5:
+//				modifyStock();
+				break;
+				
+			case 0: 
+				jdbcManager.disconnect();
+				userManager.disconnect();
+				System.exit(0);
+			default:
+				break;
+			}
+		}while(true);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+	
+private static void loginNurse() throws Exception{
+	
+	System.out.println("Email:");
+	String email = reader.readLine();
+	
+	System.out.println("Password: ");
+	String passwd = reader.readLine();
+	User u = userManager.checkPassword(email, passwd);
+	
+	if(u!=null & u.getRole().getName().equals("owner"))
+	{	
+		System.out.println("Login Successful!");
+		nurseMenu(u.getId());
+	}
+	
+}		
+
+
 	
 /*	private static void chooseVet() throws Exception{
 		// TODO Auto-generated method stub
@@ -540,7 +544,7 @@ private static void nursesSubMenu() throws Exception{
 
 */	
 
-/*private static Materials chooseMaterial() throws Exception{
+/*private static Materials selectMaterial() throws Exception{
 	// TODO Auto-generated method stub
 	Materials m = new Materials();
 	System.out.println("Please choose a material, type its ID:");
@@ -642,28 +646,48 @@ private static void nursesSubMenu() throws Exception{
 	}
 	
 
-/*	public static void createVet() throws Exception
+		
+	/*public static void updateDoctor() throws Exception
 	{
-		System.out.println("Type the name of the vet:");
-		String name =  reader.readLine();
-		System.out.println("Type the speciality name");
-		String speciality =  reader.readLine();
+		System.out.println("Please enter the id of the doctor to update:");
+		int doctor_id =  Integer.parseInt(reader.readLine());
+		System.out.println("Please enter the new department:");
+		String department = reader.readLine();
 		
-		Vet v = new Vet(name, speciality);
-		
-		vetManager.createVet(v);		
-	}
+		doctorManager.updateDepartment(doctor_id, department);
+	}*/
 	
-	public static void updateVetSpeciality() throws Exception
+	/*public static void updateNurse() throws Exception
 	{
-		System.out.println("Please enter the id of the vet to update:");
-		int vet_id =  Integer.parseInt(reader.readLine());
-		System.out.println("Please enter the new speciality:");
-		String speciality = reader.readLine();
+		System.out.println("Please enter the id of the nurse to update:");
+		int nurse_id =  Integer.parseInt(reader.readLine());
+		System.out.println("Please enter the new department:");
+		String department = reader.readLine();
 		
-		vetManager.updateSpeciality(vet_id, speciality);
-	}
+		nurseManager.updateDepartment(nurse_id, department);
+	}*/
 	
+	/*public static void modifyStock() throws Exception
+	{
+		System.out.println("Please enter the id of the material:");
+		int material_id =  Integer.parseInt(reader.readLine());
+		System.out.println("Please enter the new stock:");
+		int stock = Integer.parseInt(reader.readLine());
+		
+		materialsManager.updateStock(material_id, stock);
+	}*/
+	
+	/*public static void updateStatus() throws Exception
+	{
+		System.out.println("Please enter the id of the order:");
+		int order_id =  Integer.parseInt(reader.readLine());
+		System.out.println("Please enter the new stock:");
+		String status = reader.readLine();
+		
+		ordersManager.updateStatus(order_id, status);
+	}*/
+
+	/*
 	public static void deleteVet() throws Exception
 	{
 		System.out.println("Please ente the id of the vet to delete:");
