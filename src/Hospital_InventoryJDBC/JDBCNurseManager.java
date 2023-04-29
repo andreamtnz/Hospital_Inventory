@@ -57,16 +57,14 @@ public class JDBCNurseManager implements NurseManager{
 	}
 
 	@Override
-	public void updateDepartment(int id) {
+	public void updateDepartment(int id, String department) {
 		// TODO Auto-generated method stub
 		String dep = "";
 		try {
-			System.out.println("Enter the new department:");
-			BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
-			dep = reader.readLine();
+			
 			String sql = "UPDATE nurse SET department=? WHERE id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setString(1, dep);
+			prep.setString(1, department);
 			prep.setInt(2, id);
 			
 			prep.executeUpdate();

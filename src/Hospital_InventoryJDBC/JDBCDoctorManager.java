@@ -58,23 +58,22 @@ public class JDBCDoctorManager implements DoctorManager{
 	}
 
 	@Override
-	public void updateDepartment(int id) {
+	public void updateDepartment(int doctor_id, String department) {
 		// TODO Auto-generated method stub
-		String dep = "";
+		
 		try {
-			System.out.println("Enter the new department:");
-			BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
-			dep = reader.readLine();
-			String sql = "UPDATE doctor SET department=? WHERE id=?;";
+			
+			String sql = "UPDATE vets SET speciality=? WHERE id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setString(1, dep);
-			prep.setInt(2, id);
+			prep.setString(1, department);
+			prep.setInt(2, doctor_id);
 			
 			prep.executeUpdate();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	@Override
