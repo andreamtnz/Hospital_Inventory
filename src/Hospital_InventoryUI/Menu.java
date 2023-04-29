@@ -409,10 +409,10 @@ private static void doctorMenu (Integer id) throws Exception{
 //					deleteTreatment(); 
 					break;
 				case 5:
-//					assignDoctorToTreatment(); 
+					assignDoctorToTreatment(); 
 					break;
 				case 6:
-//					assignNurseTotreatment();
+					assignNurseToTreatment();
 					break;
 				case 7:
 //					viewStocks();
@@ -531,7 +531,7 @@ private static void loginNurse() throws Exception{
 		System.out.println(v.toString());
 	}  */
 
-	private static void assignDoctor() throws Exception{
+	private static void assignDoctorToTreatment() throws Exception{
 		// TODO Auto-generated method stub
 		System.out.println("Please enter the doctor ID to assign:");
 		Integer doctor_id = Integer.parseInt(reader.readLine());
@@ -542,7 +542,7 @@ private static void loginNurse() throws Exception{
 		
 	}
 	
-	private static void assignNoctor() throws Exception{
+	private static void assignNurseToTreatment() throws Exception{
 		// TODO Auto-generated method stub
 		System.out.println("Please enter the nurse ID to assign:");
 		Integer nurse_id = Integer.parseInt(reader.readLine());
