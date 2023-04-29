@@ -27,7 +27,6 @@ public class JDBCDoctorManager implements DoctorManager{
 			prep.setString(1, d.getName());
 			prep.setString(2, d.getDepartment());
 			prep.executeUpdate();
-			System.out.println("Doctor added");
 					
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -50,7 +49,6 @@ public class JDBCDoctorManager implements DoctorManager{
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1,id);
 			prep.executeUpdate();
-			System.out.println("Doctor removed");
 			
 		}catch(Exception e) {
 			e.printStackTrace();

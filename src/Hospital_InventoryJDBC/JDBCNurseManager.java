@@ -26,7 +26,6 @@ public class JDBCNurseManager implements NurseManager{
 			prep.setString(1, n.getName());
 			prep.setString(2, n.getDepartment());
 			prep.executeUpdate();
-			System.out.println("Nurse added");
 					
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -49,7 +48,6 @@ public class JDBCNurseManager implements NurseManager{
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1,id);
 			prep.executeUpdate();
-			System.out.println("Nurse removed");
 			
 		}catch(Exception e) {
 			e.printStackTrace();

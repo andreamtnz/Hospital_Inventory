@@ -29,7 +29,6 @@ public class JDBCMaterialsManager implements MaterialsManager{
 			prep.setInt(5, m.getDistributor());
 
 			prep.executeUpdate();
-			System.out.println("Material added");
 					
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -108,6 +107,8 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		}
 		
 	}
+	
+
 	
 
 }

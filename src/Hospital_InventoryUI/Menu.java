@@ -421,7 +421,7 @@ private static void doctorMenu (Integer id) throws Exception{
 //					searchStock();
 					break;
 				case 9:
-//					modifyStock();
+					modifyStock();
 				case 0: 
 					jdbcManager.disconnect();
 					userManager.disconnect();
@@ -539,6 +539,8 @@ private static void loginNurse() throws Exception{
 		Integer treatment_id = Integer.parseInt(reader.readLine());
 		
 		treatmentManager.assignDoctor(doctor_id, treatment_id);
+		System.out.println("Doctor assigned");
+
 		
 	}
 	
@@ -550,6 +552,8 @@ private static void loginNurse() throws Exception{
 		Integer treatment_id = Integer.parseInt(reader.readLine());
 		
 		treatmentManager.assignDoctor(nurse_id, treatment_id);
+		System.out.println("Nurse assigned");
+
 		
 	}
 
@@ -602,6 +606,8 @@ private static void loginNurse() throws Exception{
 	
 		Materials m = new Materials(name, type, stock, price, distributor_id);
 		materialsManager.addMaterial(m);
+		System.out.println("Material added");
+
 	}
 	
 	
@@ -616,6 +622,8 @@ private static void loginNurse() throws Exception{
 	
 		Distribuitor d = new Distribuitor(name, type,);
 		distributorManager.addDistributor(d);
+		
+		System.out.println("Distributor added");
 	}		*/ //HAY QUE HACER JDBCMANAGER DE DISTRIBUITOR
 	
 	
@@ -640,6 +648,9 @@ private static void loginNurse() throws Exception{
 			
 		Doctor d = new Doctor(name, department, email);
 		doctorManager.addDoctor(d);
+		
+		System.out.println("Doctor added");
+
 	}
 	
 	public static void addNurse() throws Exception
@@ -654,6 +665,9 @@ private static void loginNurse() throws Exception{
 			
 		Nurse n = new Nurse(name, department, email);
 		nurseManager.addNurse(n);
+		
+		System.out.println("Nurse added");
+
 	}
 	
 		
@@ -665,6 +679,8 @@ private static void loginNurse() throws Exception{
 		String department = reader.readLine();
 		
 		doctorManager.updateDepartment(doctor_id, department);
+		System.out.println("Doctor department updated");
+
 	}
 	
 	public static void updateNurse() throws Exception
@@ -675,6 +691,8 @@ private static void loginNurse() throws Exception{
 		String department = reader.readLine();
 		
 		nurseManager.updateDepartment(nurse_id, department);
+		System.out.println("Nurse department updated");
+
 	}
 	
 	public static void modifyStock() throws Exception
@@ -685,16 +703,20 @@ private static void loginNurse() throws Exception{
 		int stock = Integer.parseInt(reader.readLine());
 		
 		materialsManager.updateStock(material_id, stock);
+		System.out.println("Stock modified");
+
 	}
 	
 	public static void updateStatus() throws Exception
 	{
 		System.out.println("Please enter the id of the order:");
 		int order_id =  Integer.parseInt(reader.readLine());
-		System.out.println("Please enter the new stock:");
+		System.out.println("Please enter the new status:");
 		String status = reader.readLine();
 		
 		orderManager.updateStatus(order_id, status);
+		System.out.println("Status updated");
+
 	}
 
 	
@@ -703,6 +725,7 @@ private static void loginNurse() throws Exception{
 		System.out.println("Please enter the id of the doctor to delete:");
 		int doctor_id =  Integer.parseInt(reader.readLine());
 		doctorManager.removeDoctor(doctor_id);
+		System.out.println("Doctor deleted");
 	}
 	
 	public static void deleteNurse() throws Exception
@@ -710,6 +733,17 @@ private static void loginNurse() throws Exception{
 		System.out.println("Please enter the id of the doctor to delete:");
 		int nurse_id =  Integer.parseInt(reader.readLine());
 		nurseManager.removeNurse(nurse_id);
+		System.out.println("Nurse deleted");
+	}
+	
+	public static void deleteTreatment() throws Exception
+	{
+		System.out.println("Please enter the id of the treatment to delete:");
+		int treatment_id =  Integer.parseInt(reader.readLine());
+		treatmentManager.removeTreatment(treatment_id);
+		
+		System.out.println("Treatment deleted");
+
 	}
 	
 

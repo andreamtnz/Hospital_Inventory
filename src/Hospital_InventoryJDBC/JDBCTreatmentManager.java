@@ -64,7 +64,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	public void assignNurse(int nurse_id, int treatment_id) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "INSERT INTO examines (nurse_id,treatment_id) VALUES (?,?)";
+			String sql = "INSERT INTO performs (nurse_id,treatment_id) VALUES (?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, nurse_id);
 			prep.setInt(2, treatment_id);		
@@ -99,6 +99,21 @@ public class JDBCTreatmentManager implements TreatmentManager{
 		// TODO Auto-generated method stub
 		Treatment t= null;
 		return t;
+	}
+
+	@Override
+	public void removeTreatment(int id) {
+		// TODO Auto-generated method stub
+		try {
+			
+			String sql = "DELETE FROM treatment WHERE id=?;";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1,id);
+			prep.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
