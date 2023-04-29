@@ -79,7 +79,19 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	@Override
 	public void assignToTreatment(Materials m, Treatment t, Integer q) {
 		// TODO Auto-generated method stub
-		
+		try{
+			String sql = "INSERT INTO needs (treatmentID,materialID, quantity) VALUES (?,?,?)";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, t.getId());
+			prep.setInt(2, m.getId());	
+			prep.setInt(3, q);		
+
+			
+			prep.executeUpdate();			
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
