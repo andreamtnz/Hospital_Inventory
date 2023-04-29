@@ -58,12 +58,12 @@ public class Menu {
 			case 1:
 				loginAdministrator();
 				break;
-		/*	case 2:
+			case 2:
 				loginDoctor();
 				break;
 			case 3:
 				loginNurse();
-				break;*/
+				break;
 			case 0: 
 				jdbcManager.disconnect();
 				userManager.disconnect();
@@ -99,7 +99,7 @@ public class Menu {
 					materialsSubMenu();
 					break;
 				case 2:
-		//			distibutorsSubMenu();  COMENTADO PORQUE FALTA JDBCMANAGER
+//					distibutorsSubMenu();  COMENTADO PORQUE FALTA JDBCMANAGER
 					break;
 				case 3:
 					ordersSubMenu(); 
@@ -141,6 +141,144 @@ public class Menu {
 		}
 		
 	}
+	
+private static void doctorMenu (Integer id) throws Exception{
+		
+		try {
+			do {
+				System.out.println("Choose an option");
+				System.out.println("1. View all treatments");
+				System.out.println("2. Search treatment");
+				System.out.println("3. Add a treatment");
+				System.out.println("4. Delete an existing treatment");
+				System.out.println("5. Assign doctor to a treatment");
+				System.out.println("6. Assign nurse to a treatment");
+				System.out.println("7. View stock of all materials");
+				System.out.println("8. Search stock of a material");
+				System.out.println("9. Modify stock of a material");
+				System.out.println("0. exit");
+
+				int choice = Integer.parseInt(reader.readLine());
+				switch(choice)
+				{
+				case 1:
+//					viewTreatments();
+					break;
+				case 2:
+//					searchTreatment();
+					break;
+				case 3:
+//					addTreatment(); 
+					break;
+				case 4:
+//					deleteTreatment(); 
+					break;
+				case 5:
+//					assignDoctorToTreatment(); 
+					break;
+				case 6:
+//					assignNurseTotreatment();
+					break;
+				case 7:
+//					viewStocks();
+					break;
+				case 8:
+//					searchStock();
+					break;
+				case 9:
+//					modifyStock();
+				case 0: 
+					jdbcManager.disconnect();
+					userManager.disconnect();
+					System.exit(0);
+				default:
+					break;
+				}
+			}while(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+private static void loginDoctor() throws Exception{
+		
+		System.out.println("Email:");
+		String email = reader.readLine();
+		
+		System.out.println("Password: ");
+		String passwd = reader.readLine();
+		User u = userManager.checkPassword(email, passwd);
+		
+		if(u!=null & u.getRole().getName().equals("owner"))
+		{	
+			System.out.println("Login Successful!");
+			doctorMenu(u.getId());
+		}
+		
+	}
+
+private static void loginNurse() throws Exception{
+	
+	System.out.println("Email:");
+	String email = reader.readLine();
+	
+	System.out.println("Password: ");
+	String passwd = reader.readLine();
+	User u = userManager.checkPassword(email, passwd);
+	
+	if(u!=null & u.getRole().getName().equals("owner"))
+	{	
+		System.out.println("Login Successful!");
+		nurseMenu(u.getId());
+	}
+	
+}		
+
+private static void nurseMenu (Integer id) throws Exception{
+	
+	try {
+		do {
+			System.out.println("Choose an option");
+			System.out.println("1. View all treatments");
+			System.out.println("2. Search treatment");
+			System.out.println("3. View stock of all materials");
+			System.out.println("4. Search stock of a material");
+			System.out.println("5. Modify stock of a material");
+			System.out.println("0. exit");
+
+			int choice = Integer.parseInt(reader.readLine());
+			switch(choice)
+			{
+			case 1:
+//				viewTreatments();
+				break;
+			case 2:
+//				searchTreatment();
+				break;
+			case 3:
+//				viewStocks();
+				break;
+			case 4:
+//				searchStock();
+				break;
+			case 5:
+//				modifyStock();
+				break;
+				
+			case 0: 
+				jdbcManager.disconnect();
+				userManager.disconnect();
+				System.exit(0);
+			default:
+				break;
+			}
+		}while(true);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
 	
 	
 	//submenu materiales Administrador
@@ -202,7 +340,7 @@ private static void materialsSubMenu () throws Exception{
 
 
 	//submenu distribuidores Administrador
-private static void distributorsSubMenu () throws Exception{
+private static void distributorsSubMenu() throws Exception{
 	
 	try {
 		do {
@@ -309,7 +447,7 @@ private static void doctorsSubMenu() throws Exception{
 //				searchDoctor();
 				break;
 			case 3:
-//				addDoctor();
+				addDoctor();
 				break;
 			case 4:
 //				updateDoctor();
@@ -355,7 +493,7 @@ private static void nursesSubMenu() throws Exception{
 //				searchNurse();
 				break;
 			case 3:
-//				addNurse();
+				addNurse();
 				break;
 			case 4:
 //				updateNurse();
@@ -401,6 +539,18 @@ private static void nursesSubMenu() throws Exception{
 	}
 
 */	
+
+/*private static Materials chooseMaterial() throws Exception{
+	// TODO Auto-generated method stub
+	Materials m = new Materials();
+	System.out.println("Please choose a material, type its ID:");
+	System.out.println(materialsManager.getListAllMaterials());
+	Integer materialID = Integer.parseInt(reader.readLine());
+	
+	m = materialsManager.getMaterialbyId(materialID);
+	System.out.println(v.toString());
+}*/
+
 
 /*private static void wiewMaterials() throws Exception {
 		// TODO Auto-generated method stub
@@ -452,6 +602,45 @@ private static void nursesSubMenu() throws Exception{
 		Distribuitor d = new Distribuitor(name, type,);
 		distributorManager.addDistributor(d);
 	}		*/ //HAY QUE HACER JDBCMANAGER DE DISTRIBUITOR
+	
+	
+/*	public static void placeOrder() throws Exception
+	{
+		System.out.println("Type the id of the material you want to order: ");
+		int materialID = Integer.parseInt(reader.readLine());
+		System.out.println("Type the amount of materials you want to order: ");
+		int amount = Integer.parseInt(reader.readLine());
+		//HAY QUE COMPLETAR	
+	} */
+	
+	public static void addDoctor() throws Exception
+	{
+		
+		System.out.println("Type the name:");
+		String name = reader.readLine();
+		System.out.println("Type the department:");
+		String department = reader.readLine();
+		System.out.println("Type the email:");
+		String email = reader.readLine();
+			
+		Doctor d = new Doctor(name, department, email);
+		doctorManager.addDoctor(d);
+	}
+	
+	public static void addNurse() throws Exception
+	{
+		
+		System.out.println("Type the name:");
+		String name = reader.readLine();
+		System.out.println("Type the department:");
+		String department = reader.readLine();
+		System.out.println("Type the email:");
+		String email = reader.readLine();
+			
+		Nurse n = new Nurse(name, department, email);
+		nurseManager.addNurse(n);
+	}
+	
 
 /*	public static void createVet() throws Exception
 	{
