@@ -16,7 +16,7 @@ public interface TreatmentManager {
 	public void assignDoctor(int doctor_id, int treatment_id);
 	public void assignNurse(int nurse_id, int treatment_id);
 	public void assignToTreatment(Materials m, Treatment t, Integer q);
-	public Treatment getTreatmentById(int treatment_id); 
+	public Treatment getTreatmentByID(int treatment_id); 
 	public void removeTreatment(int treatment_id);
 }
  

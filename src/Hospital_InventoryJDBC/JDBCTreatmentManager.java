@@ -95,7 +95,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	}
 
 	@Override
-	public Treatment getTreatmentById(int treatment_id) {
+	public Treatment getTreatmentByID(int treatment_id) {
 		// TODO Auto-generated method stub
 		Treatment t= null;
 		return t;

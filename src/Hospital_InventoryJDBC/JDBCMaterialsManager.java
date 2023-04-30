@@ -63,7 +63,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 	}
 
 	@Override
-	public Materials getMaterialBYID(int id) {
+	public Materials getMaterialByID(int id) {
 		// TODO Auto-generated method stub
 		Materials m = null;
 		try {

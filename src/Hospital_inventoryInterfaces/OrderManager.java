@@ -12,6 +12,6 @@ public interface OrderManager {
 	public void addToOrder(Materials m, Order o, Integer q);
 	//get a list of orders
 	public List<Order> getListOrder();
-	public Order getOrderById(int order_id);
+	public Order getOrderByID(int order_id);
 	public void updateStatus(int order_id, String state);
 }

@@ -520,16 +520,60 @@ private static void loginNurse() throws Exception{
 
 
 	
-/*	private static void chooseVet() throws Exception{
+	private static void searchMaterial() throws Exception{
 		// TODO Auto-generated method stub
-		Vet v = new Vet();
-		System.out.println("Please choose a vet, type its ID:");
-		System.out.println(vetManager.getListAllVets());
-		Integer vetID = Integer.parseInt(reader.readLine());
-		//show vet data
-		v = vetManager.getVetbyId(vetID);
-		System.out.println(v.toString());
-	}  */
+		Materials m = new Materials();
+		System.out.println("Please choose a material, type its ID:");
+		System.out.println(materialsManager.getListMaterials());
+		Integer material_id = Integer.parseInt(reader.readLine());
+		//show material data
+		m = materialsManager.getMaterialByID(material_id);
+		System.out.println(m.toString());
+	} 
+	
+/*	private static void searchDistributor() throws Exception{ //hace falta distributor JDBC e interfaz
+		// TODO Auto-generated method stub
+		Distribuitor d = new Distribuitor();
+		System.out.println("Please choose a distributor, type its ID:");
+		System.out.println(distributorManager.getListDistributors());
+		Integer distributor_id = Integer.parseInt(reader.readLine());
+		//show material data
+		d = distributorManager.getDistributorByID(distributor_id);
+		System.out.println(d.toString());
+	} */
+	
+	private static void searchOrder() throws Exception{
+		// TODO Auto-generated method stub
+		Order o = new Order();
+		System.out.println("Please choose an order, type its ID:");
+		System.out.println(orderManager.getListOrder());
+		Integer order_id = Integer.parseInt(reader.readLine());
+		//show material data
+		o = orderManager.getOrderByID(order_id);
+		System.out.println(o.toString());
+	}
+
+	private static void searchDoctor() throws Exception{
+		// TODO Auto-generated method stub
+		Doctor d = new Doctor();
+		System.out.println("Please choose a doctor, type its ID:");
+		System.out.println(doctorManager.getListDoctor());
+		Integer doctor_id = Integer.parseInt(reader.readLine());
+		//show material data
+		d = doctorManager.getDoctorByID(doctor_id);
+		System.out.println(d.toString());
+	}
+	
+	private static void searchNurse() throws Exception{
+		// TODO Auto-generated method stub
+		Nurse n = new Nurse();
+		System.out.println("Please choose a nurse, type its ID:");
+		System.out.println(nurseManager.getListNurse());
+		Integer nurse_id = Integer.parseInt(reader.readLine());
+		//show material data
+		n = nurseManager.getNurseByID(nurse_id);
+		System.out.println(n.toString());
+	}
 
 	private static void assignDoctorToTreatment() throws Exception{
 		// TODO Auto-generated method stub

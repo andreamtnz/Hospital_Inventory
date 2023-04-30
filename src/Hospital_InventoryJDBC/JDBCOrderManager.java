@@ -64,7 +64,7 @@ public class JDBCOrderManager implements OrderManager{
 	}
 
 	@Override
-	public Order getOrderById(int order_id) {
+	public Order getOrderByID(int order_id) {
 		// TODO Auto-generated method stub
 		Order o = null;
 		try {
