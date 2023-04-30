@@ -163,7 +163,7 @@ private static void materialsSubMenu () throws Exception{
 	//				viewMaterials(); //shows all info about all the materials, full table
 					break;
 				case 2:
-	//				searchMaterial();
+					searchMaterial();
 					break;
 				case 3:
 					addMaterial();
@@ -260,13 +260,13 @@ private static void ordersSubMenu() throws Exception{
 //				viewOrders();
 				break;
 			case 2:
-//				searchOrder();
+				searchOrder();
 				break;
 			case 3:
 //				placeOrder();
 				break;
 			case 4:
-//				upsateStatus();
+				updateStatus();
 				break;
 			case 0: 
 				jdbcManager.disconnect();
@@ -303,7 +303,7 @@ private static void doctorsSubMenu() throws Exception{
 //				viewDoctors();
 				break;
 			case 2:
-//				searchDoctor();
+				searchDoctor();
 				break;
 			case 3:
 				addDoctor();
@@ -349,7 +349,7 @@ private static void nursesSubMenu() throws Exception{
 //				viewNurses();
 				break;
 			case 2:
-//				searchNurse();
+				searchNurse();
 				break;
 			case 3:
 				addNurse();
