@@ -1,5 +1,6 @@
 package Hospital_InventoryJDBC;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -60,7 +61,34 @@ public class JDBCOrderManager implements OrderManager{
 	@Override
 	public List<Order> getListOrder() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Order> orders = new ArrayList<Order>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM order";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("id");
+				String state = rs.getString("state");
+				Date date = rs.getDate("date");
+				Float cost = rs.getFloat("cost");
+				Integer administrator = rs.getInt("administratorID");
+				
+				Order o = new Order(id, state, date, cost, administrator);
+				orders.add(o);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return orders;
 	}
 
 	@Override

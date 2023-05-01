@@ -2,11 +2,13 @@ package Hospital_InventoryJDBC;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.Statement;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import Hospital_InventoryPOJO.Distribuitor;
 import Hospital_InventoryPOJO.Doctor;
 import Hospital_inventoryInterfaces.DoctorManager;
 
@@ -37,7 +39,33 @@ public class JDBCDoctorManager implements DoctorManager{
 	@Override
 	public List<Doctor> getListDoctor() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM doctor";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String department = rs.getString("department");
+				String email = rs.getString("email");
+				
+				Doctor d = new Doctor(id,name, department, email);
+				doctors.add(d);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return doctors;
 	}
 
 	@Override

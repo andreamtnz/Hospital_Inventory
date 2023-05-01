@@ -2,10 +2,13 @@ package Hospital_InventoryJDBC;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.Statement;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+
+import Hospital_InventoryPOJO.Doctor;
 import Hospital_InventoryPOJO.Nurse;
 import Hospital_inventoryInterfaces.NurseManager;
 
@@ -36,7 +39,33 @@ public class JDBCNurseManager implements NurseManager{
 	@Override
 	public List<Nurse> getListNurse() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Nurse> nurses = new ArrayList<Nurse>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM nurse";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String department = rs.getString("department");
+				String email = rs.getString("email");
+				
+				Nurse n = new Nurse(id,name, department, email);
+				nurses.add(n);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return nurses;
 	}
 
 	@Override

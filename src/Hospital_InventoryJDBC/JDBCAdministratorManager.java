@@ -3,9 +3,11 @@ package Hospital_InventoryJDBC;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import Hospital_InventoryPOJO.Administrator;
+import Hospital_InventoryPOJO.Doctor;
 import Hospital_inventoryInterfaces.AdministratorManager;
 
 public class JDBCAdministratorManager implements AdministratorManager{
@@ -35,7 +37,32 @@ public class JDBCAdministratorManager implements AdministratorManager{
 	@Override
 	public List<Administrator> getListAdministrator() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Administrator> administrators = new ArrayList<Administrator>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM administrator";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				
+				Administrator a = new Administrator(id,name, email);
+				administrators.add(a);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return administrators;
 	}
 
 	@Override

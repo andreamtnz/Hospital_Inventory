@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import Hospital_InventoryPOJO.Distribuitor;
 import Hospital_InventoryPOJO.Materials;
 import Hospital_inventoryInterfaces.MaterialsManager;
 
@@ -60,7 +61,35 @@ public class JDBCMaterialsManager implements MaterialsManager{
 	@Override
 	public List<Materials> getListMaterials() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Materials> materials = new ArrayList<Materials>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM material";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String type = rs.getString("type");
+				Integer stock = rs.getInt("stock");
+				Float price = rs.getFloat("price");
+				Integer distributor = rs.getInt("distributorID");
+				
+				Materials m = new Materials(id,name, type, stock, price, distributor);
+				materials.add(m);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return materials;
 	}
 
 	@Override

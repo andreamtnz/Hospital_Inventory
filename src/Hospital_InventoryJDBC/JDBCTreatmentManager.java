@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import Hospital_InventoryPOJO.Doctor;
@@ -42,7 +43,34 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	@Override
 	public List<Treatment> getListTreatments() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Treatment> treatments = new ArrayList<Treatment>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM treatment";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				Date date = rs.getDate("date");
+				String time = rs.getString("time");
+				String patient = rs.getString("patient");
+				
+				Treatment t = new Treatment(id, name, date, time, patient);
+				treatments.add(t);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return treatments;
 	}
 
 	@Override
