@@ -26,6 +26,14 @@ public class Treatment implements Serializable{
 		super();
 	}
 	
+	public Treatment(Integer id, String name, Date date, String time, String patient) {
+		this.id = id;
+		this.name = name;
+		this.date = date;
+		this.time = time;
+		this.patient = patient;
+	}
+	
 	
 	public Integer getId() {
 		return id;

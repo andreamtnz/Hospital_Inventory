@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
 
+import Hospital_InventoryPOJO.Doctor;
 import Hospital_InventoryPOJO.Materials;
 import Hospital_InventoryPOJO.Order;
 import Hospital_InventoryPOJO.Treatment;
@@ -97,7 +98,25 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	@Override
 	public Treatment getTreatmentByID(int treatment_id) {
 		// TODO Auto-generated method stub
-		Treatment t= null;
+		Treatment t = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM doctor WHERE id=" + treatment_id;
+			ResultSet rs = stmt.executeQuery(sql);
+			
+				String name = rs.getString("name");
+				Date date = rs.getDate("date");
+				String time = rs.getString("time");
+				String patient = rs.getString("email");
+				t = new Treatment(treatment_id, name,date, time, patient);				
+			
+			rs.close();
+			stmt.close();
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
 		return t;
 	}
 

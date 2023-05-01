@@ -131,7 +131,7 @@ public class Menu {
 		String passwd = reader.readLine();
 		User u = userManager.checkPassword(email, passwd);
 		
-		if(u!=null & u.getRole().getName().equals("owner"))
+		if(u!=null & u.getRole().getName().equals("administrator"))
 		{	
 			System.out.println("Login Successful!");
 			administratorMenu(u.getId());
@@ -445,7 +445,7 @@ private static void loginDoctor() throws Exception{
 		String passwd = reader.readLine();
 		User u = userManager.checkPassword(email, passwd);
 		
-		if(u!=null & u.getRole().getName().equals("owner"))
+		if(u!=null & u.getRole().getName().equals("doctor"))
 		{	
 			System.out.println("Login Successful!");
 			doctorMenu(u.getId());
@@ -510,7 +510,7 @@ private static void loginNurse() throws Exception{
 	String passwd = reader.readLine();
 	User u = userManager.checkPassword(email, passwd);
 	
-	if(u!=null & u.getRole().getName().equals("owner"))
+	if(u!=null & u.getRole().getName().equals("nurse"))
 	{	
 		System.out.println("Login Successful!");
 		nurseMenu(u.getId());
@@ -595,7 +595,7 @@ private static void loginNurse() throws Exception{
 		System.out.println("Please enter the treatment ID to assign:");
 		Integer treatment_id = Integer.parseInt(reader.readLine());
 		
-		treatmentManager.assignDoctor(nurse_id, treatment_id);
+		treatmentManager.assignNurse(nurse_id, treatment_id);
 		System.out.println("Nurse assigned");
 
 		
