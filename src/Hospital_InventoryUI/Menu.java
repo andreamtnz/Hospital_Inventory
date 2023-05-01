@@ -101,7 +101,7 @@ public class Menu {
 					materialsSubMenu();
 					break;
 				case 2:
-//					distibutorsSubMenu();  COMENTADO PORQUE FALTA JDBCMANAGER
+					distributorsSubMenu();  //COMENTADO PORQUE FALTA JDBCMANAGER
 					break;
 				case 3:
 					ordersSubMenu(); 
@@ -165,7 +165,7 @@ private static void materialsSubMenu () throws Exception{
 				switch(choice)
 				{
 				case 1:
-	//				viewMaterials(); //shows all info about all the materials, full table
+					viewMaterials(); //shows all info about all the materials, full table
 					break;
 				case 2:
 					searchMaterial();
@@ -262,7 +262,7 @@ private static void ordersSubMenu() throws Exception{
 			switch(choice)
 			{
 			case 1:
-//				viewOrders();
+				viewOrders();
 				break;
 			case 2:
 				searchOrder();
@@ -535,15 +535,7 @@ private static void loginNurse() throws Exception{
 		m = materialsManager.getMaterialByID(material_id);
 		System.out.println(m.toString());
 	} 
-	
-	private static void addDistributor() throws Exception{
-		System.out.println("Type the name of the distributor:");
-		String name = reader.readLine();
-		System.out.println("Type the type of the distributor:");
-		String type = reader.readLine();
-		Distribuitor d = new Distribuitor(name,type);
-		distributorManager.addDistributor(d);
-	}
+
 	
 	private static void viewDistributors() {
 		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
@@ -650,24 +642,24 @@ private static void loginNurse() throws Exception{
 
 
 
-/*private static Materials selectMaterial() throws Exception{
+private static void selectMaterial() throws Exception{
 	// TODO Auto-generated method stub
 	Materials m = new Materials();
 	System.out.println("Please choose a material, type its ID:");
-	System.out.println(materialsManager.getListAllMaterials());
+	System.out.println(materialsManager.getListMaterials());
 	Integer materialID = Integer.parseInt(reader.readLine());
 	
-	m = materialsManager.getMaterialbyId(materialID);
-	System.out.println(v.toString());
-}*/
+	m = materialsManager.getMaterialByID(materialID);
+	System.out.println(m.toString());
+}
 
 
-/*private static void wiewMaterials() throws Exception {
+private static void viewMaterials() throws Exception {
 		// TODO Auto-generated method stub
 		List<Materials> materials = new ArrayList<Materials>();
 		
 		try {
-			materials = materialsManager.getListAllMaterials();
+			materials = materialsManager.getListMaterials();
 			int i;
 			for(i=0; i< materials.size(); i++)
 			{
@@ -680,7 +672,7 @@ private static void loginNurse() throws Exception{
 		}
 	}
 
-*/
+
 	
 	
 	public static void addMaterial() throws Exception
@@ -704,7 +696,7 @@ private static void loginNurse() throws Exception{
 	}
 	
 	
-/*	public static void addDistributor() throws Exception
+	public static void addDistributor() throws Exception
 	{
 		
 		System.out.println("Type the name:");
@@ -713,11 +705,11 @@ private static void loginNurse() throws Exception{
 		String type = reader.readLine();
 	
 	
-		Distribuitor d = new Distribuitor(name, type,);
+		Distribuitor d = new Distribuitor(name, type);
 		distributorManager.addDistributor(d);
 		
 		System.out.println("Distributor added");
-	}		*/ //HAY QUE HACER JDBCMANAGER DE DISTRIBUITOR
+	}		 //HAY QUE HACER JDBCMANAGER DE DISTRIBUITOR
 	
 	
 	public static void placeOrder() throws Exception
@@ -767,6 +759,24 @@ private static void loginNurse() throws Exception{
 		}
 		
 	} 
+	
+	private static void viewOrders()
+	{
+		List<Order> orders = new ArrayList<Order>();
+		try {
+			orders = orderManager.getListOrder();
+			int i;
+			for(i=0; i< orders.size(); i++)
+			{
+				System.out.println(orders.get(i).toString());
+			}
+		
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	public static void addDoctor() throws Exception
 	{
