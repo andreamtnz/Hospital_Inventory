@@ -18,4 +18,6 @@ public interface MaterialsManager {
 	public Materials getMaterialByID(int id);
 	public void updateStock(int id, int stock);
 	
+	public List<Materials> getMaterialsByDistributor(int distributor_id);
+	
 }

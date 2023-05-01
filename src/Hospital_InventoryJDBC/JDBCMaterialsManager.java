@@ -3,6 +3,7 @@ package Hospital_InventoryJDBC;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import Hospital_InventoryPOJO.Materials;
@@ -105,6 +106,39 @@ public class JDBCMaterialsManager implements MaterialsManager{
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public List<Materials> getMaterialsByDistributor(int distributor_id) {
+		// TODO Auto-generated method stub
+		List<Materials> materials = new ArrayList<Materials>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM material WHERE distributorID =" + distributor_id;
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String type = rs.getString("type");
+				Integer stock = rs.getInt("stock");
+				Float price = rs.getFloat("price");
+				
+				Materials m = new Materials(id,name, type, stock, price, distributor_id);
+				materials.add(m);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return materials;
 	}
 	
 

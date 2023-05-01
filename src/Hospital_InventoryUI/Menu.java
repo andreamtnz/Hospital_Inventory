@@ -2,7 +2,10 @@ package Hospital_InventoryUI;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 import Hospital_InventoryJDBC.*;
 import Hospital_InventoryJPA.JPAUserManager;
@@ -24,6 +27,7 @@ public class Menu {
 	private static OrderManager orderManager;
 	private static TreatmentManager treatmentManager;
 	private static UserManager userManager;
+	private static DistributorManager distributorManager;
 	private static JDBCManager jdbcManager;
 	
 	public static void main(String[] args) {
@@ -39,6 +43,7 @@ public class Menu {
 	orderManager = new JDBCOrderManager(jdbcManager);
 	treatmentManager = new JDBCTreatmentManager(jdbcManager);
 	userManager = new JPAUserManager();
+	distributorManager = new JDBCDistributorManager(jdbcManager);
 
 	
 	try {
@@ -673,14 +678,53 @@ private static void loginNurse() throws Exception{
 	}		*/ //HAY QUE HACER JDBCMANAGER DE DISTRIBUITOR
 	
 	
-/*	public static void placeOrder() throws Exception
+	public static void placeOrder() throws Exception
 	{
-		System.out.println("Type the id of the material you want to order: ");
-		int materialID = Integer.parseInt(reader.readLine());
-		System.out.println("Type the amount of materials you want to order: ");
-		int amount = Integer.parseInt(reader.readLine());
-		//HAY QUE COMPLETAR	
-	} */
+		boolean check = true;
+		Date date = new Date(System.currentTimeMillis()); 
+		Float price = null;
+		Order o = new Order(date,price);
+		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
+		List<Materials> materials = new ArrayList<Materials>();
+		distributors = distributorManager.getlistDistributors();
+		ListIterator<Distribuitor> iterator = distributors.listIterator();
+		while(iterator.hasNext()) {
+			Distribuitor dist = iterator.next();
+			System.out.println(dist.getId() + "->" + dist.getName());
+		}
+		System.out.println("Select a distributor by it´s id to order from:");
+		int distributorID = Integer.parseInt(reader.readLine());
+		while(check) {
+			materials = materialsManager.getMaterialsByDistributor(distributorID);
+			ListIterator<Materials> iterator2 = materials.listIterator();
+			while(iterator2.hasNext()) {
+				Materials mat = iterator2.next();
+				System.out.println(mat.getId() + "->" + mat.getName());
+			}
+			System.out.println("Type the id of the material you want to order: ");
+			int materialID = Integer.parseInt(reader.readLine());
+			Materials m = materialsManager.getMaterialByID(materialID);
+			System.out.println("Type the amount of materials you want to order: ");
+			int amount = Integer.parseInt(reader.readLine());
+			price = price + m.getPrice()*amount;
+			orderManager.addToOrder(m, o, amount);
+			String answer = "";
+			while(!answer.equalsIgnoreCase("yes")||!answer.equalsIgnoreCase("no")) {
+				System.out.println("Do you want to order other materials?[yes/no]");
+				answer = reader.readLine();
+				if(answer.equalsIgnoreCase("no")) {
+					orderManager.addOrder(o);
+					o.setCost(price);
+					System.out.println("Your order will cost " + price + "$");
+					check = false;
+					break;
+				}
+			}
+			
+			//HAY QUE COMPLETAR	
+		}
+		
+	} 
 	
 	public static void addDoctor() throws Exception
 	{

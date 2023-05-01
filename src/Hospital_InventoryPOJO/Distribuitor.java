@@ -24,6 +24,12 @@ public class Distribuitor implements Serializable{
 		this.type = type;
 
 	}
+	public Distribuitor (Integer id, String name, String type) {
+		this.id = id;
+		this.name = name;
+		this.type = type;
+
+	}
 
 	public Integer getId() {
 		return id;
