@@ -220,16 +220,16 @@ private static void distributorsSubMenu() throws Exception{
 			switch(choice)
 			{
 			case 1:
-//				viewMDistributors(); //shows all info about all the materials, full table
+				viewDistributors(); //shows all info about all the distributors, full table
 				break;
 			case 2:
-//				searchDistributor();
+				searchDistributor();
 				break;
 			case 3:
-//				addDistributor();
+				addDistributor();
 				break;
-			case 4:  		//	CASES COMENTADOS PORQUE HAY QUE HACER LOS MÉTODOS
-//				viewMaterialsDistributot();
+			case 4:  		
+				viewMaterialsDistributor();
 				break;
 	
 			case 0: 
@@ -536,16 +536,58 @@ private static void loginNurse() throws Exception{
 		System.out.println(m.toString());
 	} 
 	
-/*	private static void searchDistributor() throws Exception{ //hace falta distributor JDBC e interfaz
+	private static void addDistributor() throws Exception{
+		System.out.println("Type the name of the distributor:");
+		String name = reader.readLine();
+		System.out.println("Type the type of the distributor:");
+		String type = reader.readLine();
+		Distribuitor d = new Distribuitor(name,type);
+		distributorManager.addDistributor(d);
+	}
+	
+	private static void viewDistributors() {
+		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
+		ListIterator<Distribuitor> iterator = distributors.listIterator();
+		while(iterator.hasNext()) {
+			Distribuitor dist = iterator.next();
+			System.out.println(dist.toString());
+		}
+	}
+	
+	private static void viewMaterialsDistributor() throws Exception{
+		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
+		List<Materials> materials = new ArrayList<Materials>();
+		distributors = distributorManager.getlistDistributors();
+		ListIterator<Distribuitor> iterator = distributors.listIterator();
+		while(iterator.hasNext()) {
+			Distribuitor dist = iterator.next();
+			System.out.println(dist.getId() + "->" + dist.getName());
+		}
+		System.out.println("Select a distributor to see the materials it sells:");
+		int distributorID = Integer.parseInt(reader.readLine());
+		materials = materialsManager.getMaterialsByDistributor(distributorID);
+		ListIterator<Materials> iterator2 = materials.listIterator();
+		while(iterator2.hasNext()) {
+			Materials mat = iterator2.next();
+			System.out.println(mat.toString());
+		}
+	}
+	
+	private static void searchDistributor() throws Exception{ //hace falta distributor JDBC e interfaz
 		// TODO Auto-generated method stub
 		Distribuitor d = new Distribuitor();
+		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
+		ListIterator<Distribuitor> iterator = distributors.listIterator();
+		while(iterator.hasNext()) {
+			Distribuitor dist = iterator.next();
+			System.out.println(dist.getId() + "->" + dist.getName());
+		}
 		System.out.println("Please choose a distributor, type its ID:");
-		System.out.println(distributorManager.getListDistributors());
 		Integer distributor_id = Integer.parseInt(reader.readLine());
 		//show material data
 		d = distributorManager.getDistributorByID(distributor_id);
 		System.out.println(d.toString());
-	} */
+	} 
 	
 	private static void searchOrder() throws Exception{
 		// TODO Auto-generated method stub

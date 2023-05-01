@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.List;
 
 import Hospital_InventoryPOJO.Distribuitor;
+import Hospital_InventoryPOJO.Doctor;
 import Hospital_inventoryInterfaces.DistributorManager;
 
 public class JDBCDistributorManager implements DistributorManager{
@@ -61,6 +62,29 @@ public class JDBCDistributorManager implements DistributorManager{
 	public void removeDistributor(int id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Distribuitor getDistributorByID(int id) {
+		// TODO Auto-generated method stub
+		Distribuitor d = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM distributor WHERE id=" + id;
+			ResultSet rs = stmt.executeQuery(sql);
+			
+				String name = rs.getString("name");
+				String type = rs.getString("type");
+				d = new Distribuitor(id, name, type);				
+			
+			rs.close();
+			stmt.close();
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return d;
 	}
 
 }
