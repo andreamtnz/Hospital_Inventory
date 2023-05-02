@@ -84,7 +84,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 		List<Doctor> doctors = new ArrayList<Doctor>();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM doctor AND requests WHERE requests.treatment_id=" + treatment_id;
+			String sql = "SELECT * FROM doctor AND request WHERE request.treatment_id=" + treatment_id;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
@@ -111,7 +111,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 		List<Nurse> nurses = new ArrayList<Nurse>();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM nurse AND performs WHERE performs.treatment_id=" + treatment_id;
+			String sql = "SELECT * FROM nurse AND perform WHERE perform.treatment_id=" + treatment_id;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
