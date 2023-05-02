@@ -744,7 +744,7 @@ private static void viewMaterials() throws Exception {
 			Distribuitor dist = iterator.next();
 			System.out.println(dist.getId() + "->" + dist.getName());
 		}
-		System.out.println("Select a distributor by it´s id to order from:");
+		System.out.println("Introduce the ID of the distributor you want to order from:");
 		int distributorID = Integer.parseInt(reader.readLine());
 		while(check) {
 			materials = materialsManager.getMaterialsByDistributor(distributorID);
