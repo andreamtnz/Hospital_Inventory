@@ -305,7 +305,7 @@ private static void doctorsSubMenu() throws Exception{
 			switch(choice)
 			{
 			case 1:
-//				viewDoctors();
+				viewDoctors();
 				break;
 			case 2:
 				searchDoctor();
@@ -351,7 +351,7 @@ private static void nursesSubMenu() throws Exception{
 			switch(choice)
 			{
 			case 1:
-//				viewNurses();
+				viewNurses();
 				break;
 			case 2:
 				searchNurse();
@@ -483,13 +483,13 @@ private static void nurseMenu (Integer id) throws Exception{
 //				searchTreatment();
 				break;
 			case 3:
-//				viewStocks();
+				viewStocks();
 				break;
 			case 4:
-//				searchStock();
+				searchStock();
 				break;
 			case 5:
-//				modifyStock();
+				modifyStock();
 				break;
 				
 			case 0: 
@@ -590,6 +590,24 @@ private static void loginNurse() throws Exception{
 		//show material data
 		o = orderManager.getOrderByID(order_id);
 		System.out.println(o.toString());
+	}
+	
+	private static void viewDoctors() {
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		ListIterator<Doctor> iterator = doctors.listIterator();
+		while(iterator.hasNext()) {
+			Doctor doc = iterator.next();
+			System.out.println(doc.toString());
+		}
+	}
+	
+	private static void viewNurses() {
+		List<Nurse> nurses = new ArrayList<Nurse>();
+		ListIterator<Nurse> iterator = nurses.listIterator();
+		while(iterator.hasNext()) {
+			Nurse nur = iterator.next();
+			System.out.println(nur.toString());
+		}
 	}
 
 	private static void searchDoctor() throws Exception{
@@ -839,6 +857,7 @@ private static void viewMaterials() throws Exception {
 	
 	public static void modifyStock() throws Exception
 	{
+		
 		System.out.println("Please enter the id of the material:");
 		int material_id =  Integer.parseInt(reader.readLine());
 		System.out.println("Please enter the new stock:");
