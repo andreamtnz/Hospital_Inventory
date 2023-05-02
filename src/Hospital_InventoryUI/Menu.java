@@ -101,7 +101,7 @@ public class Menu {
 					materialsSubMenu();
 					break;
 				case 2:
-					distributorsSubMenu();  //COMENTADO PORQUE FALTA JDBCMANAGER
+					distributorsSubMenu(); 
 					break;
 				case 3:
 					ordersSubMenu(); 
@@ -173,18 +173,18 @@ private static void materialsSubMenu () throws Exception{
 				case 3:
 					addMaterial();
 					break;
-		/*		case 4:  			CASES COMENTADOS PORQUE HAY QUE HACER LOS MÉTODOS
-					modifyMaterial();
-					break;		*/
+				case 4:  			
+	//				modifyMaterial();
+					break;		
 				case 5:
 					deleteMaterial();
 					break;
-		/*		case 6:
+				case 6:
 					viewStocks(); //shows id, name and stock of all materials
 					break;
 				case 7:
 					searchStock();
-					break;*/
+					break;
 				case 8:
 					modifyStock();
 					break;		
@@ -380,7 +380,7 @@ private static void nursesSubMenu() throws Exception{
 }
 
 
-//DOCTOR
+//DOCTOR --> falta addTreatment()
 	
 private static void doctorMenu (Integer id) throws Exception{
 		
@@ -402,16 +402,16 @@ private static void doctorMenu (Integer id) throws Exception{
 				switch(choice)
 				{
 				case 1:
-//					viewTreatments();
+					viewTreatments();
 					break;
 				case 2:
-//					searchTreatment();
+					searchTreatment();
 					break;
 				case 3:
 //					addTreatment(); 
 					break;
 				case 4:
-//					deleteTreatment(); 
+					deleteTreatment(); 
 					break;
 				case 5:
 					assignDoctorToTreatment(); 
@@ -525,15 +525,19 @@ private static void loginNurse() throws Exception{
 
 
 	
-	private static void searchMaterial() throws Exception{
+	private static void searchMaterial() throws Exception {	//done
 		// TODO Auto-generated method stub
+		try {
+		showMaterialsID();
 		Materials m = new Materials();
 		System.out.println("Please choose a material, type its ID:");
-		System.out.println(materialsManager.getListMaterials());
 		Integer material_id = Integer.parseInt(reader.readLine());
 		//show material data
 		m = materialsManager.getMaterialByID(material_id);
 		System.out.println(m.toString());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	} 
 
 	
@@ -546,43 +550,59 @@ private static void loginNurse() throws Exception{
 		}
 	}
 	
-	private static void viewMaterialsDistributor() throws Exception{
-		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
-		List<Materials> materials = new ArrayList<Materials>();
-		distributors = distributorManager.getlistDistributors();
-		ListIterator<Distribuitor> iterator = distributors.listIterator();
-		while(iterator.hasNext()) {
-			Distribuitor dist = iterator.next();
-			System.out.println(dist.getId() + "->" + dist.getName());
-		}
+	private static void viewMaterialsDistributor() throws Exception{ //done
+		try {
+		showDistributorsID();
 		System.out.println("Select a distributor to see the materials it sells:");
 		int distributorID = Integer.parseInt(reader.readLine());
+		List<Materials> materials = new ArrayList<Materials>();
 		materials = materialsManager.getMaterialsByDistributor(distributorID);
-		ListIterator<Materials> iterator2 = materials.listIterator();
-		while(iterator2.hasNext()) {
-			Materials mat = iterator2.next();
+		ListIterator<Materials> iterator = materials.listIterator();
+		while(iterator.hasNext()) {
+			Materials mat = iterator.next();
 			System.out.println(mat.toString());
 		}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
-	private static void searchDistributor() throws Exception{ 
+	private static void searchDistributor() throws Exception{ //done
 		// TODO Auto-generated method stub
-		Distribuitor d = new Distribuitor();
-		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
-		ListIterator<Distribuitor> iterator = distributors.listIterator();
-		while(iterator.hasNext()) {
-			Distribuitor dist = iterator.next();
-			System.out.println(dist.getId() + "->" + dist.getName());
-		}
+		try {
+		showDistributorsID();
 		System.out.println("Please choose a distributor, type its ID:");
 		Integer distributor_id = Integer.parseInt(reader.readLine());
 		//show material data
+		Distribuitor d = new Distribuitor();
 		d = distributorManager.getDistributorByID(distributor_id);
 		System.out.println(d.toString());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	} 
 	
-	private static void searchOrder() throws Exception{
+	private static void searchTreatment() throws Exception{ //done
 		// TODO Auto-generated method stub
+		try {
+		showTreatmentsID();
+		System.out.println("Please choose a treatment, type its ID:");
+		Integer treatment_id = Integer.parseInt(reader.readLine());
+		//show material data
+		Treatment t = new Treatment();
+		t = treatmentManager.getTreatmentById(treatment_id);
+		System.out.println(t.toString());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	} 
+	
+	private static void searchOrder() throws Exception { 	//done
+		// TODO Auto-generated method stub
+		try {
+		showOrdersID();
+				
 		Order o = new Order();
 		System.out.println("Please choose an order, type its ID:");
 		System.out.println(orderManager.getListOrder());
@@ -590,6 +610,9 @@ private static void loginNurse() throws Exception{
 		//show material data
 		o = orderManager.getOrderByID(order_id);
 		System.out.println(o.toString());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private static void viewDoctors() {
@@ -610,8 +633,10 @@ private static void loginNurse() throws Exception{
 		}
 	}
 
-	private static void searchDoctor() throws Exception{
+	private static void searchDoctor() throws Exception { 	//done
 		// TODO Auto-generated method stub
+		try {
+		showDoctorsID();
 		Doctor d = new Doctor();
 		System.out.println("Please choose a doctor, type its ID:");
 		System.out.println(doctorManager.getListDoctor());
@@ -619,10 +644,16 @@ private static void loginNurse() throws Exception{
 		//show material data
 		d = doctorManager.getDoctorByID(doctor_id);
 		System.out.println(d.toString());
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	private static void searchNurse() throws Exception{
+	private static void searchNurse() throws Exception{	//done
 		// TODO Auto-generated method stub
+		try {
+		showNursesID();
 		Nurse n = new Nurse();
 		System.out.println("Please choose a nurse, type its ID:");
 		System.out.println(nurseManager.getListNurse());
@@ -630,37 +661,46 @@ private static void loginNurse() throws Exception{
 		//show material data
 		n = nurseManager.getNurseByID(nurse_id);
 		System.out.println(n.toString());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	private static void assignDoctorToTreatment() throws Exception{
-		// TODO Auto-generated method stub
+	private static void assignDoctorToTreatment() throws Exception{ 	//done
+		try {
+		showDoctorsID();
 		System.out.println("Please enter the doctor ID to assign:");
 		Integer doctor_id = Integer.parseInt(reader.readLine());
+		showTreatmentsID();
 		System.out.println("Please enter the treatment ID to assign:");
 		Integer treatment_id = Integer.parseInt(reader.readLine());
 		
 		treatmentManager.assignDoctor(doctor_id, treatment_id);
 		System.out.println("Doctor assigned");
-
-		
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	private static void assignNurseToTreatment() throws Exception{
+	private static void assignNurseToTreatment() throws Exception{	//done
 		// TODO Auto-generated method stub
+		try {
+		showNursesID();
 		System.out.println("Please enter the nurse ID to assign:");
 		Integer nurse_id = Integer.parseInt(reader.readLine());
+		showTreatmentsID();
 		System.out.println("Please enter the treatment ID to assign:");
 		Integer treatment_id = Integer.parseInt(reader.readLine());
 		
 		treatmentManager.assignNurse(nurse_id, treatment_id);
 		System.out.println("Nurse assigned");
-
-		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 
 
-
-private static void selectMaterial() throws Exception{
+private static void selectMaterial() throws Exception{   //este método es el mismo que searchMaterial()
 	// TODO Auto-generated method stub
 	Materials m = new Materials();
 	System.out.println("Please choose a material, type its ID:");
@@ -672,7 +712,7 @@ private static void selectMaterial() throws Exception{
 }
 
 
-private static void viewMaterials() throws Exception {
+private static void viewMaterials() throws Exception { // creo que no hace falta el try catch
 		// TODO Auto-generated method stub
 		List<Materials> materials = new ArrayList<Materials>();
 		
@@ -692,9 +732,7 @@ private static void viewMaterials() throws Exception {
 
 
 	
-	
-	public static void addMaterial() throws Exception
-	{
+	public static void addMaterial() throws Exception {
 		
 		System.out.println("Type the name:");
 		String name = reader.readLine();
@@ -714,8 +752,7 @@ private static void viewMaterials() throws Exception {
 	}
 	
 	
-	public static void addDistributor() throws Exception
-	{
+	public static void addDistributor() throws Exception {	//done
 		
 		System.out.println("Type the name:");
 		String name = reader.readLine();
@@ -730,8 +767,7 @@ private static void viewMaterials() throws Exception {
 	}		 
 	
 	
-	public static void placeOrder() throws Exception
-	{
+	public static void placeOrder() throws Exception {
 		boolean check = true;
 		Date date = new Date(System.currentTimeMillis()); 
 		Float price = null;
@@ -778,8 +814,7 @@ private static void viewMaterials() throws Exception {
 		
 	} 
 	
-	private static void viewOrders()
-	{
+	private static void viewOrders() { // aqui creo que no hace falta el try catch
 		List<Order> orders = new ArrayList<Order>();
 		try {
 			orders = orderManager.getListOrder();
@@ -796,8 +831,7 @@ private static void viewMaterials() throws Exception {
 		
 	}
 	
-	public static void addDoctor() throws Exception
-	{
+	public static void addDoctor() throws Exception {	//done
 		
 		System.out.println("Type the name:");
 		String name = reader.readLine();
@@ -813,9 +847,8 @@ private static void viewMaterials() throws Exception {
 
 	}
 	
-	public static void addNurse() throws Exception
-	{
-		
+	public static void addNurse() throws Exception {	//done
+
 		System.out.println("Type the name:");
 		String name = reader.readLine();
 		System.out.println("Type the department:");
@@ -831,16 +864,9 @@ private static void viewMaterials() throws Exception {
 	}
 	
 		
-	public static void updateDoctor() throws Exception
-	{
-		List<Doctor> doctors = new ArrayList<Doctor>();
+	public static void updateDoctor() throws Exception { 	//done
 		try {
-		doctors = doctorManager.getListDoctor();
-		ListIterator<Doctor> iterator =  doctors.listIterator();
-		while(iterator.hasNext()) {
-			Doctor doc = iterator.next();
-			System.out.println(doc.getId() + "->" + doc.getName());
-		}
+		showDoctorsID();
 		
 		System.out.println("Please enter the id of the doctor to update:");
 		int doctor_id =  Integer.parseInt(reader.readLine());
@@ -856,8 +882,9 @@ private static void viewMaterials() throws Exception {
 
 	}
 	
-	public static void updateNurse() throws Exception
-	{
+	public static void updateNurse() throws Exception {		//done
+		try {
+		showNursesID();
 		System.out.println("Please enter the id of the nurse to update:");
 		int nurse_id =  Integer.parseInt(reader.readLine());
 		System.out.println("Please enter the new department:");
@@ -865,12 +892,15 @@ private static void viewMaterials() throws Exception {
 		
 		nurseManager.updateDepartment(nurse_id, department);
 		System.out.println("Nurse department updated");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 	
-	public static void modifyStock() throws Exception
-	{
-		
+	public static void modifyStock() throws Exception { 	//done
+		try {
+		showMaterialsID();
 		System.out.println("Please enter the id of the material:");
 		int material_id =  Integer.parseInt(reader.readLine());
 		System.out.println("Please enter the new stock:");
@@ -878,11 +908,15 @@ private static void viewMaterials() throws Exception {
 		
 		materialsManager.updateStock(material_id, stock);
 		System.out.println("Stock modified");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 	
-	public static void updateStatus() throws Exception
-	{
+	public static void updateStatus() throws Exception {		//done
+		try {
+		showOrdersID();
 		System.out.println("Please enter the id of the order:");
 		int order_id =  Integer.parseInt(reader.readLine());
 		System.out.println("Please enter the new status:");
@@ -890,20 +924,16 @@ private static void viewMaterials() throws Exception {
 		
 		orderManager.updateStatus(order_id, status);
 		System.out.println("Status updated");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	
-	public static void deleteDoctor() throws Exception
-	{
-		List<Doctor> doctors = new ArrayList<Doctor>();
+	public static void deleteDoctor() throws Exception {		//done
 		try {
-		doctors = doctorManager.getListDoctor();
-		ListIterator<Doctor> iterator =  doctors.listIterator();
-		while(iterator.hasNext()) {
-			Doctor doc = iterator.next();
-			System.out.println(doc.getId() + "->" + doc.getName());
-		}
+		showDoctorsID();
 		System.out.println("Please enter the id of the doctor to delete:");
 		int doctor_id =  Integer.parseInt(reader.readLine());
 		doctorManager.removeDoctor(doctor_id);
@@ -914,35 +944,47 @@ private static void viewMaterials() throws Exception {
 		}
 	}
 	
-	public static void deleteNurse() throws Exception
-	{
+	public static void deleteNurse() throws Exception {			//done
+		try {
+		showNursesID();
 		System.out.println("Please enter the id of the doctor to delete:");
 		int nurse_id =  Integer.parseInt(reader.readLine());
 		nurseManager.removeNurse(nurse_id);
 		System.out.println("Nurse deleted");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public static void deleteTreatment() throws Exception
-	{
+	public static void deleteTreatment() throws Exception {		//done
+		try {
+		showTreatmentsID();
+		
 		System.out.println("Please enter the id of the treatment to delete:");
 		int treatment_id =  Integer.parseInt(reader.readLine());
 		treatmentManager.removeTreatment(treatment_id);
 		
 		System.out.println("Treatment deleted");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public static void deleteMaterial() throws Exception
-	{
+	public static void deleteMaterial() throws Exception {		//done
+		try {
+		showMaterialsID();
 		System.out.println("Please enter the id of the material to delete:");
 		int material_id =  Integer.parseInt(reader.readLine());
 		materialsManager.removeMaterial(material_id);
 		
 		System.out.println("Material deleted");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 	
-	private static void viewTreatments()
-	{
+	private static void viewTreatments() {		//creo que sobra try catch
 		List<Treatment> treatments = new ArrayList<Treatment>();
 		try {
 			treatments = treatmentManager.getListTreatments();
@@ -959,7 +1001,7 @@ private static void viewMaterials() throws Exception {
 		
 	}
 	
-	private static void viewStocks() throws Exception {
+	private static void viewStocks() throws Exception { //creo que sobra try catch
 		// TODO Auto-generated method stub
 		List<Materials> materials = new ArrayList<Materials>();
 		
@@ -977,21 +1019,82 @@ private static void viewMaterials() throws Exception {
 		}
 	}
 	
-	private static void searchStock() throws Exception{ 
+	private static void searchStock() throws Exception{ //done
 		// TODO Auto-generated method stub
-		Materials m = new Materials();
-		List<Materials> materials = new ArrayList<Materials>();
-		ListIterator<Materials> iterator = materials.listIterator();
-		while(iterator.hasNext()) {
-			Materials mat = iterator.next();
-			System.out.println(mat.getId() + "->" + mat.getName());
-		}
+		try {
+		showMaterialsID();
 		System.out.println("Please choose a material, type its ID:");
 		Integer material_id = Integer.parseInt(reader.readLine());
-		//show material data
+		Materials m = new Materials();
 		m = materialsManager.getMaterialByID(material_id);
 		System.out.println(m.stockToString());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	} 
+	
+	
+	//SHOW ALL ID'S METHODS FOR ALL CLASSES
+	
+	private static void showDoctorsID() {
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		doctors = doctorManager.getListDoctor();
+		ListIterator<Doctor> iterator =  doctors.listIterator();
+		while(iterator.hasNext()) {
+			Doctor doc = iterator.next();
+			System.out.println(doc.getId() + "->" + doc.getName());
+		}
+	}
+	
+	private static void showNursesID() {
+		List<Nurse> nurses = new ArrayList<Nurse>();
+		nurses = nurseManager.getListNurse();
+		ListIterator<Nurse> iterator =  nurses.listIterator();
+		while(iterator.hasNext()) {
+			Nurse nur = iterator.next();
+			System.out.println(nur.getId() + "->" + nur.getName());
+		}
+	}
+	
+	private static void showOrdersID() {
+		List<Order> orders = new ArrayList<Order>();
+		orders = orderManager.getListOrder();
+		ListIterator<Order> iterator =  orders.listIterator();
+		while(iterator.hasNext()) {
+			Order ord = iterator.next();
+			System.out.println(ord.getId());
+		}
+	}
+
+	private static void showTreatmentsID() {
+		List<Treatment> treatments = new ArrayList<Treatment>();
+		treatments = treatmentManager.getListTreatments();
+		ListIterator<Treatment> iterator =  treatments.listIterator();
+		while(iterator.hasNext()) {
+			Treatment tre = iterator.next();
+			System.out.println(tre.getId() + "->" + tre.getName());
+		}
+	}
+	
+	private static void showMaterialsID() {
+		List<Materials> materials = new ArrayList<Materials>();
+		materials = materialsManager.getListMaterials();
+		ListIterator<Materials> iterator =  materials.listIterator();
+		while(iterator.hasNext()) {
+			Materials mat= iterator.next();
+			System.out.println(mat.getId() + "->" + mat.getName());
+		}
+	}
+	
+	private static void showDistributorsID() {
+		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
+		distributors = distributorManager.getlistDistributors();
+		ListIterator<Distribuitor> iterator =  distributors.listIterator();
+		while(iterator.hasNext()) {
+			Distribuitor dist= iterator.next();
+			System.out.println(dist.getId() + "->" + dist.getName());
+		}
+	}
 	
 	
 	
