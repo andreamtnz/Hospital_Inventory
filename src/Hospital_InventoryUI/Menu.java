@@ -420,10 +420,10 @@ private static void doctorMenu (Integer id) throws Exception{
 					assignNurseToTreatment();
 					break;
 				case 7:
-//					viewStocks();
+					viewStocks();
 					break;
 				case 8:
-//					searchStock();
+					searchStock();
 					break;
 				case 9:
 					modifyStock();
@@ -477,7 +477,7 @@ private static void nurseMenu (Integer id) throws Exception{
 			switch(choice)
 			{
 			case 1:
-//				viewTreatments();
+				viewTreatments();
 				break;
 			case 2:
 //				searchTreatment();
@@ -565,7 +565,7 @@ private static void loginNurse() throws Exception{
 		}
 	}
 	
-	private static void searchDistributor() throws Exception{ //hace falta distributor JDBC e interfaz
+	private static void searchDistributor() throws Exception{ 
 		// TODO Auto-generated method stub
 		Distribuitor d = new Distribuitor();
 		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
@@ -709,7 +709,7 @@ private static void viewMaterials() throws Exception {
 		distributorManager.addDistributor(d);
 		
 		System.out.println("Distributor added");
-	}		 //HAY QUE HACER JDBCMANAGER DE DISTRIBUITOR
+	}		 
 	
 	
 	public static void placeOrder() throws Exception
@@ -914,6 +914,42 @@ private static void viewMaterials() throws Exception {
 		}
 		
 	}
+	
+	private static void viewStocks() throws Exception {
+		// TODO Auto-generated method stub
+		List<Materials> materials = new ArrayList<Materials>();
+		
+		try {
+			materials = materialsManager.getListMaterials();
+			int i;
+			for(i=0; i< materials.size(); i++)
+			{
+				System.out.println(materials.get(i).stockToString());
+			}
+		
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private static void searchStock() throws Exception{ 
+		// TODO Auto-generated method stub
+		Materials m = new Materials();
+		List<Materials> materials = new ArrayList<Materials>();
+		ListIterator<Materials> iterator = materials.listIterator();
+		while(iterator.hasNext()) {
+			Materials mat = iterator.next();
+			System.out.println(mat.getId() + "->" + mat.getName());
+		}
+		System.out.println("Please choose a material, type its ID:");
+		Integer material_id = Integer.parseInt(reader.readLine());
+		//show material data
+		m = materialsManager.getMaterialByID(material_id);
+		System.out.println(m.stockToString());
+	} 
+	
+	
 	
 
 }

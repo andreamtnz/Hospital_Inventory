@@ -112,6 +112,10 @@ public class Materials implements Serializable{
 		return "Materials [id=" + id + ", name=" + name + ", type=" + type + ", stock=" + stock + ", price=" + price
 				+ ", distributor=" + distributor + "]";
 	}
+	
+	public String stockToString() {
+		return id + name + stock;
+	}
 
 	
 	
