@@ -34,6 +34,17 @@ public class Treatment implements Serializable{
 		this.patient = patient;
 	}
 	
+	public Treatment(Integer id, String name, Date date, String time, String patient, List<Doctor> doctors, List<Nurse> nurses) {
+		this.id = id;
+		this.name = name;
+		this.date = date;
+		this.time = time;
+		this.patient = patient;
+		this.doctores = doctors;
+		this.nurses = nurses;
+	}
+	
+	
 	
 	public Integer getId() {
 		return id;

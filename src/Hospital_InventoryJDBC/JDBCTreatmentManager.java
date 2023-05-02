@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Hospital_InventoryPOJO.Doctor;
+import Hospital_InventoryPOJO.Nurse;
 import Hospital_InventoryPOJO.Materials;
 import Hospital_InventoryPOJO.Order;
 import Hospital_InventoryPOJO.Treatment;
 import Hospital_inventoryInterfaces.TreatmentManager;
+
 
 public class JDBCTreatmentManager implements TreatmentManager{
 	
@@ -57,8 +59,12 @@ public class JDBCTreatmentManager implements TreatmentManager{
 				Date date = rs.getDate("date");
 				String time = rs.getString("time");
 				String patient = rs.getString("patient");
+				List<Doctor> doctors = new ArrayList<Doctor>();
+				doctors = getDoctorsInTreatment(id);
+				List <Nurse> nurses = new ArrayList<Nurse>();
+				nurses = getNursesInTreatment(id);
 				
-				Treatment t = new Treatment(id, name, date, time, patient);
+				Treatment t = new Treatment(id, name, date, time, patient, doctors, nurses);
 				treatments.add(t);
 			}
 			
@@ -73,6 +79,61 @@ public class JDBCTreatmentManager implements TreatmentManager{
 		return treatments;
 	}
 
+	@Override
+	public List<Doctor> getDoctorsInTreatment(int treatment_id){
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM doctor AND requests WHERE id=" + treatment_id;
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				Integer doctor_id = rs.getInt("doctor_id");
+				String name = rs.getString("name");
+				String department = rs.getString("department");
+				String email = rs.getString("email");
+				Doctor d = new Doctor(doctor_id, name,department, email);		
+				
+				doctors.add(d);
+			}
+			rs.close();
+			stmt.close();
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return doctors;
+	}
+	
+	@Override
+	public List<Nurse> getNursesInTreatment(int treatment_id){
+		List<Nurse> nurses = new ArrayList<Nurse>();
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM nurse AND performs WHERE id=" + treatment_id;
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				Integer nurse_id = rs.getInt("nurse_id");
+				String name = rs.getString("name");
+				String department = rs.getString("department");
+				String email = rs.getString("email");
+				Nurse n = new Nurse(nurse_id, name,department, email);		
+				
+				nurses.add(n);
+			}
+			rs.close();
+			stmt.close();
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return nurses;
+	}
+	
+	
 	@Override
 	public void assignDoctor(int doctor_id, int treatment_id) {
 		// TODO Auto-generated method stub
@@ -124,7 +185,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	}
 
 	@Override
-	public Treatment getTreatmentByID(int treatment_id) {
+	public Treatment getTreatmentById(int treatment_id) {
 		// TODO Auto-generated method stub
 		Treatment t = null;
 		try {
@@ -162,5 +223,8 @@ public class JDBCTreatmentManager implements TreatmentManager{
 			e.printStackTrace();
 		}
 	}
+	
+	
+
 
 }

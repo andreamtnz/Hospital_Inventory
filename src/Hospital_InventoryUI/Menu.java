@@ -897,5 +897,23 @@ private static void viewMaterials() throws Exception {
 
 	}
 	
+	private static void viewTreatments()
+	{
+		List<Treatment> treatments = new ArrayList<Treatment>();
+		try {
+			treatments = treatmentManager.getListTreatments();
+			int i;
+			for(i=0; i< treatments.size(); i++)
+			{
+				System.out.println(treatments.get(i).toString());
+			}
+		
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 }
