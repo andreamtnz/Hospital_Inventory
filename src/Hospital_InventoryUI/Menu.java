@@ -833,6 +833,15 @@ private static void viewMaterials() throws Exception {
 		
 	public static void updateDoctor() throws Exception
 	{
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		try {
+		doctors = doctorManager.getListDoctor();
+		ListIterator<Doctor> iterator =  doctors.listIterator();
+		while(iterator.hasNext()) {
+			Doctor doc = iterator.next();
+			System.out.println(doc.getId() + "->" + doc.getName());
+		}
+		
 		System.out.println("Please enter the id of the doctor to update:");
 		int doctor_id =  Integer.parseInt(reader.readLine());
 		System.out.println("Please enter the new department:");
@@ -840,6 +849,10 @@ private static void viewMaterials() throws Exception {
 		
 		doctorManager.updateDepartment(doctor_id, department);
 		System.out.println("Doctor department updated");
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 	
