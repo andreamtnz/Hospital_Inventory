@@ -896,10 +896,22 @@ private static void viewMaterials() throws Exception {
 	
 	public static void deleteDoctor() throws Exception
 	{
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		try {
+		doctors = doctorManager.getListDoctor();
+		ListIterator<Doctor> iterator =  doctors.listIterator();
+		while(iterator.hasNext()) {
+			Doctor doc = iterator.next();
+			System.out.println(doc.getId() + "->" + doc.getName());
+		}
 		System.out.println("Please enter the id of the doctor to delete:");
 		int doctor_id =  Integer.parseInt(reader.readLine());
 		doctorManager.removeDoctor(doctor_id);
 		System.out.println("Doctor deleted");
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void deleteNurse() throws Exception
