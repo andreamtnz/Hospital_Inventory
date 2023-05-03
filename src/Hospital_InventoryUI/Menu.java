@@ -789,27 +789,55 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				Materials mat = iterator2.next();
 				System.out.println(mat.getId() + "->" + mat.getName());
 			}
-			System.out.println("Type the id of the material you want to order: ");
-			int materialID = Integer.parseInt(reader.readLine());
-			Materials m = materialsManager.getMaterialByID(materialID);
-			System.out.println("Type the amount of materials you want to order: ");
-			int amount = Integer.parseInt(reader.readLine());
-			price = price + m.getPrice()*amount;
-			orderManager.addToOrder(m, o, amount);
-			String answer = "";
-			while(!answer.equalsIgnoreCase("yes")||!answer.equalsIgnoreCase("no")) {
-				System.out.println("Do you want to order other materials?[yes/no]");
-				answer = reader.readLine();
-				if(answer.equalsIgnoreCase("no")) {
-					orderManager.addOrder(o);
-					o.setCost(price);
-					System.out.println("Your order will cost " + price + "$");
-					check = false;
-					break;
-				}
-			}
+			System.out.println("Type your option:");
+			System.out.println("1. Order something from the list");
+			System.out.println("2. Order a new material from this distributor");
+			int choice = Integer.parseInt(reader.readLine());
+			Materials m = null;
 			
-			//HAY QUE COMPLETAR	
+			switch(choice) {
+			
+			case 1:{
+				while(m==null) {
+					System.out.println("Type the id of the material you want to order");
+					int materialID = Integer.parseInt(reader.readLine());
+					m = materialsManager.getMaterialByID(materialID);
+					if(m==null) {
+						System.out.println("This material doesn´t exist");
+					}
+				}
+				break;
+				
+			}
+			case 2:{
+				System.out.println("Type the name:");
+				String name = reader.readLine();
+				System.out.println("Type the type:");
+				String type = reader.readLine();
+				System.out.println("Type the price:");
+				Float cost = Float.parseFloat(reader.readLine());
+			
+				m = new Materials(name, type, 0, cost, distributorID);
+				materialsManager.addMaterial(m);
+				break;
+			}
+			}
+			System.out.println("Type the amount of materials you want to order: ");
+				int amount = Integer.parseInt(reader.readLine());
+				price = price + m.getPrice()*amount;
+				orderManager.addToOrder(m, o, amount);
+				String answer = "";
+				while(!answer.equalsIgnoreCase("yes")||!answer.equalsIgnoreCase("no")) {
+					System.out.println("Do you want to order other materials?[yes/no]");
+					answer = reader.readLine();
+					if(answer.equalsIgnoreCase("no")) {
+						orderManager.addOrder(o);
+						o.setCost(price);
+						System.out.println("Your order will cost " + price + "$");
+						check = false;
+						break;
+					}
+				}
 		}
 		
 	} 
