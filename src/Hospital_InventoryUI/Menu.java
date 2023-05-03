@@ -52,6 +52,7 @@ public class Menu {
 			System.out.println("1. Login Administrator");
 			System.out.println("2. Login Doctor");
 			System.out.println("3. Login Nurse");
+			System.out.println("4. Sign up");
 			System.out.println("0. exit");
 
 			int choice = Integer.parseInt(reader.readLine());
@@ -65,6 +66,9 @@ public class Menu {
 				break;
 			case 3:
 				loginNurse();
+				break;
+			case 4: 
+				signup(); //hay que hacerlo
 				break;
 			case 0: 
 				jdbcManager.disconnect();
@@ -1124,7 +1128,29 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		}
 	}
 	
-	
+	private static void signup() throws Exception{
+		System.out.println("What type of sign up do you want to do?");
+		System.out.println("1. As a administrator");
+		System.out.println("2. As a doctor");
+		System.out.println("3. As a nurse");
+		
+		int choice = Integer.parseInt(reader.readLine());
+		
+		System.out.println("Email:");
+		String email = reader.readLine();
+		
+		System.out.println("Password: ");
+		String passwd = reader.readLine();
+		
+		switch(choice) {
+			case 1:
+			case 2:
+			case 3:
+			default: 
+				break;
+		}
+		
+	}
 	
 
 }
