@@ -22,6 +22,7 @@ public class JDBCManager {
 			
 			//create tables
 			this.createTables();
+			System.out.println("Tables created.");
 		}
 		catch (SQLException e)
 		{
@@ -122,6 +123,7 @@ public class JDBCManager {
 		+ "	PRIMARY KEY(doctorID,treatmentID)\r\n"
 		+ ");";
 		stmt.executeUpdate(sql);
+		System.out.println("Tables created in java");
 		} catch (SQLException e) {
 			// Do not complain if tables already exist
 			if (!e.getMessage().contains("already exists")) {

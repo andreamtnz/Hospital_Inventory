@@ -1149,11 +1149,11 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		
 		switch(choice) {
 			case 1:{
-				Administrator a = new Administrator(name, email);
-				administratorManager.addAdministrator(a);
 				r = new Role("administrator"); 
 				u = new User(email, passwd.getBytes(),r);
 				userManager.newUser(u);
+				Administrator a = new Administrator(name, email);
+				administratorManager.addAdministrator(a);
 				break;
 			}
 			case 2:{
@@ -1193,6 +1193,21 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		
 		System.out.println("Administrator added");
 
+	}
+	
+	public static void addTreatment()throws Exception{
+		System.out.println("Type the name:");
+		String name = reader.readLine();
+		System.out.println("Type the date[YYYY-MM-DD]:");
+		String dateString = reader.readLine();
+		Date date = Date.valueOf(dateString);
+		System.out.println("Type the time[HH:MM]:");
+		String time = reader.readLine();
+		System.out.println("Type the name of the patient:");
+		String patient = reader.readLine();
+		
+		Treatment t = new Treatment(name,date,time,patient);
+		treatmentManager.addTreatment(t);
 	}
 	
 

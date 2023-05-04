@@ -70,7 +70,10 @@ public class JPAUserManager implements UserManager{
 	@Override
 	public Role getRole(String email) {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createNativeQuery("SELECT roles FROM user WHERE email=?", Role.class);
+		q.setParameter(1, email);
+		Role r = (Role) q.getSingleResult();
+		return r;
 	}
 
 	@Override
