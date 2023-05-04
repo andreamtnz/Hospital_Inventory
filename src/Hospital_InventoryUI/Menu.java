@@ -1141,11 +1141,28 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		
 		System.out.println("Password: ");
 		String passwd = reader.readLine();
+		User u = null;
+		Role r = null;
 		
 		switch(choice) {
-			case 1:
-			case 2:
-			case 3:
+			case 1:{
+				r = new Role("administrator"); 
+				u = new User(email, passwd.getBytes(),r);
+				userManager.newUser(u);
+				break;
+			}
+			case 2:{
+				r = new Role("doctor"); 
+				u = new User(email, passwd.getBytes(),r);
+				userManager.newUser(u);
+				break;
+			}
+			case 3:{
+				r = new Role("nurse"); 
+				u = new User(email, passwd.getBytes(),r);
+				userManager.newUser(u);
+				break;
+			}
 			default: 
 				break;
 		}
