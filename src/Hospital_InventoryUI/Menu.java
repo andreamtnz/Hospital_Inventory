@@ -1136,6 +1136,9 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
+		System.out.println("Name:");
+		String name = reader.readLine();
+		
 		System.out.println("Email:");
 		String email = reader.readLine();
 		
@@ -1146,18 +1149,28 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		
 		switch(choice) {
 			case 1:{
+				Administrator a = new Administrator(name, email);
+				administratorManager.addAdministrator(a);
 				r = new Role("administrator"); 
 				u = new User(email, passwd.getBytes(),r);
 				userManager.newUser(u);
 				break;
 			}
 			case 2:{
+				System.out.println("Department:");
+				String department = reader.readLine();
+				Doctor d = new Doctor(name, department, email);
+				doctorManager.addDoctor(d);
 				r = new Role("doctor"); 
 				u = new User(email, passwd.getBytes(),r);
 				userManager.newUser(u);
 				break;
 			}
 			case 3:{
+				System.out.println("Department:");
+				String department = reader.readLine();
+				Nurse n = new Nurse(name, department, email);
+				nurseManager.addNurse(n);
 				r = new Role("nurse"); 
 				u = new User(email, passwd.getBytes(),r);
 				userManager.newUser(u);
@@ -1167,6 +1180,19 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				break;
 		}
 		
+	}
+	public static void addAdministrator() throws Exception {	//done
+
+		System.out.println("Type the name:");
+		String name = reader.readLine();
+		System.out.println("Type the email:");
+		String email = reader.readLine();
+			
+		Administrator a = new Administrator(name, email);
+		administratorManager.addAdministrator(a);
+		
+		System.out.println("Administrator added");
+
 	}
 	
 
