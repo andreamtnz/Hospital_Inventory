@@ -18,5 +18,7 @@ public interface UserManager {
 	
 	public User checkPassword(String email, String passwd);
 	
+	public Role getRoleByName (String name);
+	
 }
 

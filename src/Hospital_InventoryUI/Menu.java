@@ -1149,7 +1149,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		
 		switch(choice) {
 			case 1:{
-				r = new Role("administrator"); 
+				r = userManager.getRoleByName("administrator");
 				u = new User(email, passwd.getBytes(),r);
 				userManager.newUser(u);
 				Administrator a = new Administrator(name, email);
@@ -1161,7 +1161,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				String department = reader.readLine();
 				Doctor d = new Doctor(name, department, email);
 				doctorManager.addDoctor(d);
-				r = new Role("doctor"); 
+				r = userManager.getRoleByName("doctor");
 				u = new User(email, passwd.getBytes(),r);
 				userManager.newUser(u);
 				break;
@@ -1171,7 +1171,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				String department = reader.readLine();
 				Nurse n = new Nurse(name, department, email);
 				nurseManager.addNurse(n);
-				r = new Role("nurse"); 
+				r = userManager.getRoleByName("nurse");
 				u = new User(email, passwd.getBytes(),r);
 				userManager.newUser(u);
 				break;

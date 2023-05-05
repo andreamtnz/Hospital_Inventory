@@ -76,6 +76,7 @@ public class JPAUserManager implements UserManager{
 		return r;
 	}
 
+	
 	@Override
 	public List<Role> getRoles() {
 		// TODO Auto-generated method stub
@@ -92,15 +93,15 @@ public class JPAUserManager implements UserManager{
 		
 		Query q = em.createNativeQuery("Select * from users where email =? AND password = ?", User.class);
 		q.setParameter(1, email);
-//		q.setParameter(2, passwd);
-		try {
+		q.setParameter(2, passwd.getBytes());
+		/*try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(passwd.getBytes());
 			byte[] digest = md.digest();
 			q.setParameter(2,digest);
 		}catch(NoSuchAlgorithmException e){
 			e.printStackTrace();
-		}
+		}*/
 		
 		try {
 			u = (User) q.getSingleResult(); // if there is any user with this email and password we should get a result
@@ -108,6 +109,19 @@ public class JPAUserManager implements UserManager{
 		}catch(NoResultException e) {}
 		
 		return u;
+	}
+
+	@Override
+	public Role getRoleByName(String name) {
+		// TODO Auto-generated method stub
+		Role r = null;
+		Query q = em.createNativeQuery("Select * from roles where name=?", Role.class);
+		q.setParameter(1, name);
+		try {
+			r = (Role) q.getSingleResult(); 
+			
+		}catch(NoResultException e) {}
+		return r;
 	}
 	
 
