@@ -68,7 +68,7 @@ public class Menu {
 				loginNurse();
 				break;
 			case 4: 
-				signup(); //hay que hacerlo
+				signup(); 
 				break;
 			case 0: 
 				jdbcManager.disconnect();
@@ -178,7 +178,7 @@ private static void materialsSubMenu () throws Exception{
 					addMaterial();
 					break;
 				case 4:  			
-	//				modifyMaterial();
+					//modifyMaterial();
 					break;		
 				case 5:
 					deleteMaterial();
@@ -272,7 +272,7 @@ private static void ordersSubMenu() throws Exception{
 				searchOrder();
 				break;
 			case 3:
-//				placeOrder();
+				placeOrder();
 				break;
 			case 4:
 				updateStatus();
@@ -384,7 +384,6 @@ private static void nursesSubMenu() throws Exception{
 }
 
 
-//DOCTOR --> falta addTreatment()
 	
 private static void doctorMenu (Integer id) throws Exception{
 		
@@ -412,7 +411,7 @@ private static void doctorMenu (Integer id) throws Exception{
 					searchTreatment();
 					break;
 				case 3:
-//					addTreatment(); 
+					addTreatment(); 
 					break;
 				case 4:
 					deleteTreatment(); 
