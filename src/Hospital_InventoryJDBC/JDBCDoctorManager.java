@@ -24,10 +24,11 @@ public class JDBCDoctorManager implements DoctorManager{
 	public void addDoctor(Doctor d) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "INSERT INTO doctor (name, department) VALUES (?,?)";
+			String sql = "INSERT INTO doctor (name, department, email) VALUES (?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, d.getName());
 			prep.setString(2, d.getDepartment());
+			prep.setString(3, d.getEmail());
 			prep.executeUpdate();
 					
 		}catch(Exception e) {
