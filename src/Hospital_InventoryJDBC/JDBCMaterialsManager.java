@@ -42,7 +42,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		// TODO Auto-generated method stub
 		try {
 			
-			String sql = "DELETE FROM materials WHERE id=?;";
+			String sql = "DELETE FROM materials WHERE material_id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1,id);
 			prep.executeUpdate();
@@ -70,7 +70,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 			
 			while(rs.next())
 			{
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("material_id");
 				String name = rs.getString("name");
 				String type = rs.getString("type");
 				Integer stock = rs.getInt("stock");
@@ -98,7 +98,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		Materials m = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM material WHERE id=" + id;
+			String sql = "SELECT * FROM material WHERE material_id=" + id;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 				String name = rs.getString("name");
@@ -124,7 +124,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		
 		try {
 			
-			String sql = "UPDATE Materials SET stock=? WHERE id=?;";
+			String sql = "UPDATE Materials SET stock=? WHERE material_id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, stock);
 			prep.setInt(2, material_id);
@@ -149,7 +149,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 			
 			while(rs.next())
 			{
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("material_id");
 				String name = rs.getString("name");
 				String type = rs.getString("type");
 				Integer stock = rs.getInt("stock");

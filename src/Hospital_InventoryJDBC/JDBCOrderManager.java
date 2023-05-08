@@ -70,7 +70,7 @@ public class JDBCOrderManager implements OrderManager{
 			
 			while(rs.next())
 			{
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("order_id");
 				String state = rs.getString("state");
 				Date date = rs.getDate("date");
 				Float cost = rs.getFloat("cost");
@@ -97,7 +97,7 @@ public class JDBCOrderManager implements OrderManager{
 		Order o = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM order WHERE id=" + order_id;
+			String sql = "SELECT * FROM order WHERE order_id=" + order_id;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 				String state = rs.getString("state");
@@ -122,7 +122,7 @@ public class JDBCOrderManager implements OrderManager{
 		
 			try {
 					
-				String sql = "UPDATE Order SET state=? WHERE id=?;";
+				String sql = "UPDATE Order SET state=? WHERE order_id=?;";
 				PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 				prep.setString(1, state);
 				prep.setInt(2, order_id);

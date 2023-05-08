@@ -54,7 +54,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 			
 			while(rs.next())
 			{
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("treatment_id");
 				String name = rs.getString("name");
 				Date date = rs.getDate("date");
 				String time = rs.getString("time");
@@ -115,7 +115,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				Integer nurse_id = rs.getInt("nurse_id");
+				Integer nurse_id = rs.getInt("id");
 				String name = rs.getString("name");
 				String department = rs.getString("department");
 				String email = rs.getString("email");
@@ -138,7 +138,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	public void assignDoctor(int doctor_id, int treatment_id) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "INSERT INTO examines (doctor_id,treatment_id) VALUES (?,?)";
+			String sql = "INSERT INTO request (doctorID,treatmentID) VALUES (?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, doctor_id);
 			prep.setInt(2, treatment_id);		
@@ -154,7 +154,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	public void assignNurse(int nurse_id, int treatment_id) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "INSERT INTO performs (nurse_id,treatment_id) VALUES (?,?)";
+			String sql = "INSERT INTO performs (nurseID,treatmentID) VALUES (?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, nurse_id);
 			prep.setInt(2, treatment_id);		
@@ -190,7 +190,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 		Treatment t = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM doctor WHERE id=" + treatment_id;
+			String sql = "SELECT * FROM doctor WHERE treatment_id=" + treatment_id;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 				String name = rs.getString("name");
@@ -214,7 +214,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 		// TODO Auto-generated method stub
 		try {
 			
-			String sql = "DELETE FROM treatment WHERE id=?;";
+			String sql = "DELETE FROM treatment WHERE treatment_id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1,id);
 			prep.executeUpdate();

@@ -39,7 +39,7 @@ public class JDBCDistributorManager implements DistributorManager{
 			
 			while(rs.next())
 			{
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("distributor_id");
 				String name = rs.getString("name");
 				String type = rs.getString("type");
 				
@@ -70,7 +70,7 @@ public class JDBCDistributorManager implements DistributorManager{
 		Distribuitor d = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM distributor WHERE id=" + id;
+			String sql = "SELECT * FROM distributor WHERE distributor_id=" + id;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 				String name = rs.getString("name");

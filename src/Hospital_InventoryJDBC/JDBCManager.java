@@ -39,13 +39,13 @@ public class JDBCManager {
 		try {
 		Statement stmt = c.createStatement();
 		String sql = "CREATE TABLE administrator ("
-		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
+		+ "	administrator_id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	name	TEXT NOT NULL,"
 		+ " email   TEXT NOT NULL"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE material ("
-		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
+		+ "	material_id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	name	TEXT NOT NULL,"
 		+ "	type	TEXT NOT NULL,"
 		+ "	stock	INTEGER,"
@@ -54,13 +54,13 @@ public class JDBCManager {
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE distributor ("
-		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
+		+ "	distributor_id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	name	TEXT NOT NULL,"
 		+ "	type	TEXT NOT NULL"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE doctor ("
-		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
+		+ "	doctor_id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	name	TEXT NOT NULL,"
 		+ "	department	TEXT NOT NULL,"
 		+ " email   TEXT NOT NULL"
@@ -74,7 +74,7 @@ public class JDBCManager {
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE treatment ("
-		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
+		+ "	treatment_id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	name	TEXT NOT NULL,"
 		+ " date    DATE,"
 		+ " time    TEXT,"
@@ -82,45 +82,45 @@ public class JDBCManager {
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE order ("
-		+ "	id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
+		+ "	order_id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	state	TEXT NOT NULL,"
 		+ " date    DATE,"
 		+ " cost    FLOAT,"
-		+ " administratorID	INTEGER NOT NULL REFERENCES administrator(id) ON DELETE RESTRICT"
+		+ " administratorID	INTEGER NOT NULL REFERENCES administrator(administrator_id) ON DELETE RESTRICT"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE has ("
+		+ " has_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	materialID	INTEGER,"
 		+ "	orderID	INTEGER,"
 		+ " quantity INTEGER,"
-		+ "	FOREIGN KEY(materialID) REFERENCES material(id) ON DELETE CASCADE,"
-		+ "	FOREIGN KEY(orderID) REFERENCES order(id) ON DELETE CASCADE,"
-		+ "	PRIMARY KEY(materialID,orderID)\r\n"
+		+ "	FOREIGN KEY(materialID) REFERENCES material(material_id) ON DELETE CASCADE,"
+		+ "	FOREIGN KEY(orderID) REFERENCES order(order_id) ON DELETE CASCADE,"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE needs ("
+		+ " needs_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	treatmentID	INTEGER,"
 		+ "	materialID	INTEGER,"
 		+ " quantity    INTEGER,"
-		+ "	FOREIGN KEY(treatmentID) REFERENCES treatment(id) ON DELETE CASCADE,"
-		+ "	FOREIGN KEY(materialID) REFERENCES material(id) ON DELETE CASCADE,"
-		+ "	PRIMARY KEY(treatmentID,materialID)\r\n"
+		+ "	FOREIGN KEY(treatmentID) REFERENCES treatment(treatment_id) ON DELETE CASCADE,"
+		+ "	FOREIGN KEY(materialID) REFERENCES material(material_id) ON DELETE CASCADE,"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE perform ("
 		+ "	nurseID	INTEGER,"
 		+ "	treatmentID	INTEGER,"
 		+ "	FOREIGN KEY(nurseID) REFERENCES nurse(id) ON DELETE CASCADE,"
-		+ "	FOREIGN KEY(treatmentID) REFERENCES treatment(id) ON DELETE CASCADE,"
+		+ "	FOREIGN KEY(treatmentID) REFERENCES treatment(treatment_id) ON DELETE CASCADE,"
 		+ "	PRIMARY KEY(nurseID,treatmentID)\r\n"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE request ("
+		+ " request_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	doctorID	INTEGER,"
 		+ "	treatmentID	INTEGER,"
-		+ "	FOREIGN KEY(doctorID) REFERENCES doctor(id) ON DELETE CASCADE,"
-		+ "	FOREIGN KEY(treatmentID) REFERENCES treatment(id) ON DELETE CASCADE,"
-		+ "	PRIMARY KEY(doctorID,treatmentID)\r\n"
+		+ "	FOREIGN KEY(doctorID) REFERENCES doctor(doctor_id) ON DELETE CASCADE,"
+		+ "	FOREIGN KEY(treatmentID) REFERENCES treatment(treatment_id) ON DELETE CASCADE,"
 		+ ");";
 		stmt.executeUpdate(sql);
 		System.out.println("Tables created in java");

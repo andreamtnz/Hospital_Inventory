@@ -49,7 +49,7 @@ public class JDBCDoctorManager implements DoctorManager{
 			
 			while(rs.next())
 			{
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("doctor_id");
 				String name = rs.getString("name");
 				String department = rs.getString("department");
 				String email = rs.getString("email");
@@ -74,7 +74,7 @@ public class JDBCDoctorManager implements DoctorManager{
 		// TODO Auto-generated method stub
 		try {
 			
-			String sql = "DELETE FROM doctor WHERE id=?;";
+			String sql = "DELETE FROM doctor WHERE doctor_id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1,id);
 			prep.executeUpdate();
@@ -90,7 +90,7 @@ public class JDBCDoctorManager implements DoctorManager{
 		
 		try {
 			
-			String sql = "UPDATE Doctor SET department=? WHERE id=?;";
+			String sql = "UPDATE Doctor SET department=? WHERE doctor_id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, department);
 			prep.setInt(2, doctor_id);
@@ -109,7 +109,7 @@ public class JDBCDoctorManager implements DoctorManager{
 		Doctor d = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM doctor WHERE id=" + id;
+			String sql = "SELECT * FROM doctor WHERE doctor_id=" + id;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 				String name = rs.getString("name");

@@ -46,7 +46,7 @@ public class JDBCAdministratorManager implements AdministratorManager{
 			
 			while(rs.next())
 			{
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("administrator_id");
 				String name = rs.getString("name");
 				String email = rs.getString("email");
 				
@@ -70,7 +70,7 @@ public class JDBCAdministratorManager implements AdministratorManager{
 		// TODO Auto-generated method stub
 			try {
 				
-				String sql = "DELETE FROM administrator WHERE id=?;";
+				String sql = "DELETE FROM administrator WHERE administrator_id=?;";
 				PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 				
 				prep.setInt(1,id);
@@ -88,7 +88,7 @@ public class JDBCAdministratorManager implements AdministratorManager{
 		Administrator a = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM administrator WHERE id=" + id;
+			String sql = "SELECT * FROM administrator WHERE administrator_id=" + id;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 				String name = rs.getString("name");
