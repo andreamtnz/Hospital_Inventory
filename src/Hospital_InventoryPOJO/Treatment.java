@@ -43,6 +43,15 @@ public class Treatment implements Serializable{
 		this.doctores = doctors;
 		this.nurses = nurses;
 	}
+	
+	public Treatment( String name, Date date, String time, String patient, List<Doctor> doctors, List<Nurse> nurses) {
+		this.name = name;
+		this.date = date;
+		this.time = time;
+		this.patient = patient;
+		this.doctores = doctors;
+		this.nurses = nurses;
+	}
 		
 	public Treatment(String name, Date date, String time, String patient) {
 		this.name = name;

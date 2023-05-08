@@ -1195,6 +1195,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	}
 	
 	public static void addTreatment()throws Exception{
+		try {
 		System.out.println("Type the name:");
 		String name = reader.readLine();
 		System.out.println("Type the date[YYYY-MM-DD]:");
@@ -1205,8 +1206,52 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		System.out.println("Type the name of the patient:");
 		String patient = reader.readLine();
 		
-		Treatment t = new Treatment(name,date,time,patient);
+		List<Doctor> docs = new ArrayList<Doctor>();
+		System.out.println("List of doctors");
+		boolean op = false;
+		while (!op) {
+			showDoctorsID();
+			System.out.println("Type the id of the doctor");
+			int doc_id = Integer.parseInt(reader.readLine());
+			Doctor d = doctorManager.getDoctorByID(doc_id);
+			if(docs.contains(d)) {
+				System.out.println("This doctor is already assigned to this treatment");
+			}else {
+				docs.add(d);				
+			}
+			System.out.println("Do you want to add another doctor to this treatment?");
+			String a  = reader.readLine();
+			if (a.equalsIgnoreCase("no")) {
+				op = true;
+			}
+		}
+		
+		List <Nurse> nurs = new ArrayList<Nurse>();
+		System.out.println("List of nurses");
+		op = false;
+		while (!op) {
+			showNursesID();
+			System.out.println("Type the id of the nurse");
+			int nur_id = Integer.parseInt(reader.readLine());
+			Nurse n = nurseManager.getNurseByID(nur_id);
+			if(nurs.contains(n)) {
+				System.out.println("This nurse is already assigned to this treatment");
+			}else {
+				nurs.add(n);				
+			}
+			System.out.println("Do you want to add another nurse to this treatment?");
+			String a  = reader.readLine();
+			if (a.equalsIgnoreCase("no")) {
+				op = true;
+			}
+		}
+		
+		Treatment t = new Treatment(name,date,time,patient, docs, nurs);
+		t.setDoctores(docs);
 		treatmentManager.addTreatment(t);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 
