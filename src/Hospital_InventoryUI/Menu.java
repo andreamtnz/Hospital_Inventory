@@ -644,7 +644,6 @@ private static void loginNurse() throws Exception{
 		showDoctorsID();
 		Doctor d = new Doctor();
 		System.out.println("Please choose a doctor, type its ID:");
-		System.out.println(doctorManager.getListDoctor());
 		Integer doctor_id = Integer.parseInt(reader.readLine());
 		//show material data
 		d = doctorManager.getDoctorByID(doctor_id);
