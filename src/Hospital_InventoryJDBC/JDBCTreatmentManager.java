@@ -84,7 +84,9 @@ public class JDBCTreatmentManager implements TreatmentManager{
 		List<Doctor> doctors = new ArrayList<Doctor>();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM doctor AND request WHERE request.treatment_id=" + treatment_id;
+			String sql = "SELECT * FROM doctor WHERE (SELECT doctor_id FROM request WHERE treatment_id =?)";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, treatment_id);
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
@@ -111,7 +113,9 @@ public class JDBCTreatmentManager implements TreatmentManager{
 		List<Nurse> nurses = new ArrayList<Nurse>();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM nurse AND perform WHERE perform.treatment_id=" + treatment_id;
+			String sql = "SELECT * FROM nurse WHERE (SELECT nurseID FROM perform WHERE treatmentID =?)";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, treatment_id);
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
@@ -154,7 +158,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	public void assignNurse(int nurse_id, int treatment_id) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "INSERT INTO performs (nurseID,treatmentID) VALUES (?,?)";
+			String sql = "INSERT INTO perform (nurseID,treatmentID) VALUES (?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, nurse_id);
 			prep.setInt(2, treatment_id);		

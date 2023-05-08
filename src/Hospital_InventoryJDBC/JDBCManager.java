@@ -117,10 +117,10 @@ public class JDBCManager {
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE request ("
 		+ " request_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-		+ "	doctorID	INTEGER,"
-		+ "	treatmentID	INTEGER,"
-		+ "	FOREIGN KEY(doctorID) REFERENCES doctor(doctor_id) ON DELETE CASCADE,"
-		+ "	FOREIGN KEY(treatmentID) REFERENCES treatment(treatment_id) ON DELETE CASCADE,"
+		+ "	doctor_id	INTEGER,"
+		+ "	treatment_id	INTEGER,"
+		+ "	FOREIGN KEY(doctor_id) REFERENCES doctor(doctor_id) ON DELETE CASCADE,"
+		+ "	FOREIGN KEY(treatment_id) REFERENCES treatment(treatment_id) ON DELETE CASCADE,"
 		+ ");";
 		stmt.executeUpdate(sql);
 		System.out.println("Tables created in java");
