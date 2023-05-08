@@ -620,6 +620,7 @@ private static void loginNurse() throws Exception{
 	
 	private static void viewDoctors() {
 		List<Doctor> doctors = new ArrayList<Doctor>();
+		doctors = doctorManager.getListDoctor();
 		ListIterator<Doctor> iterator = doctors.listIterator();
 		while(iterator.hasNext()) {
 			Doctor doc = iterator.next();
@@ -629,6 +630,7 @@ private static void loginNurse() throws Exception{
 	
 	private static void viewNurses() {
 		List<Nurse> nurses = new ArrayList<Nurse>();
+		nurses = nurseManager.getListNurse();
 		ListIterator<Nurse> iterator = nurses.listIterator();
 		while(iterator.hasNext()) {
 			Nurse nur = iterator.next();
