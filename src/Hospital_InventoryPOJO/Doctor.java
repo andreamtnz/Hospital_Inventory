@@ -3,10 +3,18 @@ package Hospital_InventoryPOJO;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Doctor")
-
+@XmlType(propOrder = {"email", "department"})
 public class Doctor implements Serializable {
 	
 	/**
@@ -14,10 +22,13 @@ public class Doctor implements Serializable {
 	 */
 	private static final long serialVersionUID = -6814603893152445627L;
 	
-	
+	@XmlTransient
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlElement
 	private String department;
+	@XmlElement
 	private String email;
 	
 	public Doctor() {

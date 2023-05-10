@@ -11,6 +11,7 @@ import Hospital_InventoryJDBC.*;
 import Hospital_InventoryJPA.JPAUserManager;
 import Hospital_inventoryInterfaces.*;
 import Hospital_InventoryPOJO.*;
+import Hospital_InventoryXMLManager.XMLDoctor_NurseManager;
 
 
 
@@ -29,6 +30,7 @@ public class Menu {
 	private static UserManager userManager;
 	private static DistributorManager distributorManager;
 	private static JDBCManager jdbcManager;
+	private static XMLManager xmlManager;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -44,6 +46,7 @@ public class Menu {
 	treatmentManager = new JDBCTreatmentManager(jdbcManager);
 	userManager = new JPAUserManager();
 	distributorManager = new JDBCDistributorManager(jdbcManager);
+	xmlManager = new XMLDoctor_NurseManager(jdbcManager);
 
 	
 	try {
