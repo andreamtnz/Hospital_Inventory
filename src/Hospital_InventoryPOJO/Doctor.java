@@ -3,6 +3,10 @@ package Hospital_InventoryPOJO;
 import java.io.Serializable;
 import java.util.Objects;
 
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Doctor")
+
 public class Doctor implements Serializable {
 	
 	/**
