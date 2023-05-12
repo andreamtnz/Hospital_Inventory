@@ -1,0 +1,10 @@
+
+
+
+
+<!DOCTYPE Doctor[
+	<!ELEMENT Doctor (department, email)>
+	<!ATTLIST Doctor name CDATA #REQUIRED>
+	<!ELEMENT department(#PCDATA)>
+	<!ELEMENT email(#PCDATA)>
+	]>

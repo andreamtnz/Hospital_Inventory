@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+
+
+
+<!DOCTYPE Doctor[
+	<!ELEMENT Doctor (department, email)>
+	<!ATTLIST Doctor name CDATA #REQUIRED>
+	<!ELEMENT department (#PCDATA)>
+	<!ELEMENT email (#PCDATA)>
+	]>
+	
+	
+<Doctor name = "Julian">
+	<department>surgery</department>
+	<email>julian@gmail.com</email>
+	
+</Doctor>

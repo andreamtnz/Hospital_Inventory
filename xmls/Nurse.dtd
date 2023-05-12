@@ -1,0 +1,9 @@
+
+
+
+<!DOCTYPE Nurse[
+	<!ELEMENT Nurse (department, email)>
+	<!ATTLIST Nurse name CDATA #REQUIRED>
+	<!ELEMENT department(#PCDATA)>
+	<!ELEMENT email(#PCDATA)>
+	]>
