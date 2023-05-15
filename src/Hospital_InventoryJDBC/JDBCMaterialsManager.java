@@ -55,7 +55,21 @@ public class JDBCMaterialsManager implements MaterialsManager{
 	@Override
 	public void changeMaterial(Materials m) {
 		// TODO Auto-generated method stub
-		
+		try {
+			
+			String sql = "UPDATE Materials SET name=?,type=?,stock=?,price=?,distributorID=? WHERE material_id=?;";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, m.getName());
+			prep.setString(2, m.getType());
+			prep.setInt(3, m.getStock());
+			prep.setFloat(4, m.getPrice());
+			prep.setInt(5, m.getDistributor());
+			
+			prep.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

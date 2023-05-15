@@ -55,7 +55,7 @@ public class XMLDoctor_NurseManager implements XMLManager{
 
 	@Override
 	public void nurse2xml(Nurse n) {
-try {
+		try {
 			
 			JAXBContext jaxbContext = JAXBContext.newInstance(Nurse.class);
 			Marshaller marshaller = jaxbContext.createMarshaller();

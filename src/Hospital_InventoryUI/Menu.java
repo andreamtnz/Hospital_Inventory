@@ -1,6 +1,7 @@
 package Hospital_InventoryUI;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -156,6 +157,7 @@ public class Menu {
 private static void materialsSubMenu () throws Exception{
 		
 		try {
+			boolean check = true;
 			do {
 				System.out.println("Choose an option");
 				System.out.println("1.View all materials");
@@ -181,7 +183,7 @@ private static void materialsSubMenu () throws Exception{
 					addMaterial();
 					break;
 				case 4:  			
-					//modifyMaterial();
+					modifyMaterial();
 					break;		
 				case 5:
 					deleteMaterial();
@@ -196,13 +198,12 @@ private static void materialsSubMenu () throws Exception{
 					modifyStock();
 					break;		
 				case 0: 
-					jdbcManager.disconnect();
-					userManager.disconnect();
-					System.exit(0);
+					check = false;
+					break;
 				default:
 					break;
 				}
-			}while(true);
+			}while(check);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -486,7 +487,7 @@ private static void nurseMenu (Integer id) throws Exception{
 				viewTreatments();
 				break;
 			case 2:
-//				searchTreatment();
+				searchTreatment();
 				break;
 			case 3:
 				viewStocks();
@@ -651,7 +652,6 @@ private static void loginNurse() throws Exception{
 		//show material data
 		d = doctorManager.getDoctorByID(doctor_id);
 		System.out.println(d.toString());
-		
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -878,6 +878,8 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		Doctor d = new Doctor(name, department, email);
 		doctorManager.addDoctor(d);
 		
+		xmlManager.doctor2xml(d);
+		
 		System.out.println("Doctor added");
 
 	}
@@ -893,6 +895,8 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			
 		Nurse n = new Nurse(name, department, email);
 		nurseManager.addNurse(n);
+		
+		xmlManager.nurse2xml(n);
 		
 		System.out.println("Nurse added");
 
@@ -1258,5 +1262,59 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		}
 	}
 	
+	public static void modifyMaterial() {
+		try {
+			showMaterialsID();
+			System.out.println("What material do you want to edit?:");
+			int mat_id = Integer.parseInt(reader.readLine());
+			Materials m = materialsManager.getMaterialByID(mat_id);
+			System.out.println(m.toString());
+			boolean check = true;
+			while(check) {
+				System.out.println("1.Name");
+				System.out.println("2.Type");
+				System.out.println("3.Stock");
+				System.out.println("4.Price");
+				System.out.println("What do you want to edit?:");
+				int choice = Integer.parseInt(reader.readLine());
+				switch(choice) {
+				case 1:{
+					System.out.println("Type the new name:");
+					String name = reader.readLine();
+					m.setName(name);
+					break;
+				}
+				case 2:{
+					System.out.println("Type the new type:");
+					String type = reader.readLine();
+					m.setType(type);
+					break;
+				}
+				case 3:{
+					System.out.println("Type the new Stock:");
+					int stock = Integer.parseInt(reader.readLine());
+					m.setStock(stock);
+					break;
+				}
+				case 4:{
+					System.out.println("Type the new price:");
+					float price = Float.parseFloat(reader.readLine());
+					m.setPrice(price);;
+					break;
+				}
+				default:
+					break;
+				}
+				System.out.println("Do you want to edit something else?");
+				String answer = reader.readLine();
+				if(answer.equalsIgnoreCase("no")) {
+					materialsManager.changeMaterial(m);
+					check = false;
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
