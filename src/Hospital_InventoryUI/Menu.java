@@ -215,6 +215,7 @@ private static void materialsSubMenu () throws Exception{
 private static void distributorsSubMenu() throws Exception{
 	
 	try {
+		boolean check = true;
 		do {
 			System.out.println("Choose an option");
 			System.out.println("1.View all distributors");
@@ -241,13 +242,12 @@ private static void distributorsSubMenu() throws Exception{
 				break;
 	
 			case 0: 
-				jdbcManager.disconnect();
-				userManager.disconnect();
-				System.exit(0);
+				check = false;
+				break;
 			default:
 				break;
 			}
-		}while(true);
+		}while(check);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -258,6 +258,7 @@ private static void distributorsSubMenu() throws Exception{
 private static void ordersSubMenu() throws Exception{
 	
 	try {
+		boolean check = true;
 		do {
 			System.out.println("Choose an option");
 			System.out.println("1. View all orders");
@@ -282,13 +283,12 @@ private static void ordersSubMenu() throws Exception{
 				updateStatus();
 				break;
 			case 0: 
-				jdbcManager.disconnect();
-				userManager.disconnect();
-				System.exit(0);
+				check = false;
+				break;
 			default:
 				break;
 			}
-		}while(true);
+		}while(check);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -300,6 +300,7 @@ private static void ordersSubMenu() throws Exception{
 private static void doctorsSubMenu() throws Exception{
 	
 	try {
+		boolean check = true;
 		do {
 			System.out.println("Choose an option");
 			System.out.println("1. View all doctors");
@@ -328,13 +329,12 @@ private static void doctorsSubMenu() throws Exception{
 				deleteDoctor();
 				break;
 			case 0: 
-				jdbcManager.disconnect();
-				userManager.disconnect();
-				System.exit(0);
+				check = false;
+				break;
 			default:
 				break;
 			}
-		}while(true);
+		}while(check);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -346,6 +346,7 @@ private static void doctorsSubMenu() throws Exception{
 private static void nursesSubMenu() throws Exception{
 	
 	try {
+		boolean check = true;
 		do {
 			System.out.println("Choose an option");
 			System.out.println("1. View all nurses");
@@ -374,13 +375,12 @@ private static void nursesSubMenu() throws Exception{
 				deleteNurse();
 				break;
 			case 0: 
-				jdbcManager.disconnect();
-				userManager.disconnect();
-				System.exit(0);
+				check = false;
+				break;
 			default:
 				break;
 			}
-		}while(true);
+		}while(check);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
