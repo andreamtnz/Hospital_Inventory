@@ -308,6 +308,7 @@ private static void doctorsSubMenu() throws Exception{
 			System.out.println("3. Add a new doctor");
 			System.out.println("4. Update a doctor's department");
 			System.out.println("5. Delete a doctor");
+			System.out.println("6. Save in xml and html");
 			System.out.println("0. exit");
 
 			int choice = Integer.parseInt(reader.readLine());
@@ -327,6 +328,9 @@ private static void doctorsSubMenu() throws Exception{
 				break;
 			case 5:
 				deleteDoctor();
+				break;
+			case 6:
+				printMe();
 				break;
 			case 0: 
 				check = false;
@@ -1312,6 +1316,20 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 					check = false;
 				}
 			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void printMe() {
+		try {
+		showDoctorsID();
+		System.out.println("Which doctor do you want to save?");
+		int id = Integer.parseInt(reader.readLine());
+		xmlManager.doctorID2xml(id);;
+		xmlManager.simpleTransform("./xmls/Doctor.xml", "./xmls/Doctor-Style.xslt", "./xmls/Doctor.html");
+		
+		System.out.println("Doctor saved");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

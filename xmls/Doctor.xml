@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Doctor name="Juan">
-    <email>Juan@gmail.com</email>
-    <department>dermatology</department>
+<Doctor name="Javier">
+    <email>ejemplo</email>
+    <department>Cirujia</department>
 </Doctor>
