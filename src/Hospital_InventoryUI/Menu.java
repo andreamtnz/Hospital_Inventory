@@ -642,6 +642,7 @@ private static void loginNurse() throws Exception{
 		List<Doctor> doctors = new ArrayList<Doctor>();
 		doctors = doctorManager.getListDoctor();
 		ListIterator<Doctor> iterator = doctors.listIterator();
+		System.out.println("\nDoctors");
 		while(iterator.hasNext()) {
 			Doctor doc = iterator.next();
 			System.out.println(doc.toString());
@@ -652,6 +653,7 @@ private static void loginNurse() throws Exception{
 		List<Nurse> nurses = new ArrayList<Nurse>();
 		nurses = nurseManager.getListNurse();
 		ListIterator<Nurse> iterator = nurses.listIterator();
+		System.out.println("\nNurses");
 		while(iterator.hasNext()) {
 			Nurse nur = iterator.next();
 			System.out.println(nur.toString());
@@ -738,6 +740,7 @@ private static void selectMaterial() throws Exception{   //este método es el mi
 private static void viewMaterials() throws Exception { // creo que no hace falta el try catch
 		// TODO Auto-generated method stub
 		List<Materials> materials = new ArrayList<Materials>();
+		System.out.println("\nMaterials");
 		
 		try {
 			materials = materialsManager.getListMaterials();
@@ -1054,6 +1057,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	
 	private static void viewTreatments() {		//creo que sobra try catch
 		List<Treatment> treatments = new ArrayList<Treatment>();
+		System.out.println("\nTreatments");
 		try {
 			treatments = treatmentManager.getListTreatments();
 			int i;
@@ -1072,6 +1076,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	private static void viewStocks() throws Exception { //creo que sobra try catch
 		// TODO Auto-generated method stub
 		List<Materials> materials = new ArrayList<Materials>();
+		System.out.println("\nStock");
 		
 		try {
 			materials = materialsManager.getListMaterials();
