@@ -558,6 +558,7 @@ private static void loginNurse() throws Exception{
 	
 	private static void viewDistributors() {
 		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
+		distributors = distributorManager.getlistDistributors();
 		ListIterator<Distribuitor> iterator = distributors.listIterator();
 		while(iterator.hasNext()) {
 			Distribuitor dist = iterator.next();
