@@ -552,7 +552,7 @@ private static void loginNurse() throws Exception{
 		try {
 		showMaterialsID();
 		Materials m = new Materials();
-		System.out.println("Please choose a material, type its ID:");
+		System.out.println("\nPlease choose a material, type its ID:");
 		Integer material_id = Integer.parseInt(reader.readLine());
 		//show material data
 		m = materialsManager.getMaterialByID(material_id);
@@ -577,14 +577,20 @@ private static void loginNurse() throws Exception{
 	private static void viewMaterialsDistributor() throws Exception{ //done
 		try {
 		showDistributorsID();
-		System.out.println("Select a distributor to see the materials it sells:");
+		System.out.println("\nSelect a distributor to see the materials it sells:");
 		int distributorID = Integer.parseInt(reader.readLine());
+		boolean check = checkDistributor_id(distributorID);
+		if (check == false) {
+			System.out.println("Distributor not found");
+		}
+		else {
 		List<Materials> materials = new ArrayList<Materials>();
 		materials = materialsManager.getMaterialsByDistributor(distributorID);
 		ListIterator<Materials> iterator = materials.listIterator();
 		while(iterator.hasNext()) {
 			Materials mat = iterator.next();
 			System.out.println(mat.toString());
+		}
 		}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -596,12 +602,17 @@ private static void loginNurse() throws Exception{
 		// TODO Auto-generated method stub
 		try {
 		showDistributorsID();
-		System.out.println("Please choose a distributor, type its ID:");
+		System.out.println("\nPlease choose a distributor, type its ID:");
 		Integer distributor_id = Integer.parseInt(reader.readLine());
-		//show material data
+		boolean check = checkDistributor_id(distributor_id);
+		if (check == false) {
+			System.out.println("Distributor not found");
+		}
+		else {
 		Distribuitor d = new Distribuitor();
 		d = distributorManager.getDistributorByID(distributor_id);
 		System.out.println(d.toString());
+		}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
