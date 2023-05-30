@@ -758,6 +758,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		Integer stock = Integer.parseInt(reader.readLine());
 		System.out.println("Type the price:");
 		Float price = Float.parseFloat(reader.readLine());
+		showDistributorsID();
 		System.out.println("Type the distributor ID:");
 		Integer distributor_id = Integer.parseInt(reader.readLine());
 	
