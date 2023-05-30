@@ -101,7 +101,7 @@ public class Nurse implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Nurse [id=" + id + ", name=" + name + ", department=" + department + ",email= " + email + "]";
+		return "id=" + id + "	name=" + name + "	department=" + department + "	email= " + email + "";
 	}
 
 	

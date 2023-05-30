@@ -107,8 +107,8 @@ public class Order implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", state=" + state + ", date=" + date.toString() + ", cost=" + cost + ", administrador="
-				+ administrador + "]";
+		return "id=" + id + "	state=" + state + "	date=" + date.toString() + "	cost=" + cost + "	administrator="
+				+ administrador + "";
 	}
 
 	

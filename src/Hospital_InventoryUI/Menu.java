@@ -159,8 +159,9 @@ private static void materialsSubMenu () throws Exception{
 		try {
 			boolean check = true;
 			do {
-				System.out.println("Choose an option");
-				System.out.println("1.View all materials");
+				System.out.println("\nAdministrator Menu - Work with Materials");
+				System.out.println("\nChoose an option");
+				System.out.println("1. View all materials");
 				System.out.println("2. Search a material");
 				System.out.println("3. Add a new material");
 				System.out.println("4. Modify an existing material");
@@ -260,7 +261,8 @@ private static void ordersSubMenu() throws Exception{
 	try {
 		boolean check = true;
 		do {
-			System.out.println("Choose an option");
+			System.out.println("\nAdministrator Menu - Work with Orders");
+			System.out.println("\nChoose an option");
 			System.out.println("1. View all orders");
 			System.out.println("2. Search an order");
 			System.out.println("3. Place an order");
@@ -302,7 +304,8 @@ private static void doctorsSubMenu() throws Exception{
 	try {
 		boolean check = true;
 		do {
-			System.out.println("Choose an option");
+			System.out.println("\nAdministrator Menu - Work with Doctors");
+			System.out.println("\nChoose an option");
 			System.out.println("1. View all doctors");
 			System.out.println("2. Search a doctor");
 			System.out.println("3. Add a new doctor");
@@ -352,7 +355,8 @@ private static void nursesSubMenu() throws Exception{
 	try {
 		boolean check = true;
 		do {
-			System.out.println("Choose an option");
+			System.out.println("\nAdministrator Menu - Work with Nurses");
+			System.out.println("\nChoose an option");
 			System.out.println("1. View all nurses");
 			System.out.println("2. Search a nurse");
 			System.out.println("3. Add a new nurse");
@@ -401,7 +405,8 @@ private static void doctorMenu (Integer id) throws Exception{
 		
 		try {
 			do {
-				System.out.println("Choose an option");
+				System.out.println("\nDoctor Menu");
+				System.out.println("\nChoose an option");
 				System.out.println("1. View all treatments");
 				System.out.println("2. Search treatment");
 				System.out.println("3. Add a treatment");
@@ -480,7 +485,8 @@ private static void nurseMenu (Integer id) throws Exception{
 	
 	try {
 		do {
-			System.out.println("Choose an option");
+			System.out.println("\nNurse Menu");
+			System.out.println("\nChoose an option");
 			System.out.println("1. View all treatments");
 			System.out.println("2. Search treatment");
 			System.out.println("3. View stock of all materials");
@@ -864,6 +870,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	
 	private static void viewOrders() { // aqui creo que no hace falta el try catch
 		List<Order> orders = new ArrayList<Order>();
+		System.out.println("\nOrders");
 		try {
 			orders = orderManager.getListOrder();
 			int i;

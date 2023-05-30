@@ -51,7 +51,7 @@ public class Administrator implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Administrator [id=" + id + ", name=" + name + ", email=" + email + "]";
+		return "id=" + id + "	name=" + name + "	email=" + email + "";
 	}
 
 	public void setId(Integer id) {
