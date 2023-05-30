@@ -947,7 +947,8 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	
 	
 	public static void placeOrder() throws Exception {
-		boolean check = true;
+		boolean check = false;
+		int distributorID = 0;
 		Date date = new Date(System.currentTimeMillis()); 
 		Float price = null;
 		Order o = new Order(date,price);
@@ -959,8 +960,12 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			Distribuitor dist = iterator.next();
 			System.out.println(dist.getId() + "->" + dist.getName());
 		}
+		do {
 		System.out.println("Introduce the ID of the distributor you want to order from:");
-		int distributorID = Integer.parseInt(reader.readLine());
+		distributorID = Integer.parseInt(reader.readLine());
+		check = checkDistributor_id(distributorID);
+		}while(!check);
+		
 		while(check) {
 			materials = materialsManager.getMaterialsByDistributor(distributorID);
 			ListIterator<Materials> iterator2 = materials.listIterator();
@@ -1080,9 +1085,14 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	public static void updateDoctor() throws Exception { 	//done
 		try {
 		showDoctorsID();
+		boolean check;
+		int doctor_id = 0;
+		do {
+			System.out.println("Please enter the id of the doctor to update:");
+			doctor_id =  Integer.parseInt(reader.readLine());
+			check = checkDoctor_id(doctor_id);
+		}while (!check);
 		
-		System.out.println("Please enter the id of the doctor to update:");
-		int doctor_id =  Integer.parseInt(reader.readLine());
 		System.out.println("Please enter the new department:");
 		String department = reader.readLine();
 		
@@ -1098,8 +1108,13 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	public static void updateNurse() throws Exception {		//done
 		try {
 		showNursesID();
-		System.out.println("Please enter the id of the nurse to update:");
-		int nurse_id =  Integer.parseInt(reader.readLine());
+		boolean check;
+		int nurse_id;
+		do {
+			System.out.println("Please enter the id of the nurse to update:");
+			nurse_id =  Integer.parseInt(reader.readLine());
+			check = checkNurse_id(nurse_id);
+		}while(!check);
 		System.out.println("Please enter the new department:");
 		String department = reader.readLine();
 		
@@ -1114,8 +1129,13 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	public static void modifyStock() throws Exception { 	//done
 		try {
 		showMaterialsID();
-		System.out.println("Please enter the id of the material:");
-		int material_id =  Integer.parseInt(reader.readLine());
+		boolean check;
+		int material_id;
+		do {
+			System.out.println("Please enter the id of the material:");
+			material_id =  Integer.parseInt(reader.readLine());
+			check = checkMaterial_id(material_id);
+		}while(!check);
 		System.out.println("Please enter the new stock:");
 		int stock = Integer.parseInt(reader.readLine());
 		
@@ -1130,8 +1150,13 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	public static void updateStatus() throws Exception {		//done
 		try {
 		showOrdersID();
-		System.out.println("Please enter the id of the order:");
-		int order_id =  Integer.parseInt(reader.readLine());
+		boolean check;
+		int order_id;
+		do {
+			System.out.println("Please enter the id of the order:");
+			order_id =  Integer.parseInt(reader.readLine());
+			check = checkOrder_id(order_id);
+		}while(!check);
 		System.out.println("Please enter the new status:");
 		String status = reader.readLine();
 		
@@ -1156,8 +1181,13 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	public static void deleteDoctor() throws Exception {		//done
 		try {
 		showDoctorsID();
-		System.out.println("Please enter the id of the doctor to delete:");
-		int doctor_id =  Integer.parseInt(reader.readLine());
+		int doctor_id;
+		boolean check;
+		do {
+			System.out.println("Please enter the id of the doctor to delete:");
+			doctor_id =  Integer.parseInt(reader.readLine());
+			check = checkDoctor_id(doctor_id);
+		}while(!check);
 		doctorManager.removeDoctor(doctor_id);
 		System.out.println("Doctor deleted");
 		}catch (Exception e) {
@@ -1169,8 +1199,13 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	public static void deleteNurse() throws Exception {			//done
 		try {
 		showNursesID();
-		System.out.println("Please enter the id of the doctor to delete:");
-		int nurse_id =  Integer.parseInt(reader.readLine());
+		boolean check;
+		int nurse_id;
+		do {
+			System.out.println("Please enter the id of the doctor to delete:");
+			nurse_id =  Integer.parseInt(reader.readLine());
+			check = checkNurse_id(nurse_id);
+		}while(!check);
 		nurseManager.removeNurse(nurse_id);
 		System.out.println("Nurse deleted");
 		} catch(Exception e) {
@@ -1181,9 +1216,14 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	public static void deleteTreatment() throws Exception {		//done
 		try {
 		showTreatmentsID();
+		boolean check;
+		int treatment_id;
 		
-		System.out.println("Please enter the id of the treatment to delete:");
-		int treatment_id =  Integer.parseInt(reader.readLine());
+		do {
+			System.out.println("Please enter the id of the treatment to delete:");
+			treatment_id =  Integer.parseInt(reader.readLine());
+			check = checkTreatment_id(treatment_id);
+		}while(!check);
 		treatmentManager.removeTreatment(treatment_id);
 		
 		System.out.println("Treatment deleted");
@@ -1195,8 +1235,13 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	public static void deleteMaterial() throws Exception {		//done
 		try {
 		showMaterialsID();
-		System.out.println("Please enter the id of the material to delete:");
-		int material_id =  Integer.parseInt(reader.readLine());
+		boolean check;
+		int material_id;
+		do {
+			System.out.println("Please enter the id of the material to delete:");
+			material_id =  Integer.parseInt(reader.readLine());
+			check = checkMaterial_id(material_id);
+		}while(!check);
 		materialsManager.removeMaterial(material_id);
 		
 		System.out.println("Material deleted");
@@ -1456,11 +1501,16 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	public static void modifyMaterial() {
 		try {
 			showMaterialsID();
-			System.out.println("What material do you want to edit?:");
-			int mat_id = Integer.parseInt(reader.readLine());
+			int mat_id;
+			boolean check;
+			do {
+				System.out.println("What material do you want to edit?:");
+				mat_id = Integer.parseInt(reader.readLine());
+				check = checkMaterial_id(mat_id);
+			}while(!check);
 			Materials m = materialsManager.getMaterialByID(mat_id);
 			System.out.println(m.toString());
-			boolean check = true;
+			check = true;
 			while(check) {
 				System.out.println("1.Name");
 				System.out.println("2.Type");
