@@ -22,7 +22,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 	public void addMaterial(Materials m) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "INSERT INTO material (name, type, stock, price, distributorID) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO material (name, type, stock, price, distributor_id) VALUES (?,?,?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, m.getName());
 			prep.setString(2, m.getType());
@@ -57,7 +57,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		// TODO Auto-generated method stub
 		try {
 			
-			String sql = "UPDATE Materials SET name=?,type=?,stock=?,price=?,distributorID=? WHERE material_id=?;";
+			String sql = "UPDATE Materials SET name=?,type=?,stock=?,price=?,distributor_id=? WHERE material_id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, m.getName());
 			prep.setString(2, m.getType());
@@ -89,7 +89,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 				String type = rs.getString("type");
 				Integer stock = rs.getInt("stock");
 				Float price = rs.getFloat("price");
-				Integer distributor = rs.getInt("distributorID");
+				Integer distributor = rs.getInt("distributor_id");
 				
 				Materials m = new Materials(id,name, type, stock, price, distributor);
 				materials.add(m);
@@ -119,7 +119,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 				String type = rs.getString("type");
 				Integer stock = rs.getInt("stock");
 				Float price = rs.getFloat("price");
-				Integer distributor = rs.getInt("distributorID");
+				Integer distributor = rs.getInt("distributor_id");
 				m = new Materials(id, name, type, stock, price, distributor);				
 			
 			rs.close();
@@ -158,7 +158,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM material WHERE distributorID =" + distributor_id;
+			String sql = "SELECT * FROM material WHERE distributor_id =" + distributor_id;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next())

@@ -560,6 +560,7 @@ private static void loginNurse() throws Exception{
 		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
 		distributors = distributorManager.getlistDistributors();
 		ListIterator<Distribuitor> iterator = distributors.listIterator();
+		System.out.println("\nDistributors");
 		while(iterator.hasNext()) {
 			Distribuitor dist = iterator.next();
 			System.out.println(dist.toString());
@@ -1100,6 +1101,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		List<Doctor> doctors = new ArrayList<Doctor>();
 		doctors = doctorManager.getListDoctor();
 		ListIterator<Doctor> iterator =  doctors.listIterator();
+		System.out.println();
 		while(iterator.hasNext()) {
 			Doctor doc = iterator.next();
 			System.out.println(doc.getId() + "->" + doc.getName());
@@ -1110,6 +1112,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		List<Nurse> nurses = new ArrayList<Nurse>();
 		nurses = nurseManager.getListNurse();
 		ListIterator<Nurse> iterator =  nurses.listIterator();
+		System.out.println();
 		while(iterator.hasNext()) {
 			Nurse nur = iterator.next();
 			System.out.println(nur.getId() + "->" + nur.getName());
@@ -1120,6 +1123,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		List<Order> orders = new ArrayList<Order>();
 		orders = orderManager.getListOrder();
 		ListIterator<Order> iterator =  orders.listIterator();
+		System.out.println();
 		while(iterator.hasNext()) {
 			Order ord = iterator.next();
 			System.out.println(ord.getId());
@@ -1130,6 +1134,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		List<Treatment> treatments = new ArrayList<Treatment>();
 		treatments = treatmentManager.getListTreatments();
 		ListIterator<Treatment> iterator =  treatments.listIterator();
+		System.out.println();
 		while(iterator.hasNext()) {
 			Treatment tre = iterator.next();
 			System.out.println(tre.getId() + "->" + tre.getName());
@@ -1140,6 +1145,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		List<Materials> materials = new ArrayList<Materials>();
 		materials = materialsManager.getListMaterials();
 		ListIterator<Materials> iterator =  materials.listIterator();
+		System.out.println();
 		while(iterator.hasNext()) {
 			Materials mat= iterator.next();
 			System.out.println(mat.getId() + "->" + mat.getName());
@@ -1150,6 +1156,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
 		distributors = distributorManager.getlistDistributors();
 		ListIterator<Distribuitor> iterator =  distributors.listIterator();
+		System.out.println();
 		while(iterator.hasNext()) {
 			Distribuitor dist= iterator.next();
 			System.out.println(dist.getId() + "->" + dist.getName());
@@ -1157,7 +1164,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	}
 	
 	private static void signup() throws Exception{
-		System.out.println("What type of sign up do you want to do?");
+		System.out.println("\nWhat type of sign up do you want to do?");
 		System.out.println("1. As a administrator");
 		System.out.println("2. As a doctor");
 		System.out.println("3. As a nurse");

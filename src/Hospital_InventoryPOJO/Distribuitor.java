@@ -74,7 +74,7 @@ public class Distribuitor implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Distribuitor [id=" + id + ", name=" + name + ", type=" + type + "]";
+		return "id=" + id + "	name=" + name + "	type=" + type + "";
 	}
 	
 	

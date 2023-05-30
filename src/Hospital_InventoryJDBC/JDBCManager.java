@@ -50,7 +50,7 @@ public class JDBCManager {
 		+ "	type	TEXT NOT NULL,"
 		+ "	stock	INTEGER,"
 		+ "	price	FLOAT,"
-		+ "	distributorID	INTEGER NOT NULL REFERENCES distributor(id) ON DELETE RESTRICT"
+		+ "	distributor_id	INTEGER NOT NULL REFERENCES distributor(id) ON DELETE RESTRICT"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE distributor ("
