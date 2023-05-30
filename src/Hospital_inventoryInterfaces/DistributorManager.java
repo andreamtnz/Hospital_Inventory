@@ -12,5 +12,7 @@ public interface DistributorManager {
 	public void removeDistributor(int id);
 	
 	public Distribuitor getDistributorByID(int id);
+	
+	public List<Integer> getlistDistributors_id() ;
 
 }

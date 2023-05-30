@@ -110,7 +110,7 @@ public class Materials implements Serializable{
 	@Override
 	public String toString() {
 		return "id=" + id + "	name=" + name + "	type=" + type + "	stock=" + stock + "	price=" + price
-				+ "	distributor=" + distributor + "]";
+				+ "	distributor=" + distributor + "";
 	}
 	
 	public String stockToString() {

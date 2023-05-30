@@ -94,7 +94,8 @@ public class Menu {
 		
 		try {
 			do {
-				System.out.println("Choose an option");
+				System.out.println("\nAdministrator Menu");
+				System.out.println("\nChoose an option");
 				System.out.println("1. Work with materials");
 				System.out.println("2. Work with distributors");
 				System.out.println("3. Work with orders");
@@ -760,7 +761,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 
 	
 	public static void addMaterial() throws Exception {
-		
+		try {
 		System.out.println("Type the name:");
 		String name = reader.readLine();
 		System.out.println("Type the type:");
@@ -772,13 +773,49 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		showDistributorsID();
 		System.out.println("Type the distributor ID:");
 		Integer distributor_id = Integer.parseInt(reader.readLine());
+		
+		boolean check = checkDistributor_id(distributor_id);
+		while (check == false) {
+			System.out.println("Distributor ID not valid. Please try again:");
+			distributor_id = Integer.parseInt(reader.readLine());
+			check = checkDistributor_id(distributor_id);		
+		}
+		if (check == true) {
 	
 		Materials m = new Materials(name, type, stock, price, distributor_id);
 		materialsManager.addMaterial(m);
-		System.out.println("Material added");
+		System.out.println("Material added");}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 	
+	 
+	
+	public static boolean checkDistributor_id (int id) {
+		boolean r = false;
+		List<Integer> dist_id = new ArrayList<Integer>();
+		dist_id = distributorManager.getlistDistributors_id();
+		ListIterator<Integer> it= dist_id.listIterator();
+		while(it.hasNext()) {
+			Integer i = it.next();
+			System.out.println(i);
+		}
+		
+		
+		if (dist_id.contains(id)){
+			r = true;
+		}
+		else {
+			r = false;
+		}
+			
+		return r;}
+		
+		
+		
+
 	
 	public static void addDistributor() throws Exception {	//done
 		

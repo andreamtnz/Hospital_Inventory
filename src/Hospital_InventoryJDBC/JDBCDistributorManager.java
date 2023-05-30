@@ -67,6 +67,34 @@ public class JDBCDistributorManager implements DistributorManager{
 		
 		return distributors;
 	}
+	
+	@Override
+	public List<Integer> getlistDistributors_id() {
+		// TODO Auto-generated method stub
+		List<Integer> distributors_id = new ArrayList<Integer>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT distributor_id FROM distributor";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("distributor_id");
+				
+				distributors_id.add(id);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return distributors_id;
+	}
 
 	@Override
 	public void removeDistributor(int id) {
