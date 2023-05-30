@@ -23,7 +23,17 @@ public class JDBCDistributorManager implements DistributorManager{
 
 	@Override
 	public void addDistributor(Distribuitor d) {
-		// TODO Auto-generated method stub
+		try{
+			String sql = "INSERT INTO distributor (name, type) VALUES (?,?)";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, d.getName());
+			prep.setString(2, d.getType());
+			
+			prep.executeUpdate();			
+					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

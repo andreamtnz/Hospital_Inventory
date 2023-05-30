@@ -217,13 +217,13 @@ private static void distributorsSubMenu() throws Exception{
 	try {
 		boolean check = true;
 		do {
-			System.out.println("Choose an option");
-			System.out.println("1.View all distributors");
+			System.out.println("\nAdministrator Menu - Work with Distributors");
+			System.out.println("\nChoose an option");
+			System.out.println("1. View all distributors");
 			System.out.println("2. Search a distributor");
 			System.out.println("3. Add a new distributor");
 			System.out.println("4. View all materials from a specific distributor");
-			
-			System.out.println("0. exit");
+			System.out.println("0. Back to Administrator Menu");
 
 			int choice = Integer.parseInt(reader.readLine());
 			switch(choice)
