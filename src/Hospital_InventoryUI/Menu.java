@@ -358,6 +358,7 @@ private static void nursesSubMenu() throws Exception{
 			System.out.println("3. Add a new nurse");
 			System.out.println("4. Update a nurse's department");
 			System.out.println("5. Delete a nurse");
+			System.out.println("6. Save nurse in xml");
 			System.out.println("0. exit");
 
 			int choice = Integer.parseInt(reader.readLine());
@@ -377,6 +378,9 @@ private static void nursesSubMenu() throws Exception{
 				break;
 			case 5:
 				deleteNurse();
+				break;
+			case 6:
+				printMeNurse();
 				break;
 			case 0: 
 				check = false;
@@ -738,6 +742,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("No hay meateriales registrados");
 		}
 	}
 
@@ -836,6 +841,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			System.out.println("Type the amount of materials you want to order: ");
 				int amount = Integer.parseInt(reader.readLine());
 				price = price + m.getPrice()*amount;
+				System.out.println("Cost:" + price);
 				orderManager.addToOrder(m, o, amount);
 				String answer = "";
 				while(!answer.equalsIgnoreCase("yes")||!answer.equalsIgnoreCase("no")) {
@@ -967,6 +973,15 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		
 		orderManager.updateStatus(order_id, status);
 		System.out.println("Status updated");
+		if(status.equalsIgnoreCase("delivered")) {
+			List<Materials> materials = orderManager.getMaterialsOrder(order_id);
+			int i;
+			for(i=0; i< materials.size(); i++)
+			{
+				int stock = materials.get(i).getStock();
+				materialsManager.updateStock(materials.get(i).getId(), stock);
+			}
+		}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -1328,6 +1343,19 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		int id = Integer.parseInt(reader.readLine());
 		xmlManager.doctorID2xml(id);;
 		xmlManager.simpleTransform("./xmls/Doctor.xml", "./xmls/Doctor-Style.xslt", "./xmls/Doctor.html");
+		
+		System.out.println("Doctor saved");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	private static void printMeNurse() {
+		try {
+		showNursesID();
+		System.out.println("Which nurse do you want to save?");
+		int id = Integer.parseInt(reader.readLine());
+		Nurse n = nurseManager.getNurseByID(id);
+		xmlManager.nurse2xml(n);;
 		
 		System.out.println("Doctor saved");
 		}catch(Exception e) {

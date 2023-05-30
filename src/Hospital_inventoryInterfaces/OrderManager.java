@@ -14,4 +14,5 @@ public interface OrderManager {
 	public List<Order> getListOrder();
 	public Order getOrderByID(int order_id);
 	public void updateStatus(int order_id, String state);
+	public List<Materials> getMaterialsOrder(int order_id);
 }

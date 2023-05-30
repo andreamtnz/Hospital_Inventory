@@ -12,6 +12,7 @@ import Hospital_InventoryPOJO.Doctor;
 import Hospital_InventoryPOJO.Materials;
 import Hospital_InventoryPOJO.Order;
 import Hospital_inventoryInterfaces.OrderManager;
+import Hospital_inventoryInterfaces.MaterialsManager;
 
 public class JDBCOrderManager implements OrderManager{
 
@@ -132,6 +133,37 @@ public class JDBCOrderManager implements OrderManager{
 			}catch(Exception e) {
 				e.printStackTrace();
 				}
+	}
+
+	@Override
+	public List<Materials> getMaterialsOrder(int order_id) {
+		// TODO Auto-generated method stub
+		List<Materials> materials = new ArrayList<Materials>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM has WHERE orderID=" + order_id;
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("materialID");
+				Integer quantity = rs.getInt("quantity");
+				MaterialsManager materialsManager = new JDBCMaterialsManager(manager);
+				Materials m = materialsManager.getMaterialByID(id);
+				m.setStock(quantity+m.getStock());
+				materials.add(m);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return materials;
 	}
 
 }
