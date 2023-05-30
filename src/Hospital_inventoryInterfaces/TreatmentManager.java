@@ -22,6 +22,7 @@ public interface TreatmentManager {
 	public void removeTreatment(int treatment_id);
 	public List<Doctor> getDoctorsInTreatment(int treatment_id);
 	public List<Nurse> getNursesInTreatment(int treatment_id);
+	public List<Integer> getlistTreatments_id();
 	
 }
  

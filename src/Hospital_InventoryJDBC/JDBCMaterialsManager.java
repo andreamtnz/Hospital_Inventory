@@ -105,6 +105,34 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		
 		return materials;
 	}
+	
+	@Override
+	public List<Integer> getlistMaterials_id() {
+		// TODO Auto-generated method stub
+		List<Integer> materials_id = new ArrayList<Integer>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT material_id FROM material";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("material_id");
+				
+				materials_id.add(id);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return materials_id;
+	}
 
 	@Override
 	public Materials getMaterialByID(int id) {

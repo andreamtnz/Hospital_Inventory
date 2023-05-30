@@ -165,5 +165,33 @@ public class JDBCOrderManager implements OrderManager{
 		
 		return materials;
 	}
+	
+	@Override
+	public List<Integer> getlistOrders_id() {
+		// TODO Auto-generated method stub
+		List<Integer> orders_id = new ArrayList<Integer>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT order_id FROM order";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("order_id");
+				
+				orders_id.add(id);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return orders_id;
+	}
 
 }

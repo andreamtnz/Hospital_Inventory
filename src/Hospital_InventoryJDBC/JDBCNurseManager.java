@@ -126,5 +126,32 @@ public class JDBCNurseManager implements NurseManager{
 		return n;
 	}
 
+	@Override
+	public List<Integer> getlistNurses_id() {
+		// TODO Auto-generated method stub
+		List<Integer> nurses_id = new ArrayList<Integer>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT id FROM nurse";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("id");
+				
+				nurses_id.add(id);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return nurses_id;
+	}
 	
 }

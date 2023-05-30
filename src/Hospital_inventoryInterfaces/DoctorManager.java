@@ -14,5 +14,5 @@ public interface DoctorManager {
 	public void removeDoctor(int id); //creo que sería mejor poner (Doctor d)
 	//change department
 	public void updateDepartment(int id , String department); // aquí lo mismo, creo que mejor (Doctor d), y ya dentro del método se pide el departamento nuevo
-	
+	public List<Integer> getlistDoctors_id();
 }

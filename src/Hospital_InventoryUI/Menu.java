@@ -555,8 +555,14 @@ private static void loginNurse() throws Exception{
 		System.out.println("\nPlease choose a material, type its ID:");
 		Integer material_id = Integer.parseInt(reader.readLine());
 		//show material data
+		boolean check = checkMaterial_id(material_id);
+		if (check == false) {
+			System.out.println("Material not found");
+		}
+		else {		
 		m = materialsManager.getMaterialByID(material_id);
 		System.out.println(m.toString());
+		}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -814,7 +820,6 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			System.out.println(i);
 		}
 		
-		
 		if (dist_id.contains(id)){
 			r = true;
 		}
@@ -822,7 +827,105 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			r = false;
 		}
 			
-		return r;}
+		return r;
+		}
+	
+	public static boolean checkMaterial_id (int id) {
+		boolean r = false;
+		List<Integer> mat_id = new ArrayList<Integer>();
+		mat_id = materialsManager.getlistMaterials_id();
+		ListIterator<Integer> it= mat_id.listIterator();
+		while(it.hasNext()) {
+			Integer i = it.next();
+			System.out.println(i);
+		}
+		
+		if (mat_id.contains(id)){
+			r = true;
+		}
+		else {
+			r = false;
+		}
+			
+		return r;
+		}
+	
+	public static boolean checkDoctor_id (int id) {
+		boolean r = false;
+		List<Integer> doc_id = new ArrayList<Integer>();
+		doc_id = doctorManager.getlistDoctors_id();
+		ListIterator<Integer> it= doc_id.listIterator();
+		while(it.hasNext()) {
+			Integer i = it.next();
+			System.out.println(i);
+		}
+		
+		if (doc_id.contains(id)){
+			r = true;
+		}
+		else {
+			r = false;
+		}
+			
+		return r;
+		}
+	
+	public static boolean checkNurse_id (int id) {
+		boolean r = false;
+		List<Integer> nur_id = new ArrayList<Integer>();
+		nur_id = nurseManager.getlistNurses_id();
+		ListIterator<Integer> it= nur_id.listIterator();
+		while(it.hasNext()) {
+			Integer i = it.next();
+			System.out.println(i);
+		}
+		
+		if (nur_id.contains(id)){
+			r = true;
+		}
+		else {
+			r = false;
+		}
+		
+		return r;
+	}
+		
+		public static boolean checkOrder_id (int id) {
+			boolean r = false;
+			List<Integer> ord_id = new ArrayList<Integer>();
+			ord_id = orderManager.getlistOrders_id();
+			ListIterator<Integer> it= ord_id.listIterator();
+			while(it.hasNext()) {
+				Integer i = it.next();
+				System.out.println(i);
+			}
+			
+			if (ord_id.contains(id)){
+				r = true;
+			}
+			else {
+				r = false;
+			}
+			return r;
+			}
+		
+		public static boolean checkTreatment_id (int id) {
+			boolean r = false;
+			List<Integer> tre_id = new ArrayList<Integer>();
+			tre_id = treatmentManager.getlistTreatments_id();
+			ListIterator<Integer> it= tre_id.listIterator();
+			while(it.hasNext()) {
+				Integer i = it.next();
+				System.out.println(i);
+			}				
+				if (tre_id.contains(id)){
+					r = true;
+				}
+				else {
+					r = false;
+				}
+		return r;
+		}
 		
 		
 		

@@ -14,4 +14,5 @@ public interface NurseManager {
 		public void removeNurse(int id);
 		public void updateDepartment(int id, String department);
 		public Nurse getNurseByID(int id);
+		public List<Integer> getlistNurses_id();
 }

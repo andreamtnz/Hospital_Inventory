@@ -228,6 +228,34 @@ public class JDBCTreatmentManager implements TreatmentManager{
 		}
 	}
 	
+	@Override
+	public List<Integer> getlistTreatments_id() {
+		// TODO Auto-generated method stub
+		List<Integer> treatments_id = new ArrayList<Integer>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT treatment_id FROM treatment";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("treatment_id");
+				
+				treatments_id.add(id);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return treatments_id;
+	}
+	
 	
 
 

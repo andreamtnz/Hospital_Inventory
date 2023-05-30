@@ -127,5 +127,34 @@ public class JDBCDoctorManager implements DoctorManager{
 		return d;
 	}
 	
+	
+	@Override
+	public List<Integer> getlistDoctors_id() {
+		// TODO Auto-generated method stub
+		List<Integer> doctors_id = new ArrayList<Integer>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT doctor_id FROM doctor";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("doctor_id");
+				
+				doctors_id.add(id);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return doctors_id;
+	}
+	
 
 }
