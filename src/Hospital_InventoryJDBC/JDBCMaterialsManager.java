@@ -42,7 +42,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		// TODO Auto-generated method stub
 		try {
 			
-			String sql = "DELETE FROM materials WHERE material_id=?;";
+			String sql = "DELETE FROM material WHERE material_id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1,id);
 			prep.executeUpdate();
@@ -57,7 +57,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		// TODO Auto-generated method stub
 		try {
 			
-			String sql = "UPDATE Materials SET name=?,type=?,stock=?,price=?,distributor_id=? WHERE material_id=?;";
+			String sql = "UPDATE material SET name=?,type=?,stock=?,price=?,distributor_id=? WHERE material_id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, m.getName());
 			prep.setString(2, m.getType());
@@ -166,7 +166,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		
 		try {
 			
-			String sql = "UPDATE Materials SET stock=? WHERE material_id=?;";
+			String sql = "UPDATE material SET stock=? WHERE material_id=?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, stock);
 			prep.setInt(2, material_id);
