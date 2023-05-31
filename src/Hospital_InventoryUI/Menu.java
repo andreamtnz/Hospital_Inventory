@@ -557,7 +557,7 @@ private static void loginNurse() throws Exception{
 		//show material data
 		boolean check = checkMaterial_id(material_id);
 		if (check == false) {
-			System.out.println("Material not found");
+			System.out.println("\nMaterial not found");
 		}
 		else {		
 		m = materialsManager.getMaterialByID(material_id);
@@ -1368,11 +1368,17 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		// TODO Auto-generated method stub
 		try {
 		showMaterialsID();
-		System.out.println("Please choose a material, type its ID:");
+		System.out.println("\nPlease choose a material, type its ID:");
 		Integer material_id = Integer.parseInt(reader.readLine());
+		boolean check = checkMaterial_id(material_id);
+		if (!check) {
+			System.out.println("\nError. Material not found");
+		}
+		else {
 		Materials m = new Materials();
 		m = materialsManager.getMaterialByID(material_id);
 		System.out.println(m.stockToString());
+		}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -1614,6 +1620,14 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				case 1:{
 					System.out.println("Type the new name:");
 					String name = reader.readLine();
+					int distributor_id = m.getDistributor();
+					boolean check2 = checkRepeatedMaterial(distributor_id, name);
+					while (check2 == true) {
+						System.out.println("Error. The material "+name+ "already exists for the distributor " + distributor_id);
+						System.out.println("Type the name:");
+						name = reader.readLine();
+						check2 = checkRepeatedMaterial(distributor_id, name);
+					}
 					m.setName(name);
 					break;
 				}

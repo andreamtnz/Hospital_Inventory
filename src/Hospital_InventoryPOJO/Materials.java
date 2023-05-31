@@ -114,7 +114,7 @@ public class Materials implements Serializable{
 	}
 	
 	public String stockToString() {
-		return id + name + stock;
+		return "id=" + id + "	name="+ name + "	stock="+stock;
 	}
 
 	
