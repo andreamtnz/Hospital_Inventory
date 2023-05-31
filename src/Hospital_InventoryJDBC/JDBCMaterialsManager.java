@@ -57,7 +57,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		// TODO Auto-generated method stub
 		try {
 			
-			String sql = "UPDATE material SET name=?,type=?,stock=?,price=?,distributor_id=? WHERE material_id=?;";
+			String sql = "UPDATE material SET name=?,type=?,stock=?,price=?,distributor_id=? WHERE material_id=" + m.getId() +"";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, m.getName());
 			prep.setString(2, m.getType());
@@ -133,6 +133,34 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		
 		return materials_id;
 	}
+	
+	@Override
+	public List<String> getlistMaterials_name(int dist_id) {
+		// TODO Auto-generated method stub
+		List<String> materials_name = new ArrayList<String>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT name FROM material WHERE material_id = "+ dist_id;
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				String s = rs.getString("name");
+				
+				materials_name.add(s);
+			}
+			
+			rs.close();
+			stmt.close();	
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return materials_name;
+	}
+
 
 	@Override
 	public Materials getMaterialByID(int id) {

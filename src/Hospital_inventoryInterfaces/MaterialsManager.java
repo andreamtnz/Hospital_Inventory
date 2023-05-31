@@ -20,5 +20,6 @@ public interface MaterialsManager {
 	
 	public List<Materials> getMaterialsByDistributor(int distributor_id);
 	public List<Integer> getlistMaterials_id();
+	public List<String> getlistMaterials_name(int dist_id);
 	
 }

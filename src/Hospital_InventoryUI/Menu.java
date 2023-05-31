@@ -777,7 +777,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 
 
 	
-	public static void addMaterial() throws Exception {
+	public  static void addMaterial() throws Exception {
 		try {
 		System.out.println("Type the name:");
 		String name = reader.readLine();
@@ -790,14 +790,18 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		showDistributorsID();
 		System.out.println("Type the distributor ID:");
 		Integer distributor_id = Integer.parseInt(reader.readLine());
-		
 		boolean check = checkDistributor_id(distributor_id);
-		while (check == false) {
+		while (!check) {
 			System.out.println("Distributor ID not valid. Please try again:");
 			distributor_id = Integer.parseInt(reader.readLine());
 			check = checkDistributor_id(distributor_id);		
 		}
-		if (check == true) {
+		boolean check2 = checkRepeatedMaterial(distributor_id, name);
+		while (!check2) {
+			System.out.println("Error. The material "+name+ "already exists for the distributor " + distributor_id);
+		}
+		
+		if (check == true && check2 == true) {
 	
 		Materials m = new Materials(name, type, stock, price, distributor_id);
 		materialsManager.addMaterial(m);
@@ -808,18 +812,26 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 
 	}
 	
+	public static boolean checkRepeatedMaterial(int dist_id, String name) {
+		boolean r;
+		List<String> mat_dist = materialsManager.getlistMaterials_name(dist_id);
+		if (mat_dist.contains(name)) {
+			r = true;
+		}
+		else {
+			r = false;
+		}
+		
+		return r;
+	}
+	
 	 
 	
 	public static boolean checkDistributor_id (int id) {
 		boolean r = false;
 		List<Integer> dist_id = new ArrayList<Integer>();
 		dist_id = distributorManager.getlistDistributors_id();
-		ListIterator<Integer> it= dist_id.listIterator();
-		while(it.hasNext()) {
-			Integer i = it.next();
-			System.out.println(i);
-		}
-		
+
 		if (dist_id.contains(id)){
 			r = true;
 		}
@@ -834,11 +846,6 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		boolean r = false;
 		List<Integer> mat_id = new ArrayList<Integer>();
 		mat_id = materialsManager.getlistMaterials_id();
-		ListIterator<Integer> it= mat_id.listIterator();
-		while(it.hasNext()) {
-			Integer i = it.next();
-			System.out.println(i);
-		}
 		
 		if (mat_id.contains(id)){
 			r = true;
@@ -854,11 +861,6 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		boolean r = false;
 		List<Integer> doc_id = new ArrayList<Integer>();
 		doc_id = doctorManager.getlistDoctors_id();
-		ListIterator<Integer> it= doc_id.listIterator();
-		while(it.hasNext()) {
-			Integer i = it.next();
-			System.out.println(i);
-		}
 		
 		if (doc_id.contains(id)){
 			r = true;
@@ -874,11 +876,6 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		boolean r = false;
 		List<Integer> nur_id = new ArrayList<Integer>();
 		nur_id = nurseManager.getlistNurses_id();
-		ListIterator<Integer> it= nur_id.listIterator();
-		while(it.hasNext()) {
-			Integer i = it.next();
-			System.out.println(i);
-		}
 		
 		if (nur_id.contains(id)){
 			r = true;
@@ -894,11 +891,6 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			boolean r = false;
 			List<Integer> ord_id = new ArrayList<Integer>();
 			ord_id = orderManager.getlistOrders_id();
-			ListIterator<Integer> it= ord_id.listIterator();
-			while(it.hasNext()) {
-				Integer i = it.next();
-				System.out.println(i);
-			}
 			
 			if (ord_id.contains(id)){
 				r = true;
@@ -912,12 +904,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		public static boolean checkTreatment_id (int id) {
 			boolean r = false;
 			List<Integer> tre_id = new ArrayList<Integer>();
-			tre_id = treatmentManager.getlistTreatments_id();
-			ListIterator<Integer> it= tre_id.listIterator();
-			while(it.hasNext()) {
-				Integer i = it.next();
-				System.out.println(i);
-			}				
+			tre_id = treatmentManager.getlistTreatments_id();				
 				if (tre_id.contains(id)){
 					r = true;
 				}
@@ -1500,24 +1487,40 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	
 	public static void modifyMaterial() {
 		try {
-			showMaterialsID();
 			int mat_id;
 			boolean check;
-			do {
-				System.out.println("What material do you want to edit?:");
+			showMaterialsID();
+			System.out.println("\nWhat material do you want to edit?:");
+			mat_id = Integer.parseInt(reader.readLine());
+			check = checkMaterial_id(mat_id);
+			while(!check) {
+				System.out.println("Material not found. Please try again");
 				mat_id = Integer.parseInt(reader.readLine());
 				check = checkMaterial_id(mat_id);
-			}while(!check);
+			}
+			/*do {
+				showMaterialsID();
+				System.out.println("\nWhat material do you want to edit?:");
+				mat_id = Integer.parseInt(reader.readLine());
+				check = checkMaterial_id(mat_id);
+			}while(!check);*/
+	
 			Materials m = materialsManager.getMaterialByID(mat_id);
-			System.out.println(m.toString());
-			check = true;
+			System.out.println("\n"+m.toString());
+			//check = true;
 			while(check) {
+				System.out.println("\nWhat do you want to edit?:");
 				System.out.println("1.Name");
 				System.out.println("2.Type");
 				System.out.println("3.Stock");
 				System.out.println("4.Price");
-				System.out.println("What do you want to edit?:");
+				
 				int choice = Integer.parseInt(reader.readLine());
+					while (choice<1 || choice >4) {
+						System.out.println("Option not valid. Please enter a valid option (1-4).");
+						choice = Integer.parseInt(reader.readLine());
+					}
+				
 				switch(choice) {
 				case 1:{
 					System.out.println("Type the new name:");
@@ -1549,6 +1552,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				System.out.println("Do you want to edit something else?");
 				String answer = reader.readLine();
 				if(answer.equalsIgnoreCase("no")) {
+					System.out.println(m.toString());
 					materialsManager.changeMaterial(m);
 					check = false;
 				}
@@ -1557,6 +1561,8 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	private static void printMe() {
 		try {
