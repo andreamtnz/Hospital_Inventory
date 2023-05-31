@@ -797,17 +797,16 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			check = checkDistributor_id(distributor_id);		
 		}
 		boolean check2 = checkRepeatedMaterial(distributor_id, name);
-		while (check2 == false) {
+		while (check2 == true) {
 			System.out.println("Error. The material "+name+ "already exists for the distributor " + distributor_id);
 			System.out.println("Type the name:");
 			name = reader.readLine();
 			System.out.println("Type the distributor ID:");
 			distributor_id = Integer.parseInt(reader.readLine());
 			check2 = checkRepeatedMaterial(distributor_id, name);
-			
 		}
 		
-		if (check == true && check2 == true) {
+		if (check == true && check2 == false) {
 	
 		Materials m = new Materials(name, type, stock, price, distributor_id);
 		materialsManager.addMaterial(m);
