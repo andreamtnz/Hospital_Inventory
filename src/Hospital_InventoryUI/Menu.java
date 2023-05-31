@@ -107,19 +107,19 @@ public class Menu {
 				switch(choice)
 				{
 				case 1:
-					materialsSubMenu();
+					materialsSubMenu(id);
 					break;
 				case 2:
-					distributorsSubMenu(); 
+					distributorsSubMenu(id); 
 					break;
 				case 3:
-					ordersSubMenu(); 
+					ordersSubMenu(id); 
 					break;
 				case 4:
-					doctorsSubMenu(); 
+					doctorsSubMenu(id); 
 					break;
 				case 5:
-					nursesSubMenu(); 
+					nursesSubMenu(id); 
 					break;
 				case 0: 
 					jdbcManager.disconnect();
@@ -155,7 +155,7 @@ public class Menu {
 	
 	
 	//submenu materiales Administrador
-private static void materialsSubMenu () throws Exception{
+private static void materialsSubMenu (Integer id) throws Exception{
 		
 		try {
 			boolean check = true;
@@ -214,7 +214,7 @@ private static void materialsSubMenu () throws Exception{
 
 
 	//submenu distribuidores Administrador
-private static void distributorsSubMenu() throws Exception{
+private static void distributorsSubMenu(Integer id) throws Exception{
 	
 	try {
 		boolean check = true;
@@ -257,7 +257,7 @@ private static void distributorsSubMenu() throws Exception{
 }
 	
 	//submenu Order Administrador
-private static void ordersSubMenu() throws Exception{
+private static void ordersSubMenu(Integer id) throws Exception{
 	
 	try {
 		boolean check = true;
@@ -280,7 +280,7 @@ private static void ordersSubMenu() throws Exception{
 				searchOrder();
 				break;
 			case 3:
-				placeOrder();
+				placeOrder(id);
 				break;
 			case 4:
 				updateStatus();
@@ -300,7 +300,7 @@ private static void ordersSubMenu() throws Exception{
 
 
 	//submenu Doctor Administrador
-private static void doctorsSubMenu() throws Exception{
+private static void doctorsSubMenu(Integer id) throws Exception{
 	
 	try {
 		boolean check = true;
@@ -351,7 +351,7 @@ private static void doctorsSubMenu() throws Exception{
 
 
 //submenu Nurse Administrador
-private static void nursesSubMenu() throws Exception{
+private static void nursesSubMenu(Integer id) throws Exception{
 	
 	try {
 		boolean check = true;
@@ -448,6 +448,7 @@ private static void doctorMenu (Integer id) throws Exception{
 					break;
 				case 9:
 					modifyStock();
+					break;
 				case 0: 
 					jdbcManager.disconnect();
 					userManager.disconnect();
@@ -997,12 +998,14 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	}		 
 	
 	
-	public static void placeOrder() throws Exception {
+	public static void placeOrder(Integer administrator_id) throws Exception {
 		boolean check = false;
 		int distributorID = 0;
 		Date date = new Date(System.currentTimeMillis()); 
 		Float price = 0.0F;
-		Order o = new Order(date,price);
+		Order o = new Order(date,price, administrator_id);
+		orderManager.addOrder(o);
+		
 		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
 		List<Materials> materials = new ArrayList<Materials>();
 		distributors = distributorManager.getlistDistributors();

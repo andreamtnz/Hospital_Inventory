@@ -84,8 +84,8 @@ public class JDBCManager {
 		sql = "CREATE TABLE order ("
 		+ "	order_id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	state	TEXT NOT NULL,"
-		+ " date    DATE,"
-		+ " cost    FLOAT,"
+		+ " date    DATE NOT NULL,"
+		+ " cost    FLOAT NOT NULL,"
 		+ " administrator_id	INTEGER NOT NULL REFERENCES administrator(administrator_id) ON DELETE RESTRICT"
 		+ ");";
 		stmt.executeUpdate(sql);

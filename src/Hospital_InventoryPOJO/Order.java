@@ -44,6 +44,13 @@ public class Order implements Serializable{
 		//this.administrador = administrador_id;
 	}
 	
+	public Order(Date date, float price, Integer administrator_id) {
+		this.state = "ordered";
+		this.date = date;
+		this.cost = price;
+		this.administrador = administrator_id;
+	}
+	
 
 	public Integer getId() {
 		return id;

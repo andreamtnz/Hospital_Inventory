@@ -23,11 +23,13 @@ public class JDBCOrderManager implements OrderManager{
 		  this.manager = m;
 	 }
 	 
+	
+	 
 	@Override
 	public void addOrder(Order o) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "INSERT INTO order (state, date, cost, administrator_id) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO order (state, date, cost, administrator_id) VALUES (?,?,?,?)" ; 
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, o.getState());
 			prep.setDate(2, o.getDate());
