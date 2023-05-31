@@ -141,7 +141,7 @@ public class JDBCMaterialsManager implements MaterialsManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT name FROM material WHERE material_id = "+ dist_id;
+			String sql = "SELECT name FROM material WHERE distributor_id = "+ dist_id;
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next())
 			{

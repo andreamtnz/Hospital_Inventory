@@ -628,8 +628,16 @@ private static void loginNurse() throws Exception{
 		// TODO Auto-generated method stub
 		try {
 		showTreatmentsID();
-		System.out.println("Please choose a treatment, type its ID:");
-		Integer treatment_id = Integer.parseInt(reader.readLine());
+		int treatment_id;
+		boolean check;
+		do {
+			System.out.println("Please choose a treatment, type its ID:");
+			treatment_id = Integer.parseInt(reader.readLine());
+			check = checkTreatment_id(treatment_id);
+			if(!check) {
+				System.out.println("Treatment not registered");
+			}
+		}while(!check);
 		//show material data
 		Treatment t = new Treatment();
 		t = treatmentManager.getTreatmentById(treatment_id);
@@ -643,11 +651,17 @@ private static void loginNurse() throws Exception{
 		// TODO Auto-generated method stub
 		try {
 		showOrdersID();
-				
+		boolean check;
+		int order_id;
 		Order o = new Order();
-		System.out.println("Please choose an order, type its ID:");
-		System.out.println(orderManager.getListOrder());
-		Integer order_id = Integer.parseInt(reader.readLine());
+		do {
+			System.out.println("Please choose an order, type its ID:");
+			order_id = Integer.parseInt(reader.readLine());
+			check = checkOrder_id(order_id);
+			if(!check) {
+				System.out.println("Order not registered");
+			}
+		}while(!check);
 		//show material data
 		o = orderManager.getOrderByID(order_id);
 		System.out.println(o.toString());
@@ -683,8 +697,16 @@ private static void loginNurse() throws Exception{
 		try {
 		showDoctorsID();
 		Doctor d = new Doctor();
-		System.out.println("Please choose a doctor, type its ID:");
-		Integer doctor_id = Integer.parseInt(reader.readLine());
+		boolean check;
+		int doctor_id;
+		do {
+			System.out.println("Please choose a doctor, type its ID:");
+			doctor_id = Integer.parseInt(reader.readLine());
+			check = checkDoctor_id(doctor_id);
+			if(!check) {
+				System.out.println("Doctor not registered");
+			}
+		}while(!check);
 		//show material data
 		d = doctorManager.getDoctorByID(doctor_id);
 		System.out.println(d.toString());
@@ -698,9 +720,16 @@ private static void loginNurse() throws Exception{
 		try {
 		showNursesID();
 		Nurse n = new Nurse();
-		System.out.println("Please choose a nurse, type its ID:");
-		System.out.println(nurseManager.getListNurse());
-		Integer nurse_id = Integer.parseInt(reader.readLine());
+		boolean check;
+		int nurse_id;
+		do {
+			System.out.println("Please choose a nurse, type its ID:");
+			nurse_id = Integer.parseInt(reader.readLine());
+			check = checkNurse_id(nurse_id);
+			if(!check) {
+				System.out.println("Nurse not registered");
+			}
+		}while(!check);
 		//show material data
 		n = nurseManager.getNurseByID(nurse_id);
 		System.out.println(n.toString());
@@ -712,11 +741,26 @@ private static void loginNurse() throws Exception{
 	private static void assignDoctorToTreatment() throws Exception{ 	//done
 		try {
 		showDoctorsID();
-		System.out.println("Please enter the doctor ID to assign:");
-		Integer doctor_id = Integer.parseInt(reader.readLine());
+		boolean check;
+		int doctor_id;
+		do {
+			System.out.println("Please enter the doctor ID to assign:");
+			doctor_id = Integer.parseInt(reader.readLine());
+			check = checkDoctor_id(doctor_id);
+			if(!check) {
+				System.out.println("Doctor not registered");
+			}
+		}while(!check);
 		showTreatmentsID();
-		System.out.println("Please enter the treatment ID to assign:");
-		Integer treatment_id = Integer.parseInt(reader.readLine());
+		int treatment_id;
+		do {
+			System.out.println("Please enter the treatment ID to assign:");
+			treatment_id = Integer.parseInt(reader.readLine());
+			check = checkTreatment_id(treatment_id);
+			if(!check) {
+				System.out.println("Treatment not registered");
+			}
+		}while(!check);
 		
 		treatmentManager.assignDoctor(doctor_id, treatment_id);
 		System.out.println("Doctor assigned");
@@ -729,11 +773,26 @@ private static void loginNurse() throws Exception{
 		// TODO Auto-generated method stub
 		try {
 		showNursesID();
-		System.out.println("Please enter the nurse ID to assign:");
-		Integer nurse_id = Integer.parseInt(reader.readLine());
+		boolean check;
+		int nurse_id;
+		do {
+			System.out.println("Please enter the nurse ID to assign:");
+			nurse_id = Integer.parseInt(reader.readLine());
+			check = checkNurse_id(nurse_id);
+			if(!check) {
+				System.out.println("Nurse not registered");
+			}
+		}while(!check);
 		showTreatmentsID();
-		System.out.println("Please enter the treatment ID to assign:");
-		Integer treatment_id = Integer.parseInt(reader.readLine());
+		int treatment_id;
+		do {
+			System.out.println("Please enter the treatment ID to assign:");
+			treatment_id = Integer.parseInt(reader.readLine());
+			check = checkTreatment_id(treatment_id);
+			if(!check) {
+				System.out.println("Treatment not registered");
+			}
+		}while(!check);
 		
 		treatmentManager.assignNurse(nurse_id, treatment_id);
 		System.out.println("Nurse assigned");
@@ -956,6 +1015,9 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		System.out.println("Introduce the ID of the distributor you want to order from:");
 		distributorID = Integer.parseInt(reader.readLine());
 		check = checkDistributor_id(distributorID);
+		if(!check) {
+			System.out.println("Distributor not registered");
+		}
 		}while(!check);
 		
 		while(check) {
@@ -1049,7 +1111,6 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		Doctor d = new Doctor(name, department, email);
 		doctorManager.addDoctor(d);
 		
-		xmlManager.doctor2xml(d);
 		
 		System.out.println("Doctor added");
 
@@ -1067,7 +1128,6 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		Nurse n = new Nurse(name, department, email);
 		nurseManager.addNurse(n);
 		
-		xmlManager.nurse2xml(n);
 		
 		System.out.println("Nurse added");
 
@@ -1083,6 +1143,9 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			System.out.println("Please enter the id of the doctor to update:");
 			doctor_id =  Integer.parseInt(reader.readLine());
 			check = checkDoctor_id(doctor_id);
+			if(!check) {
+				System.out.println("Not registered");
+			}
 		}while (!check);
 		
 		System.out.println("Please enter the new department:");
@@ -1106,6 +1169,9 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			System.out.println("Please enter the id of the nurse to update:");
 			nurse_id =  Integer.parseInt(reader.readLine());
 			check = checkNurse_id(nurse_id);
+			if(!check) {
+				System.out.println("Not registered");
+			}
 		}while(!check);
 		System.out.println("Please enter the new department:");
 		String department = reader.readLine();
@@ -1127,6 +1193,9 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			System.out.println("Please enter the id of the material:");
 			material_id =  Integer.parseInt(reader.readLine());
 			check = checkMaterial_id(material_id);
+			if(!check) {
+				System.out.println("Not registered");
+			}
 		}while(!check);
 		System.out.println("Please enter the new stock:");
 		int stock = Integer.parseInt(reader.readLine());
@@ -1148,6 +1217,9 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			System.out.println("Please enter the id of the order:");
 			order_id =  Integer.parseInt(reader.readLine());
 			check = checkOrder_id(order_id);
+			if(!check) {
+				System.out.println("Not registered");
+			}
 		}while(!check);
 		System.out.println("Please enter the new status:");
 		String status = reader.readLine();
@@ -1179,6 +1251,9 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			System.out.println("Please enter the id of the doctor to delete:");
 			doctor_id =  Integer.parseInt(reader.readLine());
 			check = checkDoctor_id(doctor_id);
+			if(!check) {
+				System.out.println("Not registered");
+			}
 		}while(!check);
 		doctorManager.removeDoctor(doctor_id);
 		System.out.println("Doctor deleted");
@@ -1194,9 +1269,12 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		boolean check;
 		int nurse_id;
 		do {
-			System.out.println("Please enter the id of the doctor to delete:");
+			System.out.println("Please enter the id of the nurse to delete:");
 			nurse_id =  Integer.parseInt(reader.readLine());
 			check = checkNurse_id(nurse_id);
+			if(!check) {
+				System.out.println("Not registered");
+			}
 		}while(!check);
 		nurseManager.removeNurse(nurse_id);
 		System.out.println("Nurse deleted");
@@ -1215,6 +1293,9 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			System.out.println("Please enter the id of the treatment to delete:");
 			treatment_id =  Integer.parseInt(reader.readLine());
 			check = checkTreatment_id(treatment_id);
+			if(!check) {
+				System.out.println("Not registered");
+			}
 		}while(!check);
 		treatmentManager.removeTreatment(treatment_id);
 		
@@ -1233,6 +1314,9 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			System.out.println("Please enter the id of the material to delete:");
 			material_id =  Integer.parseInt(reader.readLine());
 			check = checkMaterial_id(material_id);
+			if(!check) {
+				System.out.println("Not registered");
+			}
 		}while(!check);
 		materialsManager.removeMaterial(material_id);
 		
