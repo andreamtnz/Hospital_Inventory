@@ -45,7 +45,7 @@ public class JDBCOrderManager implements OrderManager{
 	public void addToOrder(Materials m, Order o, Integer q) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "INSERT INTO has (materialID,orderID, quantity) VALUES (?,?,?)";
+			String sql = "INSERT INTO has (material_id,order_id, quantity) VALUES (?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, m.getId());
 			prep.setInt(2, o.getId());	
@@ -123,7 +123,7 @@ public class JDBCOrderManager implements OrderManager{
 		
 			try {
 					
-				String sql = "UPDATE Order SET state=? WHERE order_id=?;";
+				String sql = "UPDATE Order SET state= " + state +" WHERE order_id=" + order_id;
 				PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 				prep.setString(1, state);
 				prep.setInt(2, order_id);
@@ -142,12 +142,12 @@ public class JDBCOrderManager implements OrderManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM has WHERE orderID=" + order_id;
+			String sql = "SELECT * FROM has WHERE order_id=" + order_id;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next())
 			{
-				Integer id = rs.getInt("materialID");
+				Integer id = rs.getInt("material_id");
 				Integer quantity = rs.getInt("quantity");
 				MaterialsManager materialsManager = new JDBCMaterialsManager(manager);
 				Materials m = materialsManager.getMaterialByID(id);
