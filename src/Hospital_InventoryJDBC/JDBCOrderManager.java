@@ -75,7 +75,7 @@ public class JDBCOrderManager implements OrderManager{
 				String state = rs.getString("state");
 				Date date = rs.getDate("date");
 				Float cost = rs.getFloat("cost");
-				Integer administrator = rs.getInt("administratorID");
+				Integer administrator = rs.getInt("administrator_id");
 				
 				Order o = new Order(id, state, date, cost, administrator);
 				orders.add(o);
