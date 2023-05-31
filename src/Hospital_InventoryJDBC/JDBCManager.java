@@ -77,8 +77,8 @@ public class JDBCManager {
 		+ "	treatment_id	    INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ "	name	TEXT NOT NULL,"
 		+ " date    DATE,"
-		+ " time    TEXT,"
 		+ "	patient	TEXT,"
+		+ " time    TEXT,"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE order ("
@@ -86,13 +86,13 @@ public class JDBCManager {
 		+ "	state	TEXT NOT NULL,"
 		+ " date    DATE,"
 		+ " cost    FLOAT,"
-		+ " administratorID	INTEGER NOT NULL REFERENCES administrator(administrator_id) ON DELETE RESTRICT"
+		+ " administrator_id	INTEGER NOT NULL REFERENCES administrator(administrator_id) ON DELETE RESTRICT"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE has ("
 		+ " has_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-		+ "	materialID	INTEGER,"
-		+ "	orderID	INTEGER,"
+		+ "	material_id	INTEGER,"
+		+ "	order_id	INTEGER,"
 		+ " quantity INTEGER,"
 		+ "	FOREIGN KEY(materialID) REFERENCES material(material_id) ON DELETE CASCADE,"
 		+ "	FOREIGN KEY(orderID) REFERENCES order(order_id) ON DELETE CASCADE,"
@@ -100,8 +100,8 @@ public class JDBCManager {
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE needs ("
 		+ " needs_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-		+ "	treatmentID	INTEGER,"
-		+ "	materialID	INTEGER,"
+		+ "	treatment_id	INTEGER,"
+		+ "	material_id	INTEGER,"
 		+ " quantity    INTEGER,"
 		+ "	FOREIGN KEY(treatmentID) REFERENCES treatment(treatment_id) ON DELETE CASCADE,"
 		+ "	FOREIGN KEY(materialID) REFERENCES material(material_id) ON DELETE CASCADE,"

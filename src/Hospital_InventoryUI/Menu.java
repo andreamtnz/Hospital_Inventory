@@ -1001,7 +1001,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		boolean check = false;
 		int distributorID = 0;
 		Date date = new Date(System.currentTimeMillis()); 
-		Float price = null;
+		Float price = 0.0F;
 		Order o = new Order(date,price);
 		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
 		List<Materials> materials = new ArrayList<Materials>();
