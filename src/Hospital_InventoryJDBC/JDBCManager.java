@@ -34,6 +34,7 @@ public class JDBCManager {
 		}
 	}
 	
+	
 	private void createTables() {
 		// Create Tables
 		try {
