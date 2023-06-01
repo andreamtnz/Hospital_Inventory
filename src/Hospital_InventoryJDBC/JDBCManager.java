@@ -86,7 +86,7 @@ public class JDBCManager {
 		+ "	state	TEXT NOT NULL,"
 		+ " date    DATE NOT NULL,"
 		+ " cost    FLOAT NOT NULL,"
-		+ " administrator_id	INTEGER NOT NULL REFERENCES administrator(administrator_id)"
+		+ " administrator_id	INTEGER NOT NULL REFERENCES administrator(administrator_id) ON DELETE RESTRICT"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE has ("
