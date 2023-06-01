@@ -1002,9 +1002,9 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		boolean check = false;
 		int distributorID = 0;
 		Date date = new Date(System.currentTimeMillis()); 
-		Float price = 0.0F;
-		Order o = new Order(date,price, administrator_id);
-		orderManager.addOrder(o);
+		Float price = 0.0F; //null
+		Order o = new Order(date,price, administrator_id); //solo date, price
+		//orderManager.addOrder(o); //esto no está
 		
 		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
 		List<Materials> materials = new ArrayList<Materials>();
@@ -1030,7 +1030,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				Materials mat = iterator2.next();
 				System.out.println(mat.getId() + "->" + mat.getName());
 			}
-			System.out.println("Type your option:");
+			System.out.println("\nType your option:");
 			System.out.println("1. Order something from the list");
 			System.out.println("2. Order a new material from this distributor");
 			int choice = Integer.parseInt(reader.readLine());
@@ -1040,7 +1040,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			
 			case 1:{
 				while(m==null) {
-					System.out.println("Type the id of the material you want to order");
+					System.out.println("\nType the id of the material you want to order");
 					int materialID = Integer.parseInt(reader.readLine());
 					m = materialsManager.getMaterialByID(materialID);
 					if(m==null) {
@@ -1051,7 +1051,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				
 			}
 			case 2:{
-				System.out.println("Type the name:");
+				System.out.println("\nType the name:");
 				String name = reader.readLine();
 				System.out.println("Type the type:");
 				String type = reader.readLine();
@@ -1063,7 +1063,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				break;
 			}
 			}
-			System.out.println("Type the amount of materials you want to order: ");
+			System.out.println("\nType the amount of materials you want to order: ");
 				int amount = Integer.parseInt(reader.readLine());
 				price = price + m.getPrice()*amount;
 				System.out.println("Cost:" + price);

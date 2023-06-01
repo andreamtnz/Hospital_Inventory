@@ -3,7 +3,9 @@ package Hospital_InventoryPOJO;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Objects;
 
 public class Treatment implements Serializable{
@@ -90,6 +92,17 @@ public class Treatment implements Serializable{
 		return doctores;
 	}
 
+	public String listDoctors() {
+		String r = "";
+		List <Doctor> docs= getDoctores();
+		ListIterator<Doctor> it = docs.listIterator();
+		while(it.hasNext()) {
+			Doctor d = it.next();
+			r = r + d.getName();
+	
+		}
+		return r;
+		}
 
 	public void setDoctores(List<Doctor> doctores) {
 		this.doctores = doctores;
@@ -151,7 +164,8 @@ public class Treatment implements Serializable{
 
 	@Override
 	public String toString() {
+	
 		return "id=" + id + "	name=" + name + "	date=" + date.toString() + "	time=" + time + "	patient=" + patient
-				+ "	doctors=" + doctores + "	nurses=" + nurses + "";
+				+ "	doctors=" + listDoctors() + "	nurses=" + nurses.toString() + "";
 	}
 }
