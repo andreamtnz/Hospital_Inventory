@@ -86,7 +86,7 @@ public class JDBCManager {
 		+ "	state	TEXT NOT NULL,"
 		+ " date    DATE NOT NULL,"
 		+ " cost    FLOAT NOT NULL,"
-		+ " administrator_id	INTEGER NOT NULL REFERENCES administrator(administrator_id) ON DELETE RESTRICT"
+		+ " administrator_id	INTEGER NOT NULL REFERENCES administrator(administrator_id)"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE has ("
@@ -94,8 +94,8 @@ public class JDBCManager {
 		+ "	material_id	INTEGER,"
 		+ "	order_id	INTEGER,"
 		+ " quantity INTEGER,"
-		+ "	FOREIGN KEY(materialID) REFERENCES material(material_id) ON DELETE CASCADE,"
-		+ "	FOREIGN KEY(orderID) REFERENCES order(order_id) ON DELETE CASCADE,"
+		+ "	FOREIGN KEY(material_id) REFERENCES material(material_id) ON DELETE CASCADE,"
+		+ "	FOREIGN KEY(order_id) REFERENCES order(order_id) ON DELETE CASCADE,"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE needs ("
@@ -103,8 +103,8 @@ public class JDBCManager {
 		+ "	treatment_id	INTEGER,"
 		+ "	material_id	INTEGER,"
 		+ " quantity    INTEGER,"
-		+ "	FOREIGN KEY(treatmentID) REFERENCES treatment(treatment_id) ON DELETE CASCADE,"
-		+ "	FOREIGN KEY(materialID) REFERENCES material(material_id) ON DELETE CASCADE,"
+		+ "	FOREIGN KEY(treatment_id) REFERENCES treatment(treatment_id) ON DELETE CASCADE,"
+		+ "	FOREIGN KEY(material_id) REFERENCES material(material_id) ON DELETE CASCADE,"
 		+ ");";
 		stmt.executeUpdate(sql);
 		sql = "CREATE TABLE perform ("

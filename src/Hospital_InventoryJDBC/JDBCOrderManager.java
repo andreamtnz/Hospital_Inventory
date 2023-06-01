@@ -18,9 +18,9 @@ public class JDBCOrderManager implements OrderManager{
 
  private JDBCManager manager;
 	 
-	 public JDBCOrderManager (JDBCManager m)
+	 public JDBCOrderManager (JDBCManager manager)
 	 {
-		  this.manager = m;
+		  this.manager = manager;
 	 }
 	 
 	
