@@ -29,7 +29,7 @@ public class JDBCOrderManager implements OrderManager{
 	public void addOrder(Order o) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "INSERT INTO order (state, date, cost, administrator_id) VALUES (?,?,?,?)" ; 
+			String sql = "INSERT INTO 'order' (state, date, cost, administrator_id) VALUES (?,?,?,?)" ; 
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, o.getState());
 			prep.setDate(2, o.getDate());
@@ -68,7 +68,7 @@ public class JDBCOrderManager implements OrderManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM order";
+			String sql = "SELECT * FROM 'order'";
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next())
@@ -100,7 +100,7 @@ public class JDBCOrderManager implements OrderManager{
 		Order o = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM order WHERE order_id=" + order_id;
+			String sql = "SELECT * FROM 'order' WHERE order_id=" + order_id;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 				String state = rs.getString("state");
@@ -175,7 +175,7 @@ public class JDBCOrderManager implements OrderManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT order_id FROM order";
+			String sql = "SELECT order_id FROM 'order'";
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next())
@@ -202,15 +202,16 @@ public class JDBCOrderManager implements OrderManager{
 		// TODO Auto-generated method stub
 		Order o = null;
 		try {
+			String state = "new";
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM order WHERE state=" + "new";
+			String sql = "SELECT * FROM 'order' WHERE state=" + state;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 				Integer order_id = rs.getInt("order_id");
 				Date date = rs.getDate("date");
 				Float cost = rs.getFloat("cost");
 				Integer administrator = rs.getInt("administratorID");
-				o = new Order(order_id, "new", date, cost, administrator);				
+				o = new Order(order_id, state, date, cost, administrator);				
 			
 			rs.close();
 			stmt.close();

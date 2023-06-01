@@ -1076,6 +1076,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 					if(answer.equalsIgnoreCase("no")) {
 						//orderManager.addOrder(o);
 						o.setCost(price);
+						o.setState("ordered");
 						System.out.println("Your order will cost " + price + "$");
 						orderManager.updateOrder(o);
 						check = false;
