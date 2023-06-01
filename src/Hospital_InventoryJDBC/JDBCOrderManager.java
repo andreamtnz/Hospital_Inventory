@@ -127,8 +127,8 @@ public class JDBCOrderManager implements OrderManager{
 					
 				String sql = "UPDATE Order SET state= " + state +" WHERE order_id=" + order_id;
 				PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-				prep.setString(1, state);
-				prep.setInt(2, order_id);
+				//prep.setString(1, state);
+				//prep.setInt(2, order_id);
 		
 				prep.executeUpdate();
 				
@@ -195,5 +195,53 @@ public class JDBCOrderManager implements OrderManager{
 		
 		return orders_id;
 	}
+
+
+	@Override
+	public Order getNewOrder() {
+		// TODO Auto-generated method stub
+		Order o = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM order WHERE state=" + "new";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+				Integer order_id = rs.getInt("order_id");
+				Date date = rs.getDate("date");
+				Float cost = rs.getFloat("cost");
+				Integer administrator = rs.getInt("administratorID");
+				o = new Order(order_id, "new", date, cost, administrator);				
+			
+			rs.close();
+			stmt.close();
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return o;
+	}
+
+
+
+	@Override
+	public void updateOrder(Order o) {
+		// TODO Auto-generated method stub
+		try {
+			
+			String sql = "UPDATE Order SET state=?, cost=?  WHERE order_id=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, o.getState());
+			prep.setFloat(2, o.getCost());
+			prep.setInt(3, o.getId());
+	
+			prep.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			}
+	}
+	
+	
 
 }

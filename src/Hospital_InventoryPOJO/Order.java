@@ -38,14 +38,14 @@ public class Order implements Serializable{
 	}
 
 	public Order(Date date, float price) {
-		this.state = "ordered";
+		this.state = "new";
 		this.date = date;
 		this.cost = price;
 		//this.administrador = administrador_id;
 	}
 	
 	public Order(Date date, float price, Integer administrator_id) {
-		this.state = "ordered";
+		this.state = "new";
 		this.date = date;
 		this.cost = price;
 		this.administrador = administrator_id;

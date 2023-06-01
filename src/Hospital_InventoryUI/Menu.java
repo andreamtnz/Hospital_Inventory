@@ -1004,7 +1004,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		Date date = new Date(System.currentTimeMillis()); 
 		Float price = 0.0F; //null
 		Order o = new Order(date,price, administrator_id); //solo date, price
-		//orderManager.addOrder(o); //esto no está
+		orderManager.addOrder(o); //esto no está
 		
 		List<Distribuitor> distributors = new ArrayList<Distribuitor>();
 		List<Materials> materials = new ArrayList<Materials>();
@@ -1067,15 +1067,17 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				int amount = Integer.parseInt(reader.readLine());
 				price = price + m.getPrice()*amount;
 				System.out.println("Cost:" + price);
+				o = orderManager.getNewOrder();
 				orderManager.addToOrder(m, o, amount);
 				String answer = "";
 				while(!answer.equalsIgnoreCase("yes")||!answer.equalsIgnoreCase("no")) {
 					System.out.println("Do you want to order other materials?[yes/no]");
 					answer = reader.readLine();
 					if(answer.equalsIgnoreCase("no")) {
-						orderManager.addOrder(o);
+						//orderManager.addOrder(o);
 						o.setCost(price);
 						System.out.println("Your order will cost " + price + "$");
+						orderManager.updateOrder(o);
 						check = false;
 						break;
 					}
