@@ -53,7 +53,7 @@ public class Menu {
 	
 	try {
 		do {
-			System.out.println("Choose an option");
+			System.out.println("\nChoose an option");
 			System.out.println("1. Login Administrator");
 			System.out.println("2. Login Doctor");
 			System.out.println("3. Login Nurse");
@@ -150,7 +150,7 @@ public class Menu {
 		String passwd = reader.readLine();
 		User u = userManager.checkPassword(email, passwd);
 		
-		if(u!=null & u.getRole().getName().equals("administrator"))
+		if(u!=null && u.getRole().getName().equals("administrator"))
 		{	
 			System.out.println("Login Successful!");
 			administratorMenu(u.getId());
@@ -486,7 +486,7 @@ private static void loginDoctor() throws Exception{
 		String passwd = reader.readLine();
 		User u = userManager.checkPassword(email, passwd);
 		
-		if(u!=null & u.getRole().getName().equals("doctor"))
+		if(u!=null && u.getRole().getName().equals("doctor"))
 		{	
 			System.out.println("Login Successful!");
 			doctorMenu(u.getId());
@@ -554,7 +554,7 @@ private static void loginNurse() throws Exception{
 	String passwd = reader.readLine();
 	User u = userManager.checkPassword(email, passwd);
 	
-	if(u!=null & u.getRole().getName().equals("nurse"))
+	if(u!=null && u.getRole().getName().equals("nurse"))
 	{	
 		System.out.println("Login Successful!");
 		nurseMenu(u.getId());
@@ -1059,10 +1059,12 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 			String distributorName = distributorManager.getDistributorByID(distributorID).getName();
 			System.out.println("List of materials from "+ distributorName + ": ");
 			materials = materialsManager.getMaterialsByDistributor(distributorID);
+			List<Integer> matInDistr = new ArrayList<Integer>();
 			ListIterator<Materials> iterator2 = materials.listIterator();
 			while(iterator2.hasNext()) {
 				Materials mat = iterator2.next();
 				System.out.println(mat.getId() + "->" + mat.getName());
+				matInDistr.add(mat.getId());
 			}
 			System.out.println("\nType your option:");
 			System.out.println("1. Order something from the list");
@@ -1076,9 +1078,16 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				while(m==null) {
 					System.out.println("\nType the id of the material you want to order");
 					int materialID = Integer.parseInt(reader.readLine());
-					m = materialsManager.getMaterialByID(materialID);
+					if(!matInDistr.contains(materialID)) {
+						m=null;
+						System.out.println("This distributor doesn´t sell that material.");
+					}
+					else {
+						m = materialsManager.getMaterialByID(materialID);
+						
 					if(m==null) {
 						System.out.println("This material doesn´t exist");
+					}
 					}
 				}
 				break;
@@ -1104,7 +1113,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				o = orderManager.getNewOrder();
 				orderManager.addToOrder(m, o, amount);
 				String answer = "";
-				while(!answer.equalsIgnoreCase("yes")||!answer.equalsIgnoreCase("no")) {
+				while(!answer.equalsIgnoreCase("yes")&&!answer.equalsIgnoreCase("no")) {
 					System.out.println("Do you want to order other materials?[yes/no]");
 					answer = reader.readLine();
 					if(answer.equalsIgnoreCase("no")) {
@@ -1743,12 +1752,21 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				default:
 					break;
 				}
-				System.out.println("Do you want to edit something else?");
-				String answer = reader.readLine();
-				if(answer.equalsIgnoreCase("no")) {
-					System.out.println(m.toString());
-					materialsManager.changeMaterial(m);
-					check = false;
+				boolean check3 = true;
+				while(check3) {
+					System.out.println("Do you want to edit something else?");
+					String answer = reader.readLine();
+					if(answer.equalsIgnoreCase("no")) {
+						System.out.println(m.toString());
+						materialsManager.changeMaterial(m);
+						check = false;
+						check3 = false;
+					}
+					else if(answer.equalsIgnoreCase("yes")) {
+						check3 = false;
+					}else {
+						System.out.println("Please type yes or no");
+					}
 				}
 			}
 		}catch(Exception e) {
