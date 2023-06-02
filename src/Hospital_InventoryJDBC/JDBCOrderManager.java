@@ -106,7 +106,7 @@ public class JDBCOrderManager implements OrderManager{
 				String state = rs.getString("state");
 				Date date = rs.getDate("date");
 				Float cost = rs.getFloat("cost");
-				Integer administrator = rs.getInt("administratorID");
+				Integer administrator = rs.getInt("administrator_id");
 				o = new Order(order_id, state, date, cost, administrator);				
 			
 			rs.close();
@@ -125,10 +125,10 @@ public class JDBCOrderManager implements OrderManager{
 		
 			try {
 					
-				String sql = "UPDATE Order SET state= " + state +" WHERE order_id=" + order_id;
+				String sql = "UPDATE 'order' SET state=? WHERE order_id=?";
 				PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-				//prep.setString(1, state);
-				//prep.setInt(2, order_id);
+				prep.setString(1, state);
+				prep.setInt(2, order_id);
 		
 				prep.executeUpdate();
 				
@@ -204,13 +204,13 @@ public class JDBCOrderManager implements OrderManager{
 		try {
 			String state = "new";
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM 'order' WHERE state=" + state;
+			String sql = "SELECT * FROM 'order' WHERE state='" + state +"'";
 			ResultSet rs = stmt.executeQuery(sql);
 			
 				Integer order_id = rs.getInt("order_id");
 				Date date = rs.getDate("date");
 				Float cost = rs.getFloat("cost");
-				Integer administrator = rs.getInt("administratorID");
+				Integer administrator = rs.getInt("administrator_id");
 				o = new Order(order_id, state, date, cost, administrator);				
 			
 			rs.close();
@@ -230,7 +230,7 @@ public class JDBCOrderManager implements OrderManager{
 		// TODO Auto-generated method stub
 		try {
 			
-			String sql = "UPDATE Order SET state=?, cost=?  WHERE order_id=?";
+			String sql = "UPDATE 'order' SET state=?, cost=?  WHERE order_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, o.getState());
 			prep.setFloat(2, o.getCost());

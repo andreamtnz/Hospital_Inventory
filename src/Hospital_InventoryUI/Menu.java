@@ -1024,6 +1024,8 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		}while(!check);
 		
 		while(check) {
+			String distributorName = distributorManager.getDistributorByID(distributorID).getName();
+			System.out.println("List of materials from "+ distributorName + ": ");
 			materials = materialsManager.getMaterialsByDistributor(distributorID);
 			ListIterator<Materials> iterator2 = materials.listIterator();
 			while(iterator2.hasNext()) {
@@ -1227,9 +1229,27 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 				System.out.println("Not registered");
 			}
 		}while(!check);
-		System.out.println("Please enter the new status:");
-		String status = reader.readLine();
-		
+		System.out.println("Status options:");
+		int option =0;
+		do {
+			System.out.println("1.Ordered");
+			System.out.println("2.In transit");
+			System.out.println("3.Delivered");
+			System.out.println("Please enter the new status:");
+			option = Integer.parseInt(reader.readLine());
+		}while(option<1||option>3);
+		String status = "";
+		switch(option) {
+		case 1:
+			status = "ordered";
+			break;
+		case 2:
+			status = "in transit";
+			break;
+		case 3:
+			status = "delivered";
+			break;
+		}
 		orderManager.updateStatus(order_id, status);
 		System.out.println("Status updated");
 		if(status.equalsIgnoreCase("delivered")) {
@@ -1422,7 +1442,7 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		System.out.println();
 		while(iterator.hasNext()) {
 			Order ord = iterator.next();
-			System.out.println(ord.getId());
+			System.out.println(ord.getId()+ "->"+ ord.getDate().toString() + ", " + ord.getCost());
 		}
 	}
 
