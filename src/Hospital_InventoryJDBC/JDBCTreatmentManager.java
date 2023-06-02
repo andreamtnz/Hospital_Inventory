@@ -142,7 +142,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	public void assignDoctor(int doctor_id, int treatment_id) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "INSERT INTO request (doctorID,treatmentID) VALUES (?,?)";
+			String sql = "INSERT INTO request (doctor_id,treatment_id) VALUES (?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, doctor_id);
 			prep.setInt(2, treatment_id);		
@@ -174,7 +174,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 	public void assignToTreatment(Materials m, Treatment t, Integer q) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "INSERT INTO needs (treatmentID,materialID, quantity) VALUES (?,?,?)";
+			String sql = "INSERT INTO needs (treatment_id,material_id, quantity) VALUES (?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, t.getId());
 			prep.setInt(2, m.getId());	
@@ -194,7 +194,7 @@ public class JDBCTreatmentManager implements TreatmentManager{
 		Treatment t = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM doctor WHERE treatment_id=" + treatment_id;
+			String sql = "SELECT * FROM treatment WHERE treatment_id=" + treatment_id;
 			ResultSet rs = stmt.executeQuery(sql);
 			
 				String name = rs.getString("name");
