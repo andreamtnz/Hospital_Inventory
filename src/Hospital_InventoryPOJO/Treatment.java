@@ -92,17 +92,7 @@ public class Treatment implements Serializable{
 		return doctores;
 	}
 
-	public String listDoctors() {
-		String r = "";
-		List <Doctor> docs= getDoctores();
-		ListIterator<Doctor> it = docs.listIterator();
-		while(it.hasNext()) {
-			Doctor d = it.next();
-			r = r + d.getName();
 	
-		}
-		return r;
-		}
 
 	public void setDoctores(List<Doctor> doctores) {
 		this.doctores = doctores;
@@ -165,7 +155,6 @@ public class Treatment implements Serializable{
 	@Override
 	public String toString() {
 	
-		return "id=" + id + "	name=" + name + "	date=" + date.toString() + "	time=" + time + "	patient=" + patient
-				+ "	doctors=" + listDoctors() + "	nurses=" + nurses.toString() + "";
+		return "id=" + id + "	name=" + name + "	date=" + date.toString() + "	time=" + time + "	patient=" + patient;
 	}
 }

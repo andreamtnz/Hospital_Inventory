@@ -20,5 +20,9 @@ public interface UserManager {
 	
 	public Role getRoleByName (String name);
 	
+	public void changePassword(User u, String password);
+	
+	public List<User> getUsers();
+	
 }
 

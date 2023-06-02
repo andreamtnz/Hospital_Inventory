@@ -2,6 +2,7 @@ package Hospital_InventoryUI;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ public class Menu {
 			System.out.println("2. Login Doctor");
 			System.out.println("3. Login Nurse");
 			System.out.println("4. Sign up");
+			System.out.println("5. Change your password");
 			System.out.println("0. exit");
 
 			int choice = Integer.parseInt(reader.readLine());
@@ -73,6 +75,9 @@ public class Menu {
 				break;
 			case 4: 
 				signup(); 
+				break;
+			case 5:
+				changePassword();
 				break;
 			case 0: 
 				jdbcManager.disconnect();
@@ -149,6 +154,8 @@ public class Menu {
 		{	
 			System.out.println("Login Successful!");
 			administratorMenu(u.getId());
+		}else {
+			System.out.println("Wrong email or password");
 		}
 		
 	}
@@ -170,7 +177,7 @@ private static void materialsSubMenu (Integer id) throws Exception{
 				System.out.println("6. View full stock");
 				System.out.println("7. Search stock of a material");
 				System.out.println("8. Modify stock of a material");
-				System.out.println("0. exit");
+				System.out.println("0. Back to Administrator Menu");
 
 				int choice = Integer.parseInt(reader.readLine());
 				switch(choice)
@@ -268,7 +275,7 @@ private static void ordersSubMenu(Integer id) throws Exception{
 			System.out.println("2. Search an order");
 			System.out.println("3. Place an order");
 			System.out.println("4. Modify an order status");
-			System.out.println("0. exit");
+			System.out.println("0. Back to Administrator Menu");
 
 			int choice = Integer.parseInt(reader.readLine());
 			switch(choice)
@@ -313,7 +320,8 @@ private static void doctorsSubMenu(Integer id) throws Exception{
 			System.out.println("4. Update a doctor's department");
 			System.out.println("5. Delete a doctor");
 			System.out.println("6. Save in xml and html");
-			System.out.println("0. exit");
+			System.out.println("7. Load from the xml");
+			System.out.println("0. Back to Administrator Menu");
 
 			int choice = Integer.parseInt(reader.readLine());
 			switch(choice)
@@ -335,6 +343,9 @@ private static void doctorsSubMenu(Integer id) throws Exception{
 				break;
 			case 6:
 				printMe();
+				break;
+			case 7:
+				readMe();
 				break;
 			case 0: 
 				check = false;
@@ -364,7 +375,8 @@ private static void nursesSubMenu(Integer id) throws Exception{
 			System.out.println("4. Update a nurse's department");
 			System.out.println("5. Delete a nurse");
 			System.out.println("6. Save nurse in xml");
-			System.out.println("0. exit");
+			System.out.println("7. Load from xml");
+			System.out.println("0. Back to Administrator Menu");
 
 			int choice = Integer.parseInt(reader.readLine());
 			switch(choice)
@@ -387,6 +399,8 @@ private static void nursesSubMenu(Integer id) throws Exception{
 			case 6:
 				printMeNurse();
 				break;
+			case 7:
+				readMeNurse();
 			case 0: 
 				check = false;
 				break;
@@ -476,6 +490,8 @@ private static void loginDoctor() throws Exception{
 		{	
 			System.out.println("Login Successful!");
 			doctorMenu(u.getId());
+		}else {
+			System.out.println("Wrong email or password");
 		}
 		
 	}
@@ -542,6 +558,8 @@ private static void loginNurse() throws Exception{
 	{	
 		System.out.println("Login Successful!");
 		nurseMenu(u.getId());
+	}else {
+		System.out.println("Wrong email or password");
 	}
 	
 }		
@@ -643,6 +661,20 @@ private static void loginNurse() throws Exception{
 		Treatment t = new Treatment();
 		t = treatmentManager.getTreatmentById(treatment_id);
 		System.out.println(t.toString());
+		List<Doctor> doctors = treatmentManager.getDoctorsInTreatment(treatment_id);
+		List<Nurse> nurses = treatmentManager.getNursesInTreatment(treatment_id);
+		ListIterator<Doctor> iterator =  doctors.listIterator();
+		System.out.println("List of doctors in this treatment: ");
+		while(iterator.hasNext()) {
+			Doctor doc = iterator.next();
+			System.out.println(doc.getId() + "->" + doc.getName());
+		}
+		System.out.println("List of nurses in this treatment: ");
+		ListIterator<Nurse> iterator2 =  nurses.listIterator();
+		while(iterator2.hasNext()) {
+			Nurse nurse = iterator2.next();
+			System.out.println(nurse.getId() + "->" + nurse.getName());
+		}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -1108,34 +1140,59 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	}
 	
 	public static void addDoctor() throws Exception {	//done
-		
+		boolean check = false;
+		String email = "";
 		System.out.println("Type the name:");
 		String name = reader.readLine();
 		System.out.println("Type the department:");
 		String department = reader.readLine();
-		System.out.println("Type the email:");
-		String email = reader.readLine();
+		while(!check) {
+			System.out.println("Type the email:");
+			email = reader.readLine();
+			check = checkEmail(email);
+			if (!check) {
+				System.out.println("email already registered");
+			}
+		}
+		System.out.println("Type the password");
+		String pswd = reader.readLine();
 			
 		Doctor d = new Doctor(name, department, email);
 		doctorManager.addDoctor(d);
 		
+		Role r = userManager.getRoleByName("doctor");
+		User u = new User(email, pswd.getBytes(),r);
 		
+		userManager.newUser(u);
 		System.out.println("Doctor added");
 
 	}
 	
 	public static void addNurse() throws Exception {	//done
-
+		boolean check = false;
+		String email = "";
 		System.out.println("Type the name:");
 		String name = reader.readLine();
 		System.out.println("Type the department:");
 		String department = reader.readLine();
-		System.out.println("Type the email:");
-		String email = reader.readLine();
+		while(!check) {
+			System.out.println("Type the email:");
+			email = reader.readLine();
+			check = checkEmail(email);
+			if (!check) {
+				System.out.println("email already registered");
+			}
+		}
+		System.out.println("Type the password: ");
+		String pswd = reader.readLine();
 			
 		Nurse n = new Nurse(name, department, email);
 		nurseManager.addNurse(n);
 		
+		Role r = userManager.getRoleByName("nurse");
+		User u = new User(email, pswd.getBytes(),r);
+		
+		userManager.newUser(u);
 		
 		System.out.println("Nurse added");
 
@@ -1480,6 +1537,8 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 	}
 	
 	private static void signup() throws Exception{
+		boolean check = false;
+		String email = "";
 		System.out.println("\nWhat type of sign up do you want to do?");
 		System.out.println("1. As a administrator");
 		System.out.println("2. As a doctor");
@@ -1490,8 +1549,14 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		System.out.println("Name:");
 		String name = reader.readLine();
 		
-		System.out.println("Email:");
-		String email = reader.readLine();
+		while(!check) {
+			System.out.println("Email:");
+			email = reader.readLine();
+			check = checkEmail(email);
+			if (!check) {
+				System.out.println("email already registered");
+			}
+		}
 		
 		System.out.println("Password: ");
 		String passwd = reader.readLine();
@@ -1718,6 +1783,52 @@ private static void viewMaterials() throws Exception { // creo que no hace falta
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	private static void readMe() {
+		File xml = new File("./xmls/Doctor.xml");
+		Doctor d = xmlManager.xml2doctor(xml);
+		System.out.println(d.toString());
+	}
+	private static void readMeNurse() {
+		File xml = new File("./xmls/Nurse.xml");
+		Nurse n = xmlManager.xml2nurse(xml);
+		System.out.println(n.toString());
+	}
+	private static void changePassword() throws Exception {
+		try {
+			User u = null;
+			do {
+				System.out.println("Enter your email: ");
+				String email = reader.readLine();
+				System.out.println("Enter your old password: ");
+				String password = reader.readLine();
+				u = userManager.checkPassword(email, password);
+				if (u==null) {
+					System.out.println("The email or password are incorrect.");
+				}
+			}while(u==null);
+			System.out.println("Type your new password: ");
+			String pswd = reader.readLine();
+			userManager.changePassword(u, pswd);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	private static boolean checkEmail(String email) {
+		boolean r = false;
+		List<User> users = new ArrayList<User>();
+		users = userManager.getUsers();				
+		List<String> emails = new ArrayList<String>();
+		ListIterator<User> iterator = users.listIterator();
+		while(iterator.hasNext()) {
+			User u = iterator.next();
+			emails.add(u.getEmail());
+		}
+		if(emails.contains(email)) {
+			r=true;
+		}
+		return r;
 	}
 
 }

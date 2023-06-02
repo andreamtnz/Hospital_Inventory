@@ -124,6 +124,24 @@ public class JPAUserManager implements UserManager{
 		}catch(NoResultException e) {}
 		return r;
 	}
+
+	@Override
+	public void changePassword(User u, String password) {
+		// TODO Auto-generated method stub
+		u.setPassword(password.getBytes());
+		em.getTransaction().begin();
+		em.merge(u);
+		em.getTransaction().commit();
+		System.out.println("Password changed!");
+	}
 	
 
+	@Override
+	public List<User> getUsers() {
+		// TODO Auto-generated method stub
+		Query q = em.createNativeQuery("SELECT * FROM user", User.class);
+		List<User> users = (List<User>) q.getResultList();
+		
+		return users;
+	}
 }
